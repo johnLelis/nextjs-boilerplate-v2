@@ -6,18 +6,20 @@ import FeaturesGrid from '@/components/features/auth/home/features-grid';
 
 const HomePage = () => {
   return (
-    <div className="relative h-screen min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-800">
-      <div className="relative flex flex-col items-center justify-center min-h-screen p-8 pb-20 gap-8 sm:p-20">
-        <div className="w-full max-w-6xl mt-auto">
-          <ModeToggle />
-        </div>
+    <div className="relative min-h-screen flex flex-col bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-800">
+      <div className="w-full max-w-6xl m-auto">
+        <ModeToggle />
+      </div>
+
+      <main className="flex flex-col items-center justify-center flex-grow gap-8 sm:p-20">
         <Hero />
         <CtaButtons />
         <FeaturesGrid />
-        <div className="w-full max-w-6xl mt-auto">
-          <Footer />
-        </div>
-      </div>
+      </main>
+
+      <footer className="w-full max-w-6xl mx-auto">
+        <Footer />
+      </footer>
     </div>
   );
 };
