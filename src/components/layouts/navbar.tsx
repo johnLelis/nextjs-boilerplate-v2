@@ -8,7 +8,7 @@ const Navbar = async () => {
       <div className="flex h-16 items-center justify-between px-8">
         <div className="flex items-center gap-8 justify-between">
           <Link href="/" className="text-xl font-bold">
-            MyApp
+            NextJs
           </Link>
 
           <nav className="hidden md:flex items-center gap-8">
@@ -21,7 +21,6 @@ const Navbar = async () => {
           </nav>
         </div>
 
-        {/* Right side: actions */}
         <div className="flex items-center gap-6">
           <ModeToggle />
           <div className="flex items-center gap-2">
