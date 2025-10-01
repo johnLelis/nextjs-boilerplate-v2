@@ -1,6 +1,6 @@
 import { NextAuthOptions } from 'next-auth';
 // import { DrizzleAdapter } from '@auth/drizzle-adapter';
-import CredentialsProvider from 'next-auth/providers/credentials';
+// import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
 import GitHubProvider from 'next-auth/providers/github';
 // import { db } from '@/lib/db';
