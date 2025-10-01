@@ -3,8 +3,11 @@ import '../styles/globals.css';
 import { WithChildren } from '@/types/common';
 import { ThemeProvider } from 'next-themes';
 import { Inter } from 'next/font/google';
-
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: 'Next App Boilerplate',
