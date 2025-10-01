@@ -1,8 +1,7 @@
 import Footer from '@/components/layouts/footer';
 import Navbar from '@/components/layouts/navbar';
-import { WithChildren } from '@/types/common';
 
-const MainLayout = ({ children }: WithChildren) => {
+const MainLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="flex min-h-screen flex-col">
       <Navbar />
