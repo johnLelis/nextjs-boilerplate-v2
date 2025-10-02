@@ -7,18 +7,19 @@ import { toast } from 'sonner';
 const Logout = () => {
   const router = useRouter();
   const handleOnClick = () => {
-    toast.warning('Are you sure you want to logout?', {
+    const toastId = toast.warning('Are you sure you want to logout?', {
       description: 'You’ll be signed out and redirected to the landing page.',
       action: {
         label: 'Confirm Logout',
         onClick: async () => {
           await authClient.signOut();
           router.push('/');
+          toast.dismiss(toastId);
         },
       },
       cancel: {
         label: 'Cancel',
-        onClick: () => toast.dismiss(),
+        onClick: () => toast.dismiss(toastId),
       },
     });
   };
