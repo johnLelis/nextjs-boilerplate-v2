@@ -29,7 +29,7 @@ export const registerSchema = z
   });
 
 export const forgotPasswordSchema = z.object({
-  email: z.string().email('Please enter a valid email.'),
+  email: z.email('Please enter a valid email.'),
 });
 
 export const resetPasswordSchema = z
@@ -71,17 +71,32 @@ export const changePasswordSchema = z
   });
 
 // 🔑 Types
-export type LoginInput = z.infer<typeof loginSchema>;
-export type RegisterInput = z.infer<typeof registerSchema>;
-export type ForgotPasswordInput = z.infer<typeof forgotPasswordSchema>;
-export type ResetPasswordInput = z.infer<typeof resetPasswordSchema>;
-export type UpdateProfileInput = z.infer<typeof updateProfileSchema>;
-export type ChangePasswordInput = z.infer<typeof changePasswordSchema>;
+type LoginInput = z.infer<typeof loginSchema>;
+type RegisterInput = z.infer<typeof registerSchema>;
+type ForgotPasswordInput = z.infer<typeof forgotPasswordSchema>;
+type ResetPasswordInput = z.infer<typeof resetPasswordSchema>;
+type UpdateProfileInput = z.infer<typeof updateProfileSchema>;
+type ChangePasswordInput = z.infer<typeof changePasswordSchema>;
 
 // 🔑 Resolvers (ready to plug into useForm)
-export const loginResolver = zodResolver(loginSchema);
-export const registerResolver = zodResolver(registerSchema);
-export const forgotPasswordResolver = zodResolver(forgotPasswordSchema);
-export const resetPasswordResolver = zodResolver(resetPasswordSchema);
-export const updateProfileResolver = zodResolver(updateProfileSchema);
-export const changePasswordResolver = zodResolver(changePasswordSchema);
+const loginResolver = zodResolver(loginSchema);
+const registerResolver = zodResolver(registerSchema);
+const forgotPasswordResolver = zodResolver(forgotPasswordSchema);
+const resetPasswordResolver = zodResolver(resetPasswordSchema);
+const updateProfileResolver = zodResolver(updateProfileSchema);
+const changePasswordResolver = zodResolver(changePasswordSchema);
+
+export {
+  type LoginInput,
+  type RegisterInput,
+  type ForgotPasswordInput,
+  type ResetPasswordInput,
+  type UpdateProfileInput,
+  type ChangePasswordInput,
+  loginResolver,
+  registerResolver,
+  forgotPasswordResolver,
+  resetPasswordResolver,
+  updateProfileResolver,
+  changePasswordResolver,
+};
