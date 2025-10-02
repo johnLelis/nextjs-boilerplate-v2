@@ -15,6 +15,9 @@ import { Button } from '@/components/ui/button';
 import ModeToggle from '@/components/ui/mode-toggle';
 import { LoginInput, loginResolver } from '@/lib/validations/auth';
 import { LoadingSwap } from '@/components/ui/loading-swap';
+import { authClient } from '@/lib/auth-client';
+import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 const LoginForm = () => {
   const form = useForm<LoginInput>({
@@ -26,8 +29,8 @@ const LoginForm = () => {
   });
 
   const { isSubmitting } = form.formState;
-
-  const handleOnSubmit = async (values: LoginInput) => {
+  const router = useRouter();
+  const handleOnSubmit = async (data: LoginInput) => {
     // This is where you handle the form submission logic.
     // Options include:
     // 1. Call your backend API (e.g. POST /api/login or /api/register)
@@ -45,12 +48,27 @@ const LoginForm = () => {
     //    - Toast notifications (useToast from shadcn/ui)
     //
     // 4. Redirect or update state after success (e.g. router.push("/dashboard")).
-    await new Promise(resolve => {
-      setTimeout(() => {
-        resolve('Test');
-      }, 2000);
-    });
-    console.log(values); // For now, just logging the submitted values
+    // await new Promise(resolve => {
+    //   setTimeout(() => {
+    //     resolve('Test');
+    //   }, 2000);
+    // });
+    await authClient.signIn.email(
+      {
+        ...data,
+        rememberMe: false,
+      },
+      {
+        onSuccess: () => {
+          router.push('/dashboard');
+        },
+        onError: error => {
+          toast.error(
+            error.error.message || 'Failed to login. Please try again!'
+          );
+        },
+      }
+    );
   };
 
   return (

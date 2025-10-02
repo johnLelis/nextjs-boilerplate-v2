@@ -13,8 +13,11 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { RegisterInput, registerResolver } from '@/lib/validations/auth';
 import { LoadingSwap } from '@/components/ui/loading-swap';
-
+import { authClient } from '@/lib/auth-client';
+import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 const RegisterForm = () => {
+  const router = useRouter();
   const form = useForm<RegisterInput>({
     resolver: registerResolver,
     defaultValues: {
@@ -27,8 +30,25 @@ const RegisterForm = () => {
 
   const { isSubmitting } = form.formState;
 
-  const handleOnSubmit = async () =>
-    await new Promise(resolve => setTimeout(resolve, 2000));
+  const handleOnSubmit = async (data: RegisterInput) => {
+    await authClient.signUp.email(
+      {
+        ...data,
+        /**
+         * A URL to redirect to after the user verifies their email (optional)
+         */
+        // callbackURL: '/login',
+      },
+      {
+        onError: error => {
+          toast.error(error.error.message || 'Failed to sign up!');
+        },
+        onSuccess: () => {
+          router.push('/login');
+        },
+      }
+    );
+  };
 
   return (
     <div className="w-sm max-w-md rounded-lg border bg-card p-8 shadow-lg">

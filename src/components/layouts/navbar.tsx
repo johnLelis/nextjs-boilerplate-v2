@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import ModeToggle from '../ui/mode-toggle';
+import Logout from '../features/auth/logout';
 
 const Navbar = async () => {
   return (
@@ -24,12 +25,7 @@ const Navbar = async () => {
         <div className="flex items-center gap-6">
           <ModeToggle />
           <div className="flex items-center gap-2">
-            <Button asChild variant="ghost">
-              <Link href="/login">Sign In</Link>
-            </Button>
-            <Button asChild>
-              <Link href="/register">Sign Up</Link>
-            </Button>
+            <Logout />
           </div>
         </div>
       </div>
