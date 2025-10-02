@@ -48,7 +48,7 @@ const LoginForm = () => {
     await new Promise(resolve => {
       setTimeout(() => {
         resolve('Test');
-      }, 3000);
+      }, 2000);
     });
     console.log(values); // For now, just logging the submitted values
   };
@@ -67,19 +67,21 @@ const LoginForm = () => {
           <FormField
             control={form.control}
             name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input
-                    type="email"
-                    placeholder="you@example.com"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
+            render={({ field }) => {
+              return (
+                <FormItem>
+                  <FormLabel>Email</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="email"
+                      placeholder="you@example.com"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              );
+            }}
           />
 
           <FormField
