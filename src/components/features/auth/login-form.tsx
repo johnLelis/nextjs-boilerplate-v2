@@ -14,6 +14,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import ModeToggle from '@/components/ui/mode-toggle';
 import { LoginInput, loginResolver } from '@/lib/validations/auth';
+import { LoadingSwap } from '@/components/ui/loading-swap';
 
 const LoginForm = () => {
   const form = useForm<LoginInput>({
@@ -23,6 +24,8 @@ const LoginForm = () => {
       password: '',
     },
   });
+
+  const { isSubmitting } = form.formState;
 
   const handleOnSubmit = async (values: LoginInput) => {
     // This is where you handle the form submission logic.
@@ -42,7 +45,11 @@ const LoginForm = () => {
     //    - Toast notifications (useToast from shadcn/ui)
     //
     // 4. Redirect or update state after success (e.g. router.push("/dashboard")).
-
+    await new Promise(resolve => {
+      setTimeout(() => {
+        resolve('Test');
+      }, 3000);
+    });
     console.log(values); // For now, just logging the submitted values
   };
 
@@ -89,8 +96,8 @@ const LoginForm = () => {
             )}
           />
 
-          <Button type="submit" className="w-full">
-            Login
+          <Button type="submit" disabled={isSubmitting} className="w-full">
+            <LoadingSwap isLoading={isSubmitting}>Login</LoadingSwap>
           </Button>
         </form>
       </Form>
