@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
 import ModeToggle from '../ui/mode-toggle';
 import Logout from '../features/auth/logout';
 
