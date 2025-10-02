@@ -11,7 +11,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: 'Next App Boilerplate',
-  description: 'Created by: pen.dev',
+  description: 'Created by: PenLelis',
 };
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
