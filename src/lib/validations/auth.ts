@@ -2,12 +2,12 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 // 🔑 Schemas
-export const loginSchema = z.object({
+const loginSchema = z.object({
   email: z.email('Please enter a valid email.'),
   password: z.string().min(8, 'Password must be at least 8 characters'),
 });
 
-export const registerSchema = z
+const registerSchema = z
   .object({
     name: z.string().min(2, 'Name must be at least 2 characters').max(255),
     email: z.email('Please enter a valid email.'),
@@ -28,11 +28,11 @@ export const registerSchema = z
     path: ['confirmPassword'],
   });
 
-export const forgotPasswordSchema = z.object({
+const forgotPasswordSchema = z.object({
   email: z.email('Please enter a valid email.'),
 });
 
-export const resetPasswordSchema = z
+const resetPasswordSchema = z
   .object({
     token: z.string(),
     password: z
@@ -48,13 +48,13 @@ export const resetPasswordSchema = z
     path: ['confirmPassword'],
   });
 
-export const updateProfileSchema = z.object({
+const updateProfileSchema = z.object({
   name: z.string().min(2).max(255).optional(),
   email: z.email().optional(),
   image: z.url().optional(),
 });
 
-export const changePasswordSchema = z
+const changePasswordSchema = z
   .object({
     currentPassword: z.string().min(8),
     newPassword: z
