@@ -12,7 +12,6 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import ModeToggle from '@/components/ui/mode-toggle';
 import { LoginInput, loginResolver } from '@/lib/validations/auth';
 import { LoadingSwap } from '@/components/ui/loading-swap';
 import { authClient } from '@/lib/auth-client';
@@ -20,9 +19,8 @@ import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { Separator } from '@/components/ui/separator';
 import SocialAuthButtons from './social-auth-buttons';
-import Link from 'next/link';
-import { HomeIcon } from 'lucide-react';
-import AuthHeaderControls from '@/components/ui/auth-header-controls';
+import AuthHeaderControls from './auth-header-controls';
+import { AuthRedirectMessage } from './auth-redirect-message';
 
 const LoginForm = () => {
   const form = useForm<LoginInput>({
@@ -128,12 +126,11 @@ const LoginForm = () => {
       </Form>
       <Separator />
       <SocialAuthButtons />
-      <div className="flex gap-2 font-light text-[14px]">
-        <p>{`Don't have an account?`}</p>
-        <Link href={'/register'} className="text-blue-400 ">
-          Register!
-        </Link>
-      </div>
+      <AuthRedirectMessage
+        message={`Don't have an account?`}
+        href="/register"
+        linkText="Register!"
+      />
     </div>
   );
 };

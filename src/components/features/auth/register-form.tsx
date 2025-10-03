@@ -18,10 +18,8 @@ import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 import { Separator } from '@/components/ui/separator';
 import SocialAuthButtons from './social-auth-buttons';
-import Link from 'next/link';
-import ModeToggle from '@/components/ui/mode-toggle';
-import { HomeIcon } from 'lucide-react';
-import AuthHeaderControls from '@/components/ui/auth-header-controls';
+import AuthHeaderControls from './auth-header-controls';
+import { AuthRedirectMessage } from './auth-redirect-message';
 const RegisterForm = () => {
   const router = useRouter();
   const form = useForm<RegisterInput>({
@@ -135,12 +133,11 @@ const RegisterForm = () => {
       </Form>
       <Separator />
       <SocialAuthButtons />
-      <div className="flex gap-2 font-light text-[14px]">
-        <p>Have an account?</p>
-        <Link href={'/login'} className="text-blue-400">
-          Login!
-        </Link>
-      </div>
+      <AuthRedirectMessage
+        message="Have an account?"
+        href="/login"
+        linkText="Login!"
+      />
     </div>
   );
 };

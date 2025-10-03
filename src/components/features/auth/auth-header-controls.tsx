@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import ModeToggle from './mode-toggle';
+import ModeToggle from '../../ui/mode-toggle';
 import { HomeIcon } from 'lucide-react';
 
 const AuthHeaderControls = () => {
