@@ -1,4 +1,13 @@
 import { auth } from '@/lib/auth';
 import { toNextJsHandler } from 'better-auth/next-js';
+import { handleArcjet } from '@/lib/middlewares/auth';
 
-export const { POST, GET } = toNextJsHandler(auth);
+const authHandlers = toNextJsHandler(auth);
+export const { GET } = authHandlers;
+export const POST = async (request: Request) => {
+  const clonedRequest = request.clone();
+  const arcjetResponse = await handleArcjet(request);
+  if (arcjetResponse) return arcjetResponse;
+
+  return authHandlers.POST(clonedRequest);
+};

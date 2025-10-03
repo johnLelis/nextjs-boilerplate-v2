@@ -15,9 +15,13 @@ const Logout = () => {
       action: {
         label: 'Confirm Logout',
         onClick: async () => {
-          await authClient.signOut();
-          router.push('/');
-          toast.dismiss(toastId);
+          await authClient.signOut({
+            fetchOptions: {
+              onSuccess: () => {
+                router.push('/login');
+              },
+            },
+          });
         },
       },
       cancel: {
