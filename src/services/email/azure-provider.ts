@@ -1,6 +1,5 @@
 import { EmailMessage, EmailResponse, AzureEmailConfig } from '@/types/email';
 import { getAccessToken } from '@/services/token-service';
-import { toast } from 'sonner';
 
 export async function sendEmailViaAzure(
   message: EmailMessage,
