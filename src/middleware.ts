@@ -1,20 +1,18 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { headers } from 'next/headers';
-import { auth } from '@/lib/auth';
-
+import { NextRequest } from 'next/server';
+import { authMiddleware } from './lib/middlewares/auth';
 export const middleware = async (request: NextRequest) => {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
-
-  if (!session) {
-    return NextResponse.redirect(new URL('/login', request.url));
-  }
-
-  return NextResponse.next();
+  //use imported middlewares here
+  //Require auth for protected routes
+  const authResponse = await authMiddleware(request);
+  return authResponse;
 };
 
 export const config = {
   runtime: 'nodejs',
-  matcher: ['/dashboard', '/about'], // Apply middleware to specific routes
+  // Apply middleware to specific routes
+  matcher: [
+    '/(about|dashboard)/:path*',
+    // This regex says: match /api/ followed by anything that's NOT "auth"
+    '/api/((?!auth).*)/:path*',
+  ],
 };
