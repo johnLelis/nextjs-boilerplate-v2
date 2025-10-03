@@ -21,6 +21,7 @@ import { toast } from 'sonner';
 import { Separator } from '@/components/ui/separator';
 import SocialAuthButtons from './social-auth-buttons';
 import Link from 'next/link';
+import { HomeIcon } from 'lucide-react';
 
 const LoginForm = () => {
   const form = useForm<LoginInput>({
@@ -76,7 +77,12 @@ const LoginForm = () => {
 
   return (
     <div className="w-sm max-w-md rounded-lg border bg-card p-8 shadow-lg flex flex-col gap-4">
-      <ModeToggle />
+      <div className="flex place-items-center gap-2">
+        <ModeToggle />
+        <Link href={'/'}>
+          <HomeIcon />
+        </Link>
+      </div>
       <h1 className="mb-2 text-center text-2xl font-semibold text-card-foreground">
         Login
       </h1>
