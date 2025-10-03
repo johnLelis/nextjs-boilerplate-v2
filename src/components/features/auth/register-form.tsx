@@ -37,7 +37,7 @@ const RegisterForm = () => {
         /**
          * A URL to redirect to after the user verifies their email (optional)
          */
-        // callbackURL: '/login',
+        callbackURL: '/login',
       },
       {
         onError: error => {

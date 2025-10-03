@@ -7,7 +7,7 @@ const CtaButtons = () => {
       <Button
         asChild
         size="lg"
-        className="text-base px-8 py-6 shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700"
+        className="text-white text-base px-8 py-6 shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700"
       >
         <Link href="/login">Get Started</Link>
       </Button>
