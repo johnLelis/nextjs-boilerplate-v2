@@ -21,6 +21,7 @@ import { Separator } from '@/components/ui/separator';
 import SocialAuthButtons from './social-auth-buttons';
 import AuthHeaderControls from './auth-header-controls';
 import { AuthRedirectMessage } from './auth-redirect-message';
+import Link from 'next/link';
 
 const LoginForm = () => {
   const form = useForm<LoginInput>({
@@ -122,6 +123,14 @@ const LoginForm = () => {
           <Button type="submit" disabled={isSubmitting} className="w-full">
             <LoadingSwap isLoading={isSubmitting}>Login</LoadingSwap>
           </Button>
+          <div className="text-right">
+            <Link
+              className="text-sm hover:underline transition-colors"
+              href={'/forgot-password'}
+            >
+              Forgot Password?
+            </Link>
+          </div>
         </form>
       </Form>
       <Separator />
