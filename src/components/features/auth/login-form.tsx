@@ -18,6 +18,9 @@ import { LoadingSwap } from '@/components/ui/loading-swap';
 import { authClient } from '@/lib/auth-client';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
+import { Separator } from '@/components/ui/separator';
+import SocialAuthButtons from './social-auth-buttons';
+import Link from 'next/link';
 
 const LoginForm = () => {
   const form = useForm<LoginInput>({
@@ -72,9 +75,9 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="w-sm max-w-md rounded-lg border bg-card p-8 shadow-lg">
+    <div className="w-sm max-w-md rounded-lg border bg-card p-8 shadow-lg flex flex-col gap-4">
       <ModeToggle />
-      <h1 className="mb-6 text-center text-2xl font-semibold text-card-foreground">
+      <h1 className="mb-2 text-center text-2xl font-semibold text-card-foreground">
         Login
       </h1>
       <Form {...form}>
@@ -121,6 +124,14 @@ const LoginForm = () => {
           </Button>
         </form>
       </Form>
+      <Separator />
+      <SocialAuthButtons />
+      <div className="flex gap-2 font-light text-[14px]">
+        <p>{`Don't have an account?`}</p>
+        <Link href={'/register'} className="text-blue-400 ">
+          Register!
+        </Link>
+      </div>
     </div>
   );
 };

@@ -16,7 +16,15 @@ const envSchema = z.object({
 
   //Arcjet
   ARCJET_KEY: z.string().min(30),
+  ARCJET_ENV: z.enum(['development', 'production']).default('development'),
   ENABLE_ARCJET: z.string().default('false'),
+
+  //Social Providers
+  GITHUB_CLIENT_ID: z.string().optional(),
+  GITHUB_CLIENT_SECRET: z.string().optional(),
+  GOOGLE_CLIENT_ID: z.string().optional(),
+  GOOGLE_CLIENT_SECRET: z.string().optional(),
+
   // Optional vars with defaults
   PORT: z.string().default('3000'),
 });
