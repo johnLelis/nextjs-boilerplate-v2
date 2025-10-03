@@ -1,6 +1,8 @@
 import { authClient } from '@/lib/auth-client';
+import { useMemo } from 'react';
 
 export const useUser = () => {
   const { data: session, ...rest } = authClient.useSession();
-  return { user: session?.user ?? null, session, ...rest };
+  const user = useMemo(() => session?.user ?? null, [session?.user]);
+  return { user, session, ...rest };
 };

@@ -1,33 +1,14 @@
-import Image from 'next/image';
-type UserProps = {
-  user: {
-    name?: string | null;
-    email?: string | null;
-    image?: string | null;
-  } | null;
-};
-const UserGreeting = ({ user }: UserProps) => {
+import { UserGreetingProps } from '@/types/user';
+import UserAvatar from './user-avatar';
+
+const UserGreeting = ({ user }: UserGreetingProps) => {
+  if (!user) return null;
+
   return (
     <div className="flex gap-1 place-items-center">
-      {user?.image ? (
-        <Image
-          src={user.image}
-          alt={user.name ?? 'User avatar'}
-          width={24}
-          height={24}
-          className="rounded-full"
-        />
-      ) : (
-        <div className="h-6 w-6 rounded-full bg-blue-500 text-white flex items-center justify-center text-xs font-bold">
-          {user?.name?.[0] ?? '?'}
-        </div>
-      )}
+      <UserAvatar user={user} />
       <p className="text-sm">
-        Hello{' '}
-        <span className="font-semibold text-blue-500">
-          {user?.name ?? 'Guest'}
-        </span>
-        !
+        Hello <span className="font-semibold text-blue-500">{user.name}</span>
       </p>
     </div>
   );
