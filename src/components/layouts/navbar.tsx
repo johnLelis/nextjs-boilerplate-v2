@@ -1,8 +1,12 @@
+'use client';
 import Link from 'next/link';
 import ModeToggle from '../ui/mode-toggle';
 import Logout from '../features/auth/logout';
+import { useUser } from '@/hooks/useUser';
+import UserGreeting from '../features/user/user-greeting';
 
-const Navbar = async () => {
+const Navbar = () => {
+  const { user } = useUser();
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="flex h-16 items-center justify-between px-8">
@@ -23,6 +27,7 @@ const Navbar = async () => {
 
         <div className="flex items-center gap-6">
           <ModeToggle />
+          <UserGreeting user={user} />
           <div className="flex items-center gap-2">
             <Logout />
           </div>

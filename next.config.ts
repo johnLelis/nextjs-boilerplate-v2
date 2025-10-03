@@ -1,6 +1,6 @@
 import type { NextConfig } from 'next';
 import path from 'path';
-
+import { env } from '@/config/env';
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
@@ -38,7 +38,7 @@ const nextConfig: NextConfig = {
   },
   compiler: {
     removeConsole:
-      process.env.NODE_ENV === 'production'
+      env.NODE_ENV === 'production'
         ? {
             exclude: ['error', 'warn'],
           }

@@ -9,6 +9,7 @@ import arcjet, {
 } from '@arcjet/next';
 import { auth } from '@/lib/auth';
 import { findIp } from '@arcjet/ip';
+import { env } from '@/config/env';
 
 const botSettings = { mode: 'LIVE', allow: [] } satisfies BotOptions;
 const restrictiveRateLimitSettings = {
@@ -28,7 +29,7 @@ const emailSettings = {
 } satisfies EmailOptions;
 
 const aj = arcjet({
-  key: process.env.ARCJET_KEY!, // Get your site key from https://app.arcjet.com
+  key: env.ARCJET_KEY!, // Get your site key from https://app.arcjet.com
   characteristics: ['userIdOrIp'],
   rules: [
     // Shield protects your app from common attacks e.g. SQL injection

@@ -1,0 +1,31 @@
+import { z } from 'zod';
+
+const envSchema = z.object({
+  NODE_ENV: z.enum(['development', 'test', 'production']),
+  //Database
+  DATABASE_URL: z.url(),
+  DB_HOST: z.string().min(1),
+  DB_PORT: z.string().default('5432'),
+  DB_PASSWORD: z.string().min(1),
+  DB_USER: z.string().min(1),
+  DB_NAME: z.string().min(1),
+
+  //Better Auth
+  BETTER_AUTH_SECRET: z.string().min(1),
+  BETTER_AUTH_URL: z.url(),
+
+  //Arcjet
+  ARCJET_KEY: z.string().min(30),
+  ENABLE_ARCJET: z.string().default('false'),
+  // Optional vars with defaults
+  PORT: z.string().default('3000'),
+});
+
+const parsed = envSchema.safeParse(process.env);
+if (!parsed.success) {
+  const flattened = parsed.error.message;
+  console.error('❌ Invalid environment variables:', flattened);
+  throw new Error('Invalid environment variables');
+}
+
+export const env = parsed.data;
