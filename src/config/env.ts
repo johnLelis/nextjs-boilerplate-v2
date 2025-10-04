@@ -17,9 +17,12 @@ const envSchema = z.object({
   BETTER_AUTH_URL: z.url(),
 
   //Arcjet
-  ARCJET_KEY: z.string().min(30),
-  ARCJET_ENV: z.enum(['development', 'production']).default('development'),
-  ENABLE_ARCJET: z.string().default('false'),
+  ARCJET_KEY: z.string().min(30).optional(),
+  ARCJET_ENV: z
+    .enum(['development', 'production'])
+    .default('development')
+    .optional(),
+  ENABLE_ARCJET: z.string().default('false').optional(),
 
   //Social Providers
   GITHUB_CLIENT_ID: z.string().optional(),
