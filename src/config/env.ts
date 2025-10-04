@@ -42,4 +42,7 @@ if (!parsed.success) {
   throw new Error('Invalid environment variables');
 }
 
-export const env = parsed.data;
+const parsedData = {
+  ...parsed.data,
+} as const;
+export const env = parsedData;

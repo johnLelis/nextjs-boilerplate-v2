@@ -1,3 +1,3 @@
-export async function GET() {
+export const GET = () => {
   return Response.json({ message: 'Hello World' });
-}
+};
