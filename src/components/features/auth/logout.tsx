@@ -1,5 +1,5 @@
 'use client';
-import { authClient } from '@/lib/auth-client';
+import { authClient } from '@/lib/auth/auth-client';
 import { LogOut } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';

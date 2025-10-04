@@ -7,7 +7,7 @@ import arcjet, {
   slidingWindow,
   SlidingWindowRateLimitOptions,
 } from '@arcjet/next';
-import { auth } from '@/lib/auth';
+import { auth } from '@/lib/auth/auth';
 import { findIp } from '@arcjet/ip';
 import { env } from '@/config/env';
 

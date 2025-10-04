@@ -1,7 +1,7 @@
 'use client';
 import { Button } from '@/components/ui/button';
 import { LoadingSwap } from '@/components/ui/loading-swap';
-import { authClient } from '@/lib/auth-client';
+import { authClient } from '@/lib/auth/auth-client';
 import {
   SUPPORTED_OAUTH_PROVIDERS,
   SUPPORTED_OAUTH_PROVIDERS_DETAILS,

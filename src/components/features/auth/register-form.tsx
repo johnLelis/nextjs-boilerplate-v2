@@ -16,7 +16,7 @@ import {
   registerResolver,
 } from '@/lib/validations/auth-validator';
 import { LoadingSwap } from '@/components/ui/loading-swap';
-import { authClient } from '@/lib/auth-client';
+import { authClient } from '@/lib/auth/auth-client';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 import { Separator } from '@/components/ui/separator';
