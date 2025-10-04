@@ -4,20 +4,32 @@ import { db } from '@/drizzle/db';
 import { nextCookies } from 'better-auth/next-js';
 import { env } from '@/config/env';
 import { sendEmail } from '@/services/email';
+import { createAuthMiddleware } from 'better-auth/api';
+import {
+  createResetPasswordEmail,
+  createVerifyEmail,
+} from '@/lib/email-templates';
+import { sendWelcomeEmail } from '@/actions/email';
 
 export const auth = betterAuth({
   emailAndPassword: {
+    resetPasswordTokenExpiresIn: 300,
     enabled: true,
     autoSignIn: false,
     requireEmailVerification: true,
     sendResetPassword: async ({ user, url, token }) => {
+      const { html, text } = createResetPasswordEmail({
+        userName: user.name,
+        resetUrl: new URL(`${url}?token=${token}`),
+        expirationTime: '5 minutes',
+        brandColor: '#0070f3',
+      });
       await sendEmail({
-        to: [{ email: user.email }],
+        to: [{ email: user.email, name: user.name }],
         subject: 'Reset your password',
-        text: `Click the link to reset your password: ${new URL(
-          `${url}?token=${token}`
-        )}`,
-        from: { email: env.AZURE_USER_EMAIL },
+        text,
+        html,
+        from: { email: env.AZURE_USER_EMAIL, name: 'PenStack' },
       });
     },
   },
@@ -25,13 +37,21 @@ export const auth = betterAuth({
     autoSignInAfterVerification: true,
     sendOnSignUp: true,
     sendVerificationEmail: async ({ user, url }) => {
+      const { html, text } = createVerifyEmail({
+        userName: user.name,
+        verificationUrl: url,
+        expirationTime: '1 hour',
+        brandColor: '#0070f3',
+      });
       await sendEmail({
-        to: [{ email: user.email }],
-        subject: 'Verify your email address',
-        text: `Click the link to verify your email: ${url}`,
-        from: { email: env.AZURE_USER_EMAIL },
+        from: { email: env.AZURE_USER_EMAIL, name: 'PenStack' },
+        to: [{ email: user.email, name: user.name }],
+        subject: 'Verify Your Email Address',
+        html,
+        text,
       });
     },
+    expiresIn: 3600,
   },
   session: {
     cookieCache: {
@@ -53,4 +73,14 @@ export const auth = betterAuth({
   database: drizzleAdapter(db, {
     provider: 'pg',
   }),
+  hooks: {
+    after: createAuthMiddleware(async ctx => {
+      const newSession = ctx.context.newSession;
+      if (ctx.path.startsWith('/verify-email') && newSession) {
+        const userEmail = newSession.user.email;
+        const userName = newSession.user.name;
+        await sendWelcomeEmail(userEmail, userName);
+      }
+    }),
+  },
 });
