@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server';
-import { authMiddleware } from './lib/middlewares/auth';
+import { authMiddleware } from './lib/middlewares/auth-middleware';
 export const middleware = async (request: NextRequest) => {
   //use imported middlewares here
   //Require auth for protected routes

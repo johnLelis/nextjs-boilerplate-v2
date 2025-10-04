@@ -1,7 +1,7 @@
 import { env } from '@/config/env';
 import { auth } from '@/lib/auth';
 import { toNextJsHandler } from 'better-auth/next-js';
-import { handleArcjet } from '@/lib/middlewares/auth';
+import { handleArcjet } from '@/lib/middlewares/auth-middleware';
 
 const authHandlers = toNextJsHandler(auth);
 export const { GET } = authHandlers;

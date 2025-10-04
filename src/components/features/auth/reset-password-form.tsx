@@ -14,7 +14,7 @@ import { Input } from '@/components/ui/input';
 import {
   ResetPasswordInput,
   resetPasswordResolver,
-} from '@/lib/validations/auth';
+} from '@/lib/validations/auth-validator';
 import { LoadingSwap } from '@/components/ui/loading-swap';
 import { authClient } from '@/lib/auth-client';
 import AuthHeaderControls from '@/components/features/auth/auth-header-controls';

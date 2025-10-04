@@ -11,7 +11,10 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { RegisterInput, registerResolver } from '@/lib/validations/auth';
+import {
+  RegisterInput,
+  registerResolver,
+} from '@/lib/validations/auth-validator';
 import { LoadingSwap } from '@/components/ui/loading-swap';
 import { authClient } from '@/lib/auth-client';
 import { toast } from 'sonner';
