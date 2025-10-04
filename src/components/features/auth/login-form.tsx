@@ -2,16 +2,6 @@
 
 import { useForm } from 'react-hook-form';
 
-import {
-  Form,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormControl,
-  FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
 import { LoginInput, loginResolver } from '@/lib/validations/auth-validator';
 import { LoadingSwap } from '@/components/ui/loading-swap';
 import { authClient } from '@/lib/auth/auth-client';
@@ -22,6 +12,22 @@ import SocialAuthButtons from './social-auth-buttons';
 import AuthHeaderControls from './auth-header-controls';
 import { AuthRedirectMessage } from './auth-redirect-message';
 import Link from 'next/link';
+import { DynamicForm, FormFieldConfig } from '@/components/ui/dynamic-form';
+
+const loginFields: FormFieldConfig<LoginInput>[] = [
+  {
+    name: 'email',
+    label: 'Email',
+    type: 'email',
+    placeholder: 'you@example.com',
+  },
+  {
+    name: 'password',
+    label: 'Password',
+    type: 'password',
+    placeholder: '••••••••',
+  },
+];
 
 const LoginForm = () => {
   const form = useForm<LoginInput>({
@@ -81,58 +87,25 @@ const LoginForm = () => {
       <h1 className="mb-2 text-center text-2xl font-semibold text-card-foreground">
         Login
       </h1>
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(handleOnSubmit)}
-          className="space-y-4"
-        >
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => {
-              return (
-                <FormItem>
-                  <FormLabel>Email</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="email"
-                      placeholder="you@example.com"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              );
-            }}
-          />
-
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Password</FormLabel>
-                <FormControl>
-                  <Input type="password" placeholder="••••••••" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <Button type="submit" disabled={isSubmitting} className="w-full">
-            <LoadingSwap isLoading={isSubmitting}>Login</LoadingSwap>
-          </Button>
+      <DynamicForm
+        form={form}
+        fields={loginFields}
+        onSubmit={handleOnSubmit}
+        submitLabel="Login"
+        loadingComponent={
+          <LoadingSwap isLoading={isSubmitting}>Login</LoadingSwap>
+        }
+        footer={
           <div className="text-right">
             <Link
               className="text-sm hover:underline transition-colors"
-              href={'/forgot-password'}
+              href="/forgot-password"
             >
               Forgot Password?
             </Link>
           </div>
-        </form>
-      </Form>
+        }
+      />
       <Separator />
       <SocialAuthButtons />
       <AuthRedirectMessage
