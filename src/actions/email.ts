@@ -1,4 +1,3 @@
-'use server';
 import { env } from '@/config/env';
 import { createWelcomeEmail } from '@/lib/email-templates';
 import { sendEmail } from '@/services/email';
