@@ -36,6 +36,9 @@ const envSchema = z.object({
   AZURE_CLIENT_SECRET: z.string().optional(),
   AZURE_USER_EMAIL: z.string(),
 
+  //Email Provider
+  EMAIL_PROVIDER: z.string().optional().default('azure'),
+
   // Optional vars with defaults
   PORT: z.string().default('3000'),
 });

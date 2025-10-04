@@ -1,2 +1,2 @@
 export * from './email-service';
-export * from './azure-provider';
+export * from './providers/azure/azure-provider';
