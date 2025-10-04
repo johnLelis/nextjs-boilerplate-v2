@@ -1,10 +1,10 @@
 import { EmailMessage, EmailResponse, AzureEmailConfig } from '@/types/email';
 import { getAccessToken } from '@/services/token-service';
 
-export async function sendEmailViaAzure(
+export const sendEmailViaAzure = async (
   message: EmailMessage,
   config: AzureEmailConfig
-): Promise<EmailResponse> {
+): Promise<EmailResponse> => {
   try {
     console.log('Sending email via MS Graph...');
 
@@ -79,4 +79,4 @@ export async function sendEmailViaAzure(
       error: error instanceof Error ? error.message : 'Unknown error',
     };
   }
-}
+};
