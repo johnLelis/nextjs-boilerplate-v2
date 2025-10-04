@@ -1,4 +1,4 @@
-import { createBaseTemplate } from './base-template';
+import { createBaseTemplate } from './base';
 
 type VerifyEmailProps = {
   userName?: string;
@@ -12,7 +12,7 @@ export const createVerifyEmail = ({
   userName,
   verificationUrl,
   expirationTime = '24 hours',
-  brandName = 'Your Company',
+  brandName = 'PenStack',
   brandColor = '#0070f3',
 }: VerifyEmailProps): { html: string; text: string } => {
   const greeting = userName ? `Hi ${userName}` : 'Hi there';

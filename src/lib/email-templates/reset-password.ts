@@ -1,8 +1,8 @@
-import { createBaseTemplate } from './base-template';
+import { createBaseTemplate } from './base';
 
 type ResetPasswordEmailProps = {
   userName?: string;
-  resetUrl: string;
+  resetUrl: URL;
   expirationTime?: string;
   brandName?: string;
   brandColor?: string;
@@ -12,7 +12,7 @@ export const createResetPasswordEmail = ({
   userName,
   resetUrl,
   expirationTime = '1 hour',
-  brandName = 'Your Company',
+  brandName = 'PenStack',
   brandColor = '#0070f3',
 }: ResetPasswordEmailProps): { html: string; text: string } => {
   const greeting = userName ? `Hi ${userName}` : 'Hi there';

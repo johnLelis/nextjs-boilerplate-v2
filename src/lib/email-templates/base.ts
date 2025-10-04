@@ -69,7 +69,7 @@ export const createBaseTemplate = ({
     .email-logo {
       font-size: 24px;
       font-weight: 700;
-      color: #ffffff;
+      color: #ffffff !important;
       text-decoration: none;
       letter-spacing: -0.5px;
     }
@@ -89,12 +89,12 @@ export const createBaseTemplate = ({
       margin-bottom: 16px;
       line-height: 1.6;
     }
-    .email-button {
+   .email-button {
       display: inline-block;
       padding: 14px 32px;
       background-color: ${brandColor};
-      color: #ffffff;
-      text-decoration: none;
+      color: #ffffff !important;
+      text-decoration: none !important;
       border-radius: 6px;
       font-weight: 600;
       font-size: 16px;
@@ -102,7 +102,11 @@ export const createBaseTemplate = ({
       transition: background-color 0.2s;
     }
     .email-button:hover {
-      background-color: ${adjustBrightness(brandColor, -10)};
+      background-color: ${adjustBrightness(brandColor, -10)} !important;
+      color: #ffffff !important;
+    }
+    .email-button:visited {
+      color: #ffffff !important;
     }
     .email-link {
       color: ${brandColor};
