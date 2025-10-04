@@ -34,7 +34,7 @@ type DynamicFormProps<T extends FieldValues> = {
   loadingComponent?: ReactNode;
 };
 
-export function DynamicForm<T extends FieldValues>({
+export const DynamicForm = <T extends FieldValues>({
   form,
   fields,
   onSubmit,
@@ -42,7 +42,7 @@ export function DynamicForm<T extends FieldValues>({
   className = 'space-y-4',
   footer,
   loadingComponent,
-}: DynamicFormProps<T>) {
+}: DynamicFormProps<T>) => {
   const { isSubmitting } = form.formState;
 
   return (
@@ -88,4 +88,4 @@ export function DynamicForm<T extends FieldValues>({
       </form>
     </Form>
   );
-}
+};

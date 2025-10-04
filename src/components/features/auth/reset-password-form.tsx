@@ -1,16 +1,5 @@
 'use client';
-import { Button } from '@/components/ui/button';
 import { useForm } from 'react-hook-form';
-
-import {
-  Form,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormControl,
-  FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
 import {
   ResetPasswordInput,
   resetPasswordResolver,
@@ -20,6 +9,22 @@ import { authClient } from '@/lib/auth/auth-client';
 import AuthHeaderControls from '@/components/features/auth/auth-header-controls';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
+import { DynamicForm, FormFieldConfig } from '@/components/ui/dynamic-form';
+
+const resetPasswordFields: FormFieldConfig<ResetPasswordInput>[] = [
+  {
+    name: 'password',
+    label: 'Password',
+    type: 'password',
+    placeholder: '••••••••',
+  },
+  {
+    name: 'confirmPassword',
+    label: 'Confirm Password',
+    type: 'password',
+    placeholder: '••••••••',
+  },
+];
 
 const ResetPasswordForm = () => {
   const router = useRouter();
@@ -46,51 +51,22 @@ const ResetPasswordForm = () => {
       router.push('/login');
     }
   };
-  // await checkAuthRedirect();
+
   return (
     <div className="w-sm max-w-md rounded-lg border bg-card p-8 shadow-lg flex flex-col gap-4">
       <AuthHeaderControls />
       <h1 className="mb-2 text-center text-2xl font-semibold text-card-foreground">
         Reset Password
       </h1>
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(handleOnSubmit)}
-          className="space-y-4"
-        >
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Password</FormLabel>
-                <FormControl>
-                  <Input type="password" placeholder="••••••••" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="confirmPassword"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Confirm Password</FormLabel>
-                <FormControl>
-                  <Input type="password" placeholder="••••••••" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <Button type="submit" disabled={isSubmitting} className="w-full">
-            <LoadingSwap isLoading={isSubmitting}>Submit</LoadingSwap>
-          </Button>
-        </form>
-      </Form>
+      <DynamicForm
+        form={form}
+        fields={resetPasswordFields}
+        onSubmit={handleOnSubmit}
+        submitLabel="Submit"
+        loadingComponent={
+          <LoadingSwap isLoading={isSubmitting}>Submit</LoadingSwap>
+        }
+      />
     </div>
   );
 };

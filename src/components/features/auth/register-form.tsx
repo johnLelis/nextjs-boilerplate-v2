@@ -1,16 +1,5 @@
 'use client';
 import { useForm } from 'react-hook-form';
-
-import {
-  Form,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormControl,
-  FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
 import {
   RegisterInput,
   registerResolver,
@@ -23,6 +12,34 @@ import { Separator } from '@/components/ui/separator';
 import SocialAuthButtons from './social-auth-buttons';
 import AuthHeaderControls from './auth-header-controls';
 import { AuthRedirectMessage } from './auth-redirect-message';
+import { DynamicForm, FormFieldConfig } from '@/components/ui/dynamic-form';
+
+const registerFields: FormFieldConfig<RegisterInput>[] = [
+  {
+    name: 'name',
+    label: 'Name',
+    type: 'text',
+    placeholder: 'Your name',
+  },
+  {
+    name: 'email',
+    label: 'Email',
+    type: 'email',
+    placeholder: 'you@example.com',
+  },
+  {
+    name: 'password',
+    label: 'Password',
+    type: 'password',
+    placeholder: '••••••••',
+  },
+  {
+    name: 'confirmPassword',
+    label: 'Confirm Password',
+    type: 'password',
+    placeholder: '••••••••',
+  },
+];
 const RegisterForm = () => {
   const router = useRouter();
   const form = useForm<RegisterInput>({
@@ -64,77 +81,15 @@ const RegisterForm = () => {
       <h1 className="mb-2 text-center text-2xl font-semibold text-card-foreground">
         Register
       </h1>
-
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(handleOnSubmit)}
-          className="space-y-4"
-        >
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Name</FormLabel>
-                <FormControl>
-                  <Input type="text" placeholder="Your name" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input
-                    type="email"
-                    placeholder="you@example.com"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Password</FormLabel>
-                <FormControl>
-                  <Input type="password" placeholder="••••••••" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="confirmPassword"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Confirm Password</FormLabel>
-                <FormControl>
-                  <Input type="password" placeholder="••••••••" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <Button type="submit" disabled={isSubmitting} className="w-full">
-            <LoadingSwap isLoading={isSubmitting}>Register</LoadingSwap>
-          </Button>
-        </form>
-      </Form>
+      <DynamicForm
+        form={form}
+        fields={registerFields}
+        onSubmit={handleOnSubmit}
+        submitLabel="Register"
+        loadingComponent={
+          <LoadingSwap isLoading={isSubmitting}>Register</LoadingSwap>
+        }
+      />
       <Separator />
       <SocialAuthButtons />
       <AuthRedirectMessage
