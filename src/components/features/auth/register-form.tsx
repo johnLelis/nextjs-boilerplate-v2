@@ -51,6 +51,7 @@ const RegisterForm = () => {
           toast.error(error.error.message || 'Failed to sign up!');
         },
         onSuccess: () => {
+          toast.success(`A verification email has been sent to ${data.email}.`);
           router.push('/login');
         },
       }
