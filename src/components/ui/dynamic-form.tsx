@@ -13,7 +13,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
-import { ReactNode } from 'react';
+import { ReactNode, ComponentProps } from 'react';
 
 export type FormFieldConfig<T extends FieldValues> = {
   name: Path<T>;
@@ -22,28 +22,65 @@ export type FormFieldConfig<T extends FieldValues> = {
   placeholder?: string;
   description?: string;
   rows?: number;
+  inputProps?: Omit<ComponentProps<typeof Input>, 'type' | 'placeholder'>;
+  textareaProps?: Omit<ComponentProps<typeof Textarea>, 'placeholder' | 'rows'>;
+};
+
+export type FormButton = {
+  label: string;
+  type?: 'submit' | 'button' | 'reset';
+  variant?:
+    | 'default'
+    | 'destructive'
+    | 'outline'
+    | 'secondary'
+    | 'ghost'
+    | 'link';
+  onClick?: () => void;
+  disabled?: boolean;
+  className?: string;
+  loadingComponent?: ReactNode;
 };
 
 type DynamicFormProps<T extends FieldValues> = {
   form: UseFormReturn<T>;
   fields: FormFieldConfig<T>[];
   onSubmit: (data: T) => Promise<void> | void;
-  submitLabel: string;
+  submitLabel?: string;
   className?: string;
   footer?: ReactNode;
   loadingComponent?: ReactNode;
+  buttons?: FormButton[];
+  buttonsClassName?: string;
 };
 
 export const DynamicForm = <T extends FieldValues>({
   form,
   fields,
   onSubmit,
-  submitLabel,
+  submitLabel = 'Submit',
   className = 'space-y-4',
   footer,
   loadingComponent,
+  buttons,
+  buttonsClassName,
 }: DynamicFormProps<T>) => {
   const { isSubmitting } = form.formState;
+
+  const formButtons: FormButton[] = buttons || [
+    {
+      label: submitLabel,
+      type: 'submit',
+      variant: 'default',
+      disabled: isSubmitting,
+      loadingComponent,
+    },
+  ];
+
+  const getButtonClassName = (button: FormButton) => {
+    if (button.className) return button.className;
+    return formButtons.length === 1 ? 'w-full' : '';
+  };
 
   return (
     <Form {...form}>
@@ -62,12 +99,14 @@ export const DynamicForm = <T extends FieldValues>({
                       placeholder={fieldConfig.placeholder}
                       rows={fieldConfig.rows || 4}
                       {...field}
+                      {...fieldConfig.textareaProps}
                     />
                   ) : (
                     <Input
                       type={fieldConfig.type || 'text'}
                       placeholder={fieldConfig.placeholder}
                       {...field}
+                      {...fieldConfig.inputProps}
                     />
                   )}
                 </FormControl>
@@ -80,9 +119,26 @@ export const DynamicForm = <T extends FieldValues>({
           />
         ))}
 
-        <Button type="submit" disabled={isSubmitting} className="w-full">
-          {isSubmitting && loadingComponent ? loadingComponent : submitLabel}
-        </Button>
+        <div className={buttonsClassName || 'flex justify-end gap-3'}>
+          {formButtons.map((button, index) => (
+            <Button
+              key={`button-${index}`}
+              type={button.type || 'button'}
+              variant={button.variant || 'default'}
+              disabled={
+                button.disabled || (button.type === 'submit' && isSubmitting)
+              }
+              onClick={button.onClick}
+              className={getButtonClassName(button)}
+            >
+              {button.type === 'submit' &&
+              isSubmitting &&
+              button.loadingComponent
+                ? button.loadingComponent
+                : button.label}
+            </Button>
+          ))}
+        </div>
 
         {footer}
       </form>

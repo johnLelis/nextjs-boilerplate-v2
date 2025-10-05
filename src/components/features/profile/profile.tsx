@@ -1,103 +1,132 @@
+'use client';
+
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import {
-  Form,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormControl,
-  FormMessage,
-  FormDescription,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
+import { DynamicForm, FormFieldConfig } from '@/components/ui/dynamic-form';
 import {
   updateProfileResolver,
   UpdateProfileInput,
 } from '@/lib/validations/auth-validator';
+import { useUser } from '@/hooks/useUser';
+import { LoadingSwap } from '@/components/ui/loading-swap';
+import ProfileAvatar from './profile-avatar';
+import { authClient } from '@/lib/auth/auth-client';
+import { toast } from 'sonner';
+
 const Profile = () => {
+  const { user } = useUser();
+
   const form = useForm<UpdateProfileInput>({
     resolver: updateProfileResolver,
     defaultValues: {
-      name: 'John Doe',
-      email: 'john.doe@example.com',
+      name: '',
+      email: '',
     },
   });
 
-  const onSubmit = async (data: UpdateProfileInput) => {
+  const { isDirty, isSubmitting } = form.formState;
+
+  useEffect(() => {
+    if (user) {
+      form.reset({
+        name: user.name || '',
+        email: user.email || '',
+      });
+    }
+  }, [user, form]);
+
+  const profileFields: FormFieldConfig<UpdateProfileInput>[] = [
+    {
+      name: 'name',
+      label: 'Full Name',
+      type: 'text',
+      placeholder: 'John Doe',
+    },
+    {
+      name: 'email',
+      label: 'Email',
+      type: 'email',
+      placeholder: 'you@example.com',
+      description: "We'll send a verification email to your new email address.",
+    },
+  ];
+
+  const onSubmit = async (data: UpdateProfileInput): Promise<void> => {
     console.log('Form submitted:', data);
+
+    try {
+      const updates = [];
+      if (data.name && data.name !== user?.name) {
+        updates.push(authClient.updateUser({ name: data.name }));
+      }
+      if (data.email && data.email !== user?.email) {
+        console.log(data.email);
+        updates.push(
+          authClient.changeEmail({
+            newEmail: data.email,
+            callbackURL: '/dashboard',
+          })
+        );
+      }
+
+      await Promise.all(updates);
+      form.reset();
+      toast.success(
+        'We’ve sent a verification link to your new email. Please check your inbox to confirm the change.'
+      );
+    } catch (error) {
+      console.error('❌ Failed to update profile:', error);
+      const message =
+        error instanceof Error
+          ? error.message
+          : 'An unexpected error occurred while updating your profile.';
+
+      toast.error(message);
+    }
   };
+
   return (
     <div className="p-6">
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-          {/* Profile Picture */}
-          <div className="flex items-center gap-6">
-            <div className="w-24 h-24 rounded-full bg-gradient-to-br from-primary to-primary/50 flex items-center justify-center text-primary-foreground text-2xl font-bold">
-              JD
-            </div>
-            <div>
-              <Button type="button" variant="default" size="sm">
-                Change Photo
-              </Button>
-              <Button
-                type="button"
-                variant="secondary"
-                size="sm"
-                className="ml-2"
-              >
-                Remove
-              </Button>
-              <p className="text-xs text-muted-foreground mt-2">
-                JPG, GIF or PNG. Max size of 2MB.
-              </p>
-            </div>
-          </div>
-
-          {/* Form Fields */}
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Full Name</FormLabel>
-                <FormControl>
-                  <Input {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input type="email" {...field} />
-                </FormControl>
-                <FormDescription>
-                  {`We'll send a verification email to your new email address.`}
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          {/* Actions */}
-          <div className="flex justify-end gap-3 pt-4 border-t">
-            <Button
-              type="button"
-              variant="secondary"
-              onClick={() => form.reset()}
-            >
-              Cancel
-            </Button>
-            <Button type="submit">Save Changes</Button>
-          </div>
-        </form>
-      </Form>
+      <div className="space-y-6">
+        <ProfileAvatar user={user} />
+        <DynamicForm
+          form={form}
+          fields={profileFields}
+          onSubmit={onSubmit}
+          submitLabel="Save Changes"
+          buttons={
+            isDirty
+              ? [
+                  {
+                    label: 'Cancel',
+                    type: 'button',
+                    variant: 'secondary',
+                    onClick: () => {
+                      form.reset({
+                        name: user?.name || '',
+                        email: user?.email || '',
+                      });
+                    },
+                  },
+                  {
+                    label: 'Save Changes',
+                    type: 'submit',
+                    variant: 'default',
+                    className: 'text-white',
+                    loadingComponent: (
+                      <LoadingSwap isLoading={isSubmitting}>
+                        Saving...
+                      </LoadingSwap>
+                    ),
+                  },
+                ]
+              : undefined
+          }
+          buttonsClassName={
+            isDirty ? 'flex justify-end gap-3 pt-4 border-t' : 'hidden'
+          }
+        />
+      </div>
     </div>
   );
 };

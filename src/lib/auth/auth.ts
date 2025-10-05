@@ -6,12 +6,41 @@ import { env } from '@/config/env';
 import { sendEmail } from '@/services/email';
 import { createAuthMiddleware } from 'better-auth/api';
 import {
+  createChangeEmailVerification,
   createResetPasswordEmail,
   createVerifyEmail,
 } from '@/lib/email-templates';
 import { sendWelcomeEmail } from '@/actions/email';
 
 export const auth = betterAuth({
+  user: {
+    changeEmail: {
+      expiresIn: 3600,
+      enabled: true,
+      sendChangeEmailVerification: async ({ user, newEmail, url }) => {
+        const { html, text } = createChangeEmailVerification({
+          userName: user.name,
+          newEmail,
+          verificationUrl: url,
+          expirationTime: '1 hour',
+        });
+
+        await sendEmail({
+          from: { email: env.EMAIL_SENDER, name: 'PenStack' },
+          to: [{ email: user.email, name: user.name }],
+          subject: 'Verify Your New Email Address',
+          html,
+          text,
+        });
+      },
+    },
+    // You can extend the user schema with custom fields (e.g., firstName, lastName)
+    // Uncomment and modify the example below to add additional fields to user profiles.
+    // additionalFields: {
+    //   firstName: { type: 'string' },
+    //   lastName: { type: 'string' },
+    // },
+  },
   emailAndPassword: {
     resetPasswordTokenExpiresIn: 300,
     enabled: true,
@@ -29,7 +58,7 @@ export const auth = betterAuth({
         subject: 'Reset your password',
         text,
         html,
-        from: { email: env.AZURE_USER_EMAIL, name: 'PenStack' },
+        from: { email: env.EMAIL_SENDER, name: 'PenStack' },
       });
     },
   },
@@ -44,15 +73,17 @@ export const auth = betterAuth({
         brandColor: '#0070f3',
       });
       await sendEmail({
-        from: { email: env.AZURE_USER_EMAIL, name: 'PenStack' },
+        from: { email: env.EMAIL_SENDER, name: 'PenStack' },
         to: [{ email: user.email, name: user.name }],
         subject: 'Verify Your Email Address',
         html,
         text,
       });
     },
+
     expiresIn: 3600,
   },
+
   session: {
     cookieCache: {
       enabled: true,

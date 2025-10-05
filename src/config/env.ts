@@ -34,9 +34,9 @@ const envSchema = z.object({
   AZURE_TENANT_ID: z.string().optional(),
   AZURE_CLIENT_ID: z.string().optional(),
   AZURE_CLIENT_SECRET: z.string().optional(),
-  AZURE_USER_EMAIL: z.string(),
 
   //Email Provider
+  EMAIL_SENDER: z.string(),
   EMAIL_PROVIDER: z.string().optional().default('azure'),
 
   // Optional vars with defaults

@@ -9,7 +9,7 @@ const UserAvatar = ({ user }: { user: User }) => {
         alt={user.name ?? 'User avatar'}
         width={24}
         height={24}
-        className="rounded-full"
+        className="rounded-full "
       />
     );
   }
@@ -17,7 +17,7 @@ const UserAvatar = ({ user }: { user: User }) => {
   const initial = user.name?.[0]?.toUpperCase() ?? '?';
 
   return (
-    <div className="h-6 w-6 rounded-full bg-blue-500 text-white flex items-center justify-center text-xs font-bold">
+    <div className="h-6 w-6  rounded-full bg-blue-500 text-white flex items-center justify-center text-xs font-bold">
       {initial}
     </div>
   );

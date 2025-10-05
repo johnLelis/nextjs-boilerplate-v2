@@ -8,7 +8,7 @@ export const sendWelcomeEmail = async (userEmail: string, userName: string) => {
     dashboardUrl: new URL('http://localhost:3000/dashboard'),
   });
   const result = await sendEmail({
-    from: { email: env.AZURE_USER_EMAIL, name: 'PenStack' },
+    from: { email: env.EMAIL_SENDER, name: 'PenStack' },
     to: [{ email: userEmail, name: userName }],
     subject: 'Welcome!',
     html,

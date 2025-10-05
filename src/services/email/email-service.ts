@@ -64,17 +64,17 @@ export const getEmailConfigFromEnv = (): EmailConfig => {
         AZURE_TENANT_ID,
         AZURE_CLIENT_ID,
         AZURE_CLIENT_SECRET,
-        AZURE_USER_EMAIL,
+        EMAIL_SENDER,
       } = env;
 
       if (
         !AZURE_TENANT_ID ||
         !AZURE_CLIENT_ID ||
         !AZURE_CLIENT_SECRET ||
-        !AZURE_USER_EMAIL
+        !EMAIL_SENDER
       ) {
         throw new Error(
-          'Missing required Azure email configuration. Please set AZURE_TENANT_ID, AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, and AZURE_USER_EMAIL environment variables.'
+          'Missing required Azure email configuration. Please set AZURE_TENANT_ID, AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, and EMAIL_SENDER environment variables.'
         );
       }
 
@@ -82,7 +82,7 @@ export const getEmailConfigFromEnv = (): EmailConfig => {
         tenantId: AZURE_TENANT_ID,
         clientId: AZURE_CLIENT_ID,
         clientSecret: AZURE_CLIENT_SECRET,
-        userEmail: AZURE_USER_EMAIL,
+        userEmail: EMAIL_SENDER,
       };
       break;
 
