@@ -40,6 +40,9 @@ export const auth = betterAuth({
     //   firstName: { type: 'string' },
     //   lastName: { type: 'string' },
     // },
+    deleteUser: {
+      enabled: true,
+    },
   },
   emailAndPassword: {
     resetPasswordTokenExpiresIn: 300,
@@ -89,6 +92,7 @@ export const auth = betterAuth({
       enabled: true,
       maxAge: 60 * 5, //5mins
     },
+    preserveSessionInDatabase: false,
   },
   plugins: [nextCookies()],
   socialProviders: {
