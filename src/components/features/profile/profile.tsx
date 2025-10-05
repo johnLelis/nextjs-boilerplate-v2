@@ -52,36 +52,41 @@ const Profile = () => {
   ];
 
   const onSubmit = async (data: UpdateProfileInput): Promise<void> => {
-    console.log('Form submitted:', data);
-
     try {
-      const updates = [];
-      if (data.name && data.name !== user?.name) {
-        updates.push(authClient.updateUser({ name: data.name }));
+      const updates: Promise<unknown>[] = [];
+      const changes = {
+        name: data.name && data.name !== user?.name,
+        email: data.email && data.email !== user?.email,
+      };
+
+      if (changes.name) {
+        updates.push(authClient.updateUser({ name: data.name! }));
       }
-      if (data.email && data.email !== user?.email) {
-        console.log(data.email);
+
+      if (changes.email) {
         updates.push(
           authClient.changeEmail({
-            newEmail: data.email,
+            newEmail: data.email!,
             callbackURL: '/dashboard',
           })
         );
       }
 
       await Promise.all(updates);
-      form.reset();
-      toast.success(
-        'We’ve sent a verification link to your new email. Please check your inbox to confirm the change.'
-      );
-    } catch (error) {
-      console.error('❌ Failed to update profile:', error);
       const message =
+        changes.name && changes.email
+          ? 'Profile name updated and a verification link has been sent to your new email.'
+          : changes.name
+          ? 'Profile name updated successfully.'
+          : "We've sent a verification link to your new email. Please check your inbox to confirm the change.";
+
+      toast.success(message);
+    } catch (error) {
+      toast.error(
         error instanceof Error
           ? error.message
-          : 'An unexpected error occurred while updating your profile.';
-
-      toast.error(message);
+          : 'An unexpected error occurred while updating your profile.'
+      );
     }
   };
 
