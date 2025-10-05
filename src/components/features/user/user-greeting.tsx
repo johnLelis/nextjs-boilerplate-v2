@@ -11,7 +11,7 @@ const UserGreeting = ({ user }: UserGreetingProps) => {
       <div className="flex gap-1 place-items-center">
         <UserAvatar user={user} />
         <p className="text-sm">
-          Hello <span className="font-semibold text-blue-500">{user.name}</span>
+          <span className="font-semibold text-blue-500">{user.name}</span>
         </p>
       </div>
     </Link>
