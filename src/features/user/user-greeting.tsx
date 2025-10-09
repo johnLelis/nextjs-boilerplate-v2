@@ -1,9 +1,11 @@
 'use client';
-import { UserGreetingProps } from '@/types/user';
+
+import { useUser } from '@/hooks/useUser';
 import UserAvatar from './user-avatar';
 import Link from 'next/link';
 
-const UserGreeting = ({ user }: UserGreetingProps) => {
+const UserGreeting = () => {
+  const { user } = useUser();
   if (!user) return null;
 
   return (
