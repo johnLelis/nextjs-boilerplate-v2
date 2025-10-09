@@ -8,10 +8,10 @@ import { toast } from 'sonner';
 import { authClient } from '@/lib/auth/auth-client';
 import { DynamicDialog } from '@/components/ui/dynamic-dialog';
 import DeleteHeader from './delete-header';
-import DeleteAccountWarning from './delete-account-warning';
+import DeleteProfileWarning from './delete-profile-warning';
 import { useRouter } from 'next/navigation';
 
-const ProfileDelete = () => {
+const DeleteProfile = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [confirmText, setConfirmText] = useState('');
   const router = useRouter();
@@ -37,7 +37,7 @@ const ProfileDelete = () => {
     <div className="p-6">
       <div className="max-w-2xl">
         <DeleteHeader />
-        <DeleteAccountWarning />
+        <DeleteProfileWarning />
         <DynamicDialog
           trigger={<Button variant="destructive">Delete Account</Button>}
           title="Are you absolutely sure?"
@@ -76,4 +76,4 @@ const ProfileDelete = () => {
   );
 };
 
-export default ProfileDelete;
+export default DeleteProfile;

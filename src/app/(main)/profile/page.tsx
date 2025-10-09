@@ -3,10 +3,10 @@ import { useState } from 'react';
 import Profile from '@/features/profile/components/profile-tab/profile';
 import ProfileHeader from '@/features/profile/components/profile-tab/profile-header';
 import { TabNavigation } from '@/features/profile/tab-navigation';
-import ProfileSecurity from '@/features/profile/components/profile-tab/profile-security';
+import ProfileSecurity from '@/features/profile/components/security-tab/profile-security';
 import ProfileSession from '@/features/profile/components/profile-tab/profile-session';
 import ProfileAccounts from '@/features/profile/components/profile-tab/profile-accounts';
-import ProfileDelete from '@/features/profile/components/delete-tab/profile-delete';
+import DeleteProfile from '@/features/profile/components/delete-tab/delete-profile';
 
 const ProfilePage = () => {
   const [activeTab, setActiveTab] = useState('profile');
@@ -15,7 +15,7 @@ const ProfilePage = () => {
     security: <ProfileSecurity />,
     sessions: <ProfileSession />,
     accounts: <ProfileAccounts />,
-    delete: <ProfileDelete />,
+    delete: <DeleteProfile />,
   };
 
   return (

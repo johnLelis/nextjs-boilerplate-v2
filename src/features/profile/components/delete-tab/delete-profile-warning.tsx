@@ -1,6 +1,6 @@
 import { AlertTriangle } from 'lucide-react';
 
-const DeleteAccountWarning = () => {
+const DeleteProfileWarning = () => {
   return (
     <div className="bg-destructive/10 border border-destructive/20 rounded-lg p-4 mb-6">
       <div className="flex gap-3">
@@ -21,4 +21,4 @@ const DeleteAccountWarning = () => {
   );
 };
 
-export default DeleteAccountWarning;
+export default DeleteProfileWarning;
