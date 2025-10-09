@@ -1,6 +1,7 @@
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-import { FlatCompat } from "@eslint/eslintrc";
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+import { FlatCompat } from '@eslint/eslintrc';
+import boundaries from 'eslint-plugin-boundaries';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -10,15 +11,94 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
+  // Keep Next.js presets via compat
+  ...compat.extends('next/core-web-vitals', 'next/typescript'),
+
+  // Your ignores
   {
     ignores: [
-      "node_modules/**",
-      ".next/**",
-      "out/**",
-      "build/**",
-      "next-env.d.ts",
+      'node_modules/**',
+      '.next/**',
+      'out/**',
+      'build/**',
+      'next-env.d.ts',
     ],
+  },
+
+  // Boundaries plugin config
+  {
+    plugins: {
+      boundaries,
+    },
+    settings: {
+      'boundaries/include': ['src/**/*'],
+      'boundaries/elements': [
+        {
+          mode: 'full',
+          type: 'shared',
+          pattern: [
+            'src/components/**/*',
+            'src/data/**/*',
+            'src/drizzle/**/*',
+            'src/hooks/**/*',
+            'src/lib/**/*',
+            'src/server/**/*',
+            'src/types/**/*',
+            'src/config/**/*',
+            'src/services/**/*',
+            'src/actions/**/*',
+          ],
+        },
+        {
+          mode: 'full',
+          type: 'feature',
+          capture: ['feature-name'],
+          pattern: ['src/features/*/**/*'],
+        },
+        {
+          mode: 'full',
+          type: 'app',
+          capture: ['_', 'file-name'],
+          pattern: ['src/app/**/*'],
+        },
+        {
+          mode: 'full',
+          type: 'never-import',
+          pattern: ['src/*', 'src/tasks/**/*'],
+        },
+      ],
+    },
+    rules: {
+      'boundaries/no-unknown': ['error'],
+      'boundaries/no-unknown-files': ['error'],
+      'boundaries/element-types': [
+        'error',
+        {
+          default: 'disallow',
+          rules: [
+            {
+              from: ['shared'],
+              allow: ['shared'],
+            },
+            {
+              from: ['feature'],
+              allow: [
+                'shared',
+                ['feature', { 'feature-name': '${from.feature-name}' }],
+              ],
+            },
+            {
+              from: ['app', 'never-import'],
+              allow: ['shared', 'feature'],
+            },
+            {
+              from: ['app'],
+              allow: [['app', { 'file-name': '*.css' }]],
+            },
+          ],
+        },
+      ],
+    },
   },
 ];
 
