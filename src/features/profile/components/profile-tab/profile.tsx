@@ -9,7 +9,7 @@ import {
 } from '@/lib/validations/auth-validator';
 import { useUser } from '@/hooks/useUser';
 import { LoadingSwap } from '@/components/ui/loading-swap';
-import ProfileAvatar from './components/profile-avatar';
+import ProfileAvatar from './profile-avatar';
 import { authClient } from '@/lib/auth/auth-client';
 import { toast } from 'sonner';
 

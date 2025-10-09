@@ -1,11 +1,11 @@
 'use client';
 import { useState } from 'react';
-import Profile from '@/features/profile/profile';
-import ProfileHeader from '@/features/profile/components/profile-header';
-import { TabNavigation } from '@/features/profile/components/tab-navigation';
-import ProfileSecurity from '@/features/profile/components/profile-security';
-import ProfileSession from '@/features/profile/components/profile-session';
-import ProfileAccounts from '@/features/profile/components/profile-accounts';
+import Profile from '@/features/profile/components/profile-tab/profile';
+import ProfileHeader from '@/features/profile/components/profile-tab/profile-header';
+import { TabNavigation } from '@/features/profile/tab-navigation';
+import ProfileSecurity from '@/features/profile/components/profile-tab/profile-security';
+import ProfileSession from '@/features/profile/components/profile-tab/profile-session';
+import ProfileAccounts from '@/features/profile/components/profile-tab/profile-accounts';
 import ProfileDelete from '@/features/profile/delete/profile-delete';
 
 const ProfilePage = () => {
