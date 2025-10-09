@@ -11,10 +11,8 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
-  // Keep Next.js presets via compat
   ...compat.extends('next/core-web-vitals', 'next/typescript'),
 
-  // Your ignores
   {
     ignores: [
       'node_modules/**',
