@@ -1,9 +1,9 @@
 'use client';
 import Link from 'next/link';
 import ModeToggle from '../ui/mode-toggle';
-import Logout from '../features/auth/logout';
+import Logout from '@/features/auth/logout';
 import { useUser } from '@/hooks/useUser';
-import UserGreeting from '../features/user/user-greeting';
+import UserGreeting from '@/features/user/user-greeting';
 
 const Navbar = () => {
   const { user } = useUser();

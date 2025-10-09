@@ -1,12 +1,12 @@
 'use client';
 import { useState } from 'react';
-import Profile from '@/components/features/profile/profile';
-import ProfileHeader from '@/components/features/profile/profile-header';
-import { TabNavigation } from '@/components/features/profile/tab-navigation';
-import ProfileSecurity from '@/components/features/profile/profile-security';
-import ProfileSession from '@/components/features/profile/profile-session';
-import ProfileAccounts from '@/components/features/profile/profile-accounts';
-import ProfileDelete from '@/components/features/profile/delete/profile-delete';
+import Profile from '@/features/profile/profile';
+import ProfileHeader from '@/features/profile/profile-header';
+import { TabNavigation } from '@/features/profile/tab-navigation';
+import ProfileSecurity from '@/features/profile/profile-security';
+import ProfileSession from '@/features/profile/profile-session';
+import ProfileAccounts from '@/features/profile/profile-accounts';
+import ProfileDelete from '@/features/profile/delete/profile-delete';
 
 const ProfilePage = () => {
   const [activeTab, setActiveTab] = useState('profile');

@@ -6,7 +6,7 @@ import {
 } from '@/lib/validations/auth-validator';
 import { LoadingSwap } from '@/components/ui/loading-swap';
 import { authClient } from '@/lib/auth/auth-client';
-import AuthHeaderControls from '@/components/features/auth/auth-header-controls';
+import AuthHeaderControls from '@/features/auth/auth-header-controls';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 import { DynamicForm, FormFieldConfig } from '@/components/ui/dynamic-form';

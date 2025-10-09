@@ -1,4 +1,4 @@
-import ResetPasswordForm from '@/components/features/auth/reset-password-form';
+import ResetPasswordForm from '@/features/auth/reset-password-form';
 import { checkAuthRedirect } from '@/lib/middlewares/check-auth-redirect';
 
 const ResetPasswordPage = async () => {

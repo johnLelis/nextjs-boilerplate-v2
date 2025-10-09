@@ -5,7 +5,7 @@ import { authClient } from '@/lib/auth/auth-client';
 import {
   SUPPORTED_OAUTH_PROVIDERS,
   SUPPORTED_OAUTH_PROVIDERS_DETAILS,
-} from '@/lib/oauth-providers/o-auth-providers';
+} from '@/features/auth/o-auth-providers';
 import { useState } from 'react';
 const SocialAuthButtons = () => {
   const [submittingProvider, setSubmittingProvider] = useState<string | null>(
