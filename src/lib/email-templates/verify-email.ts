@@ -12,7 +12,7 @@ export const createVerifyEmail = ({
   userName,
   verificationUrl,
   expirationTime = '24 hours',
-  brandName = 'PenStack',
+  brandName = 'pen • dev',
   brandColor = '#0070f3',
 }: VerifyEmailProps): { html: string; text: string } => {
   const greeting = userName ? `Hi ${userName}` : 'Hi there';

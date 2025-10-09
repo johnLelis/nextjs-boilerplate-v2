@@ -46,6 +46,7 @@ const eslintConfig = [
             'src/services/**/*',
             'src/actions/**/*',
             'src/styles/**/*',
+            'src/emails/**/*',
           ],
         },
         {

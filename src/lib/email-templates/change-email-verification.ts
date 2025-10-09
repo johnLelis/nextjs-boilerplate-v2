@@ -14,7 +14,7 @@ export const createChangeEmailVerification = ({
   newEmail,
   verificationUrl,
   expirationTime = '24 hours',
-  brandName = 'PenStack',
+  brandName = 'pen • dev',
   brandColor = '#0070f3',
 }: ChangeEmailVerificationProps): { html: string; text: string } => {
   const greeting = userName ? `Hi ${userName}` : 'Hi there';

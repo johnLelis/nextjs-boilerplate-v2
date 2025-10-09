@@ -12,7 +12,7 @@ export const createWelcomeEmail = ({
   userName,
   dashboardUrl,
   supportUrl = '#',
-  brandName = 'PenStack',
+  brandName = 'pen • dev',
   brandColor = '#0070f3',
 }: WelcomeEmailProps): { html: string; text: string } => {
   const html = createBaseTemplate({

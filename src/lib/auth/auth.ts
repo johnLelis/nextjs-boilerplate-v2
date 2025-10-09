@@ -8,9 +8,9 @@ import { createAuthMiddleware } from 'better-auth/api';
 import {
   createChangeEmailVerification,
   createResetPasswordEmail,
-  createVerifyEmail,
 } from '@/lib/email-templates';
-import { sendWelcomeEmail } from '@/actions/email';
+import { sendVerifyEmail, sendWelcomeEmail } from '@/actions/email';
+import { emailOTPClient } from 'better-auth/client/plugins';
 
 export const auth = betterAuth({
   user: {
@@ -26,7 +26,7 @@ export const auth = betterAuth({
         });
 
         await sendEmail({
-          from: { email: env.EMAIL_SENDER, name: 'PenStack' },
+          from: { email: env.EMAIL_SENDER, name: 'pen • dev' },
           to: [{ email: user.email, name: user.name }],
           subject: 'Verify Your New Email Address',
           html,
@@ -61,7 +61,7 @@ export const auth = betterAuth({
         subject: 'Reset your password',
         text,
         html,
-        from: { email: env.EMAIL_SENDER, name: 'PenStack' },
+        from: { email: env.EMAIL_SENDER, name: 'pen • dev' },
       });
     },
   },
@@ -69,18 +69,11 @@ export const auth = betterAuth({
     autoSignInAfterVerification: true,
     sendOnSignUp: true,
     sendVerificationEmail: async ({ user, url }) => {
-      const { html, text } = createVerifyEmail({
+      await sendVerifyEmail({
         userName: user.name,
         verificationUrl: url,
         expirationTime: '1 hour',
-        brandColor: '#0070f3',
-      });
-      await sendEmail({
-        from: { email: env.EMAIL_SENDER, name: 'PenStack' },
-        to: [{ email: user.email, name: user.name }],
-        subject: 'Verify Your Email Address',
-        html,
-        text,
+        userEmail: user.email,
       });
     },
 
@@ -92,9 +85,11 @@ export const auth = betterAuth({
       enabled: true,
       maxAge: 60 * 5, //5mins
     },
+    freshAge: 60 * 5,
+    expiresIn: 15 * 60,
     preserveSessionInDatabase: false,
   },
-  plugins: [nextCookies()],
+  plugins: [nextCookies(), emailOTPClient()],
   socialProviders: {
     github: {
       clientId: env.GITHUB_CLIENT_ID as string,

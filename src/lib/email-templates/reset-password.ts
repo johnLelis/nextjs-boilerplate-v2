@@ -12,7 +12,7 @@ export const createResetPasswordEmail = ({
   userName,
   resetUrl,
   expirationTime = '1 hour',
-  brandName = 'PenStack',
+  brandName = 'pen • dev',
   brandColor = '#0070f3',
 }: ResetPasswordEmailProps): { html: string; text: string } => {
   const greeting = userName ? `Hi ${userName}` : 'Hi there';
