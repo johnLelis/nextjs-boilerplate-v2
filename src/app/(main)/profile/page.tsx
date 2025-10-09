@@ -6,7 +6,7 @@ import { TabNavigation } from '@/features/profile/tab-navigation';
 import ProfileSecurity from '@/features/profile/components/profile-tab/profile-security';
 import ProfileSession from '@/features/profile/components/profile-tab/profile-session';
 import ProfileAccounts from '@/features/profile/components/profile-tab/profile-accounts';
-import ProfileDelete from '@/features/profile/delete/profile-delete';
+import ProfileDelete from '@/features/profile/components/delete-tab/profile-delete';
 
 const ProfilePage = () => {
   const [activeTab, setActiveTab] = useState('profile');
