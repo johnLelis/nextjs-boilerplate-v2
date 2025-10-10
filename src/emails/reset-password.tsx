@@ -13,7 +13,7 @@ import {
 
 type ResetPasswordEmailProps = {
   userName?: string;
-  resetUrl: string;
+  resetUrl: URL | string;
   expirationTime?: string;
   brandName?: string;
   brandColor?: string;
@@ -60,7 +60,7 @@ export const ResetPasswordEmail = ({
               </Text>
               <Section className="text-center my-6">
                 <Link
-                  href={resetUrl}
+                  href={resetUrl.toString()}
                   className="inline-block rounded bg-blue-600 px-6 py-3 text-white font-semibold no-underline"
                 >
                   Reset Password
@@ -75,8 +75,11 @@ export const ResetPasswordEmail = ({
               <Text className="mb-2">
                 Or copy and paste this link into your browser:
               </Text>
-              <Link href={resetUrl} className="text-blue-600 break-all">
-                {resetUrl}
+              <Link
+                href={resetUrl.toString()}
+                className="text-blue-600 break-all"
+              >
+                {resetUrl.toString()}
               </Link>
               <hr className="my-6 border-gray-200" />
               <Section className="bg-red-50 rounded p-4">

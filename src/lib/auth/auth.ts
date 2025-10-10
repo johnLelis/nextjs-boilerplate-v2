@@ -3,13 +3,13 @@ import { drizzleAdapter } from 'better-auth/adapters/drizzle';
 import { db } from '@/drizzle/db';
 import { nextCookies } from 'better-auth/next-js';
 import { env } from '@/config/env';
-import { sendEmail } from '@/services/email';
 import { createAuthMiddleware } from 'better-auth/api';
 import {
-  createChangeEmailVerification,
-  createResetPasswordEmail,
-} from '@/lib/email-templates';
-import { sendVerifyEmail, sendWelcomeEmail } from '@/actions/email';
+  sendChangeEmailVerification,
+  sendResetEmailPassword,
+  sendVerifyEmail,
+  sendWelcomeEmail,
+} from '@/actions/email';
 import { emailOTPClient } from 'better-auth/client/plugins';
 
 export const auth = betterAuth({
@@ -18,19 +18,11 @@ export const auth = betterAuth({
       expiresIn: 3600,
       enabled: true,
       sendChangeEmailVerification: async ({ user, newEmail, url }) => {
-        const { html, text } = createChangeEmailVerification({
-          userName: user.name,
+        await sendChangeEmailVerification({
+          user,
           newEmail,
           verificationUrl: url,
           expirationTime: '1 hour',
-        });
-
-        await sendEmail({
-          from: { email: env.EMAIL_SENDER, name: 'pen • dev' },
-          to: [{ email: user.email, name: user.name }],
-          subject: 'Verify Your New Email Address',
-          html,
-          text,
         });
       },
     },
@@ -50,18 +42,10 @@ export const auth = betterAuth({
     autoSignIn: false,
     requireEmailVerification: true,
     sendResetPassword: async ({ user, url, token }) => {
-      const { html, text } = createResetPasswordEmail({
-        userName: user.name,
+      await sendResetEmailPassword({
+        user,
         resetUrl: new URL(`${url}?token=${token}`),
         expirationTime: '5 minutes',
-        brandColor: '#0070f3',
-      });
-      await sendEmail({
-        to: [{ email: user.email, name: user.name }],
-        subject: 'Reset your password',
-        text,
-        html,
-        from: { email: env.EMAIL_SENDER, name: 'pen • dev' },
       });
     },
   },

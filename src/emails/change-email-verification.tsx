@@ -11,7 +11,7 @@ import {
   Text,
 } from '@react-email/components';
 
-type ChangeEmailVerificationProps = {
+export type ChangeEmailVerificationProps = {
   userName?: string;
   newEmail: string;
   verificationUrl: string;

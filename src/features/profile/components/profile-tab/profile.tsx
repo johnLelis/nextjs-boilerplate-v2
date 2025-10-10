@@ -77,9 +77,12 @@ const Profile = () => {
         changes.name && changes.email
           ? 'Profile name updated and a verification link has been sent to your new email.'
           : changes.name
-          ? 'Profile name updated successfully.'
-          : "We've sent a verification link to your new email. Please check your inbox to confirm the change.";
-
+            ? 'Profile name updated successfully.'
+            : "We've sent a verification link to your new email. Please check your inbox to confirm the change.";
+      form.reset({
+        name: user?.name || '',
+        email: user?.email || '',
+      });
       toast.success(message);
     } catch (error) {
       toast.error(

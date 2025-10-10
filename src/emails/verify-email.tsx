@@ -13,7 +13,7 @@ import {
 
 type VerifyEmailProps = {
   userName?: string;
-  verificationUrl: string;
+  verificationUrl: URL | string;
   expirationTime?: string;
   brandName?: string;
   brandColor?: string;
@@ -61,7 +61,7 @@ export const VerifyEmail = ({
               </Text>
               <Section className="text-center my-6">
                 <Link
-                  href={verificationUrl}
+                  href={verificationUrl.toString()}
                   className="inline-block rounded bg-blue-600 px-6 py-3 text-white font-semibold no-underline"
                 >
                   Verify Email Address
@@ -77,8 +77,11 @@ export const VerifyEmail = ({
               <Text className="mb-2">
                 Or copy and paste this link into your browser:
               </Text>
-              <Link href={verificationUrl} className="text-blue-600 break-all">
-                {verificationUrl}
+              <Link
+                href={verificationUrl.toString()}
+                className="text-blue-600 break-all"
+              >
+                {verificationUrl.toString()}
               </Link>
               <hr className="my-6 border-gray-200" />
               <Section className="bg-red-50 rounded p-4">

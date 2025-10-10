@@ -3,6 +3,12 @@ import { sendEmail } from '@/services/email';
 import { render, toPlainText } from '@react-email/render';
 import WelcomeEmail from '@/emails/welcome-email';
 import VerifyEmail from '@/emails/verify-email';
+import {
+  ChangeEmailVerification,
+  ChangeEmailVerificationProps,
+} from '@/emails/change-email-verification';
+import { User } from '@/types/user';
+import ResetPasswordEmail from '@/emails/reset-password';
 export const sendWelcomeEmail = async (userEmail: string, userName: string) => {
   const html = await render(
     <WelcomeEmail
@@ -21,9 +27,9 @@ export const sendWelcomeEmail = async (userEmail: string, userName: string) => {
 
   return result;
 };
-type VerifyEmailProps = {
+type EmailProps = {
   userName: string;
-  verificationUrl: string;
+  verificationUrl: URL | string;
   expirationTime: string;
   userEmail: string;
 };
@@ -32,11 +38,11 @@ export const sendVerifyEmail = async ({
   verificationUrl,
   expirationTime,
   userEmail,
-}: VerifyEmailProps) => {
+}: EmailProps) => {
   const html = await render(
     <VerifyEmail
       userName={userName}
-      verificationUrl={verificationUrl}
+      verificationUrl={verificationUrl.toString()}
       expirationTime={expirationTime}
     />
   );
@@ -47,6 +53,64 @@ export const sendVerifyEmail = async ({
     from: { email: env.EMAIL_SENDER, name: 'pen • dev' },
     to: [{ email: userEmail, name: userName }],
     subject: 'Verify Your Email Address',
+    html,
+    text,
+  });
+};
+
+type CommonEmailProps = Omit<ChangeEmailVerificationProps, 'userName'> & {
+  user: User;
+};
+export const sendChangeEmailVerification = async ({
+  user,
+  newEmail,
+  verificationUrl,
+  expirationTime,
+}: CommonEmailProps) => {
+  const html = await render(
+    <ChangeEmailVerification
+      userName={user.name}
+      verificationUrl={verificationUrl}
+      expirationTime={expirationTime}
+      newEmail={newEmail}
+    />
+  );
+
+  const text = toPlainText(html);
+
+  await sendEmail({
+    from: { email: env.EMAIL_SENDER, name: 'pen • dev' },
+    to: [{ email: user.email, name: user.name }],
+    subject: 'Verify Your New Email Address',
+    html,
+    text,
+  });
+};
+
+type ResetEmailProps = {
+  user: User;
+  resetUrl: URL;
+  expirationTime: string;
+};
+export const sendResetEmailPassword = async ({
+  user,
+  resetUrl,
+  expirationTime,
+}: ResetEmailProps) => {
+  const html = await render(
+    <ResetPasswordEmail
+      userName={user.name}
+      resetUrl={resetUrl}
+      expirationTime={expirationTime}
+    />
+  );
+
+  const text = toPlainText(html);
+
+  await sendEmail({
+    from: { email: env.EMAIL_SENDER, name: 'pen • dev' },
+    to: [{ email: user.email, name: user.name }],
+    subject: 'Verify Your New Email Address',
     html,
     text,
   });
