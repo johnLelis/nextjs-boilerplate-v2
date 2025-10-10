@@ -5,6 +5,7 @@ import path from "path";
 import { env } from "@/config/env";
 
 const nextConfig: NextConfig = {
+  typedRoutes: true,
   reactStrictMode: true,
   poweredByHeader: false,
   turbopack: {
