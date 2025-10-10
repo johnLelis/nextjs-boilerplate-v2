@@ -113,15 +113,21 @@ const eslintConfig = [
   },
   {
     files: ["src/**/*.*"],
+    ignores: [
+      "package.json",
+      "package-lock.json",
+      ".prettierrc.json",
+      "components.json",
+      "**/*.css",
+    ],
     plugins: {
       "check-file": checkFile,
     },
-    ignores: ["**/*.css"],
     rules: {
       "check-file/filename-naming-convention": [
         "error",
         {
-          "**/*.{ts,tsx}": "KEBAB_CASE",
+          "**/*.{ts,tsx,js,mjs,cjs,yaml,yml,json}": "KEBAB_CASE",
         },
         {
           // ignore the middle extensions of the filename to support filename like bable.config.js or smoke.spec.ts
