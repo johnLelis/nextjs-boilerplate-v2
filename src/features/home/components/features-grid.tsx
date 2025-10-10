@@ -2,9 +2,9 @@ const FeaturesGrid = () => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mt-8">
       {[
-        { title: 'Fast', desc: 'Optimized performance' },
-        { title: 'Modern', desc: 'Latest Next.js 15' },
-        { title: 'Ready', desc: 'Production-ready' },
+        { title: "Fast", desc: "Optimized performance" },
+        { title: "Modern", desc: "Latest Next.js 15" },
+        { title: "Ready", desc: "Production-ready" },
       ].map((feature, i) => (
         <div
           key={i}

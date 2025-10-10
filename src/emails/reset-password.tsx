@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   Body,
   Container,
@@ -9,7 +9,7 @@ import {
   Section,
   Tailwind,
   Text,
-} from '@react-email/components';
+} from "@react-email/components";
 
 type ResetPasswordEmailProps = {
   userName?: string;
@@ -22,12 +22,12 @@ type ResetPasswordEmailProps = {
 export const ResetPasswordEmail = ({
   userName,
   resetUrl,
-  expirationTime = '1 hour',
-  brandName = 'pen • dev',
-  brandColor = '#0070f3',
+  expirationTime = "1 hour",
+  brandName = "pen • dev",
+  brandColor = "#0070f3",
 }: ResetPasswordEmailProps) => {
-  const greeting = userName ? `Hi ${userName}` : 'Hi there';
-  const previewText = 'Reset your password to regain access to your account';
+  const greeting = userName ? `Hi ${userName}` : "Hi there";
+  const previewText = "Reset your password to regain access to your account";
 
   return (
     <Html>
@@ -84,7 +84,7 @@ export const ResetPasswordEmail = ({
               <hr className="my-6 border-gray-200" />
               <Section className="bg-red-50 rounded p-4">
                 <Text className="text-sm text-gray-700">
-                  <strong>{`Didn't`} request this?</strong> If you {`didn't`}{' '}
+                  <strong>{`Didn't`} request this?</strong> If you {`didn't`}{" "}
                   ask to reset your password, you can safely ignore this email.
                   Your password will remain unchanged.
                 </Text>
@@ -114,11 +114,11 @@ export const ResetPasswordEmail = ({
 
 // Preview props for local dev
 ResetPasswordEmail.PreviewProps = {
-  userName: 'John Doe',
-  resetUrl: 'https://example.com/reset?token=123',
-  expirationTime: '1 hour',
-  brandName: 'pen • dev',
-  brandColor: '#0070f3',
+  userName: "John Doe",
+  resetUrl: "https://example.com/reset?token=123",
+  expirationTime: "1 hour",
+  brandName: "pen • dev",
+  brandColor: "#0070f3",
 } as ResetPasswordEmailProps;
 
 export default ResetPasswordEmail;

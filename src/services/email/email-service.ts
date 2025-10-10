@@ -1,8 +1,8 @@
-import { EmailMessage, EmailResponse } from '@/types/email';
-import { sendEmailViaAzure } from './providers/azure/azure-provider';
-import { env } from '@/config/env';
+import { EmailMessage, EmailResponse } from "@/types/email";
+import { sendEmailViaAzure } from "./providers/azure/azure-provider";
+import { env } from "@/config/env";
 
-type EmailProvider = 'azure' | 'postmark' | 'sendgrid';
+type EmailProvider = "azure" | "postmark" | "sendgrid";
 
 type AzureEmailConfig = {
   tenantId: string;
@@ -30,14 +30,14 @@ export const sendEmail = async (
   message: EmailMessage,
   config?: EmailConfig
 ): Promise<EmailResponse> => {
-  console.log('EmailService: Sending email...');
+  console.log("EmailService: Sending email...");
 
   const emailConfig = config || getEmailConfigFromEnv();
 
   switch (emailConfig.provider) {
-    case 'azure':
+    case "azure":
       if (!emailConfig.azure) {
-        throw new Error('Azure configuration is required');
+        throw new Error("Azure configuration is required");
       }
       return sendEmailViaAzure(message, emailConfig.azure);
 
@@ -50,7 +50,7 @@ export const getEmailConfigFromEnv = (): EmailConfig => {
   const provider = env.EMAIL_PROVIDER as EmailProvider;
 
   if (!provider) {
-    throw new Error('EMAIL_PROVIDER environment variable is required');
+    throw new Error("EMAIL_PROVIDER environment variable is required");
   }
 
   const config: EmailConfig = {
@@ -59,7 +59,7 @@ export const getEmailConfigFromEnv = (): EmailConfig => {
 
   // Load config based on provider
   switch (provider) {
-    case 'azure':
+    case "azure":
       const {
         AZURE_TENANT_ID,
         AZURE_CLIENT_ID,
@@ -74,7 +74,7 @@ export const getEmailConfigFromEnv = (): EmailConfig => {
         !EMAIL_SENDER
       ) {
         throw new Error(
-          'Missing required Azure email configuration. Please set AZURE_TENANT_ID, AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, and EMAIL_SENDER environment variables.'
+          "Missing required Azure email configuration. Please set AZURE_TENANT_ID, AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, and EMAIL_SENDER environment variables."
         );
       }
 

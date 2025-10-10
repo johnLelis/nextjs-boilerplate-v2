@@ -1,17 +1,17 @@
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 // 🔑 Schemas
 const loginSchema = z.object({
-  email: z.email('Please enter a valid email.'),
-  password: z.string().min(8, 'Password must be at least 8 characters'),
+  email: z.email("Please enter a valid email."),
+  password: z.string().min(8, "Password must be at least 8 characters"),
 });
 
 const registerSchema = z
   .object({
-    name: z.string().min(2, 'Name must be at least 2 characters').max(255),
-    email: z.email('Please enter a valid email.'),
-    password: z.string().min(8, 'Password must be at least 8 characters'),
+    name: z.string().min(2, "Name must be at least 2 characters").max(255),
+    email: z.email("Please enter a valid email."),
+    password: z.string().min(8, "Password must be at least 8 characters"),
     //Uncomment for production use
     // .regex(/[A-Z]/, 'Password must contain at least one uppercase letter')
     // .regex(/[a-z]/, 'Password must contain at least one lowercase letter')
@@ -22,27 +22,27 @@ const registerSchema = z
     // ),
     confirmPassword: z.string(),
   })
-  .refine(data => data.password === data.confirmPassword, {
+  .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords don't match",
-    path: ['confirmPassword'],
+    path: ["confirmPassword"],
   });
 
 const forgotPasswordSchema = z.object({
-  email: z.email('Please enter a valid email.'),
+  email: z.email("Please enter a valid email."),
 });
 
 const resetPasswordSchema = z
   .object({
-    password: z.string().min(8, 'Password must be at least 8 characters'),
+    password: z.string().min(8, "Password must be at least 8 characters"),
     //Uncomment for production use
     // .regex(/[A-Z]/, 'Password must contain at least one uppercase letter')
     // .regex(/[a-z]/, 'Password must contain at least one lowercase letter')
     // .regex(/[0-9]/, 'Password must contain at least one number'),
     confirmPassword: z.string(),
   })
-  .refine(data => data.password === data.confirmPassword, {
+  .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords don't match",
-    path: ['confirmPassword'],
+    path: ["confirmPassword"],
   });
 
 const updateProfileSchema = z.object({
@@ -57,14 +57,14 @@ const changePasswordSchema = z
     newPassword: z
       .string()
       .min(8)
-      .regex(/[A-Z]/, 'Password must contain at least one uppercase letter')
-      .regex(/[a-z]/, 'Password must contain at least one lowercase letter')
-      .regex(/[0-9]/, 'Password must contain at least one number'),
+      .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
+      .regex(/[a-z]/, "Password must contain at least one lowercase letter")
+      .regex(/[0-9]/, "Password must contain at least one number"),
     confirmPassword: z.string(),
   })
-  .refine(data => data.newPassword === data.confirmPassword, {
+  .refine((data) => data.newPassword === data.confirmPassword, {
     message: "Passwords don't match",
-    path: ['confirmPassword'],
+    path: ["confirmPassword"],
   });
 
 // 🔑 Types

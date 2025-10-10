@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   Body,
   Container,
@@ -11,7 +11,7 @@ import {
   Text,
   Row,
   Column,
-} from '@react-email/components';
+} from "@react-email/components";
 
 type UpdatePasswordOtpTemplateProps = {
   userName?: string;
@@ -22,14 +22,14 @@ type UpdatePasswordOtpTemplateProps = {
 };
 
 export const UpdatePasswordOtpEmail = ({
-  userName = 'User',
+  userName = "User",
   otpCode,
-  supportEmail = 'support@example.com',
-  brandName = 'pen • dev',
-  brandColor = '#0070f3',
+  supportEmail = "support@example.com",
+  brandName = "pen • dev",
+  brandColor = "#0070f3",
 }: UpdatePasswordOtpTemplateProps) => {
   const previewText = `Use this code to confirm your password change: ${otpCode}`;
-  const digits = otpCode.split('');
+  const digits = otpCode.split("");
   return (
     <Html>
       <Head />
@@ -75,7 +75,7 @@ export const UpdatePasswordOtpEmail = ({
               </Section>
 
               <Text className="mb-4">
-                For your security, this code will expire in{' '}
+                For your security, this code will expire in{" "}
                 <strong>10 minutes</strong>. If you did not request this change,
                 please ignore this email or contact our support team
                 immediately.
@@ -89,7 +89,7 @@ export const UpdatePasswordOtpEmail = ({
               </Section>
 
               <Text className="mb-4">
-                If you continue to experience issues, you can reach us at{' '}
+                If you continue to experience issues, you can reach us at{" "}
                 <Link
                   href={`mailto:${supportEmail}`}
                   className="text-blue-600 underline"
@@ -115,11 +115,11 @@ export const UpdatePasswordOtpEmail = ({
 
 // Preview props for local dev
 UpdatePasswordOtpEmail.PreviewProps = {
-  userName: 'John Doe',
-  otpCode: '123456',
-  supportEmail: 'support@example.com',
-  brandName: 'pen • dev',
-  brandColor: '#0070f3',
+  userName: "John Doe",
+  otpCode: "123456",
+  supportEmail: "support@example.com",
+  brandName: "pen • dev",
+  brandColor: "#0070f3",
 } as UpdatePasswordOtpTemplateProps;
 
 export default UpdatePasswordOtpEmail;

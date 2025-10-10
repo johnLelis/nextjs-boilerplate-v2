@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   Body,
   Container,
@@ -9,7 +9,7 @@ import {
   Section,
   Tailwind,
   Text,
-} from '@react-email/components';
+} from "@react-email/components";
 
 type VerifyEmailProps = {
   userName?: string;
@@ -22,12 +22,12 @@ type VerifyEmailProps = {
 export const VerifyEmail = ({
   userName,
   verificationUrl,
-  expirationTime = '24 hours',
-  brandName = 'pen • dev',
-  brandColor = '#0070f3',
+  expirationTime = "24 hours",
+  brandName = "pen • dev",
+  brandColor = "#0070f3",
 }: VerifyEmailProps) => {
-  const greeting = userName ? `Hi ${userName}` : 'Hi there';
-  const previewText = 'Verify your email to activate your account';
+  const greeting = userName ? `Hi ${userName}` : "Hi there";
+  const previewText = "Verify your email to activate your account";
 
   return (
     <Html>
@@ -69,7 +69,7 @@ export const VerifyEmail = ({
               </Section>
               <Section className="bg-gray-100 rounded p-4 my-6">
                 <Text className="text-sm text-gray-700">
-                  <strong>This link will expire in {expirationTime}.</strong>{' '}
+                  <strong>This link will expire in {expirationTime}.</strong>{" "}
                   After that, {`you'll`} need to request a new verification
                   email.
                 </Text>
@@ -86,7 +86,7 @@ export const VerifyEmail = ({
               <hr className="my-6 border-gray-200" />
               <Section className="bg-red-50 rounded p-4">
                 <Text className="text-sm text-gray-700">
-                  <strong>{`Didn't`} create an account?</strong> If you{' '}
+                  <strong>{`Didn't`} create an account?</strong> If you{" "}
                   {`didn't`} sign up for {brandName}, you can safely ignore this
                   email.
                 </Text>
@@ -111,11 +111,11 @@ export const VerifyEmail = ({
 };
 
 VerifyEmail.PreviewProps = {
-  userName: 'John Doe',
-  verificationUrl: 'https://example.com/verify?token=123',
-  expirationTime: '24 hours',
-  brandName: 'pen • dev',
-  brandColor: '#0070f3',
+  userName: "John Doe",
+  verificationUrl: "https://example.com/verify?token=123",
+  expirationTime: "24 hours",
+  brandName: "pen • dev",
+  brandColor: "#0070f3",
 } as VerifyEmailProps;
 
 export default VerifyEmail;

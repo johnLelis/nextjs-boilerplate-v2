@@ -6,37 +6,37 @@ import arcjet, {
   shield,
   slidingWindow,
   SlidingWindowRateLimitOptions,
-} from '@arcjet/next';
-import { auth } from '@/lib/auth/auth';
-import { findIp } from '@arcjet/ip';
-import { env } from '@/config/env';
+} from "@arcjet/next";
+import { auth } from "@/lib/auth/auth";
+import { findIp } from "@arcjet/ip";
+import { env } from "@/config/env";
 
-const botSettings = { mode: 'LIVE', allow: [] } satisfies BotOptions;
+const botSettings = { mode: "LIVE", allow: [] } satisfies BotOptions;
 const restrictiveRateLimitSettings = {
-  mode: 'LIVE',
+  mode: "LIVE",
   max: 10,
-  interval: '10m',
+  interval: "10m",
 } as SlidingWindowRateLimitOptions<[]>;
 const laxRateLimitSettings = {
-  mode: 'LIVE',
+  mode: "LIVE",
   max: 60,
-  interval: '1m',
+  interval: "1m",
 } as SlidingWindowRateLimitOptions<[]>;
 
 const emailSettings = {
-  mode: 'LIVE',
-  block: ['DISPOSABLE', 'INVALID', 'NO_MX_RECORDS'],
+  mode: "LIVE",
+  block: ["DISPOSABLE", "INVALID", "NO_MX_RECORDS"],
 } satisfies EmailOptions;
 
 const aj = arcjet({
   key: env.ARCJET_KEY!, // Get your site key from https://app.arcjet.com
-  characteristics: ['userIdOrIp'],
+  characteristics: ["userIdOrIp"],
   rules: [
     // Shield protects your app from common attacks e.g. SQL injection
-    shield({ mode: 'LIVE' }),
+    shield({ mode: "LIVE" }),
     // Create a bot detection rule
     detectBot({
-      mode: 'LIVE', // Blocks requests. Use "DRY_RUN" to log only
+      mode: "LIVE", // Blocks requests. Use "DRY_RUN" to log only
       // Block all bots except the following
       allow: [
         // 'CATEGORY:SEARCH_ENGINE', // Google, Bing, etc
@@ -52,14 +52,14 @@ const aj = arcjet({
 export const checkArcjet = async (request: Request) => {
   const body = (await request.json()) as unknown;
   const session = await auth.api.getSession({ headers: request.headers });
-  const userIdOrIp = (session?.user.id ?? findIp(request)) || '127.0.0.1';
+  const userIdOrIp = (session?.user.id ?? findIp(request)) || "127.0.0.1";
 
-  if (request.url.endsWith('auth/sign-up/email')) {
+  if (request.url.endsWith("auth/sign-up/email")) {
     if (
       body &&
-      typeof body === 'object' &&
-      'email' in body &&
-      typeof body.email === 'string'
+      typeof body === "object" &&
+      "email" in body &&
+      typeof body.email === "string"
     ) {
       return aj
         .withRule(

@@ -1,5 +1,5 @@
-'use client';
-import { useParams } from 'next/navigation';
+"use client";
+import { useParams } from "next/navigation";
 
 const UserPage = () => {
   const { id } = useParams<{ id: string }>();

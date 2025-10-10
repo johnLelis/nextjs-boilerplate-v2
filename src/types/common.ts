@@ -1,5 +1,5 @@
 // types/common.ts
-import { ReactNode } from 'react';
+import { ReactNode } from "react";
 
 /**
  * Adds children prop to a component type
@@ -7,7 +7,7 @@ import { ReactNode } from 'react';
  * type LayoutProps = WithChildren<{ theme: 'light' | 'dark' }>
  */
 export type WithChildren<
-  T extends Record<string, unknown> = Record<string, never>
+  T extends Record<string, unknown> = Record<string, never>,
 > = T & {
   readonly children: ReactNode;
 };
@@ -18,7 +18,7 @@ export type WithChildren<
  * type CardProps = WithOptionalChildren<{ title: string }>
  */
 export type WithOptionalChildren<
-  T extends Record<string, unknown> = Record<string, never>
+  T extends Record<string, unknown> = Record<string, never>,
 > = T & {
   readonly children?: ReactNode;
 };
@@ -29,7 +29,7 @@ export type WithOptionalChildren<
  * type ButtonProps = WithClassName<{ variant: 'primary' | 'secondary' }>
  */
 export type WithClassName<
-  T extends Record<string, unknown> = Record<string, never>
+  T extends Record<string, unknown> = Record<string, never>,
 > = T & {
   className?: string;
 };
@@ -44,7 +44,7 @@ export type PageProps<
   TSearchParams extends Record<string, string | string[] | undefined> = Record<
     string,
     never
-  >
+  >,
 > = {
   params: Promise<TParams>;
   searchParams: Promise<TSearchParams>;

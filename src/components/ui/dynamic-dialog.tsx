@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { ReactNode, useState } from 'react';
+import { ReactNode, useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -9,18 +9,18 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 
 export type DialogButton = {
   label: string;
   variant?:
-    | 'default'
-    | 'destructive'
-    | 'outline'
-    | 'secondary'
-    | 'ghost'
-    | 'link';
+    | "default"
+    | "destructive"
+    | "outline"
+    | "secondary"
+    | "ghost"
+    | "link";
   onClick?: () => void | Promise<void>;
   disabled?: boolean;
   className?: string;
@@ -89,7 +89,7 @@ export const DynamicDialog = ({
             {buttons.map((button, index) => (
               <Button
                 key={index}
-                variant={button.variant || 'default'}
+                variant={button.variant || "default"}
                 onClick={() => handleButtonClick(button, index)}
                 disabled={button.disabled || loadingButton !== null}
                 className={button.className}

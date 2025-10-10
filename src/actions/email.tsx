@@ -1,14 +1,14 @@
-import { env } from '@/config/env';
-import { sendEmail } from '@/services/email';
-import { render, toPlainText } from '@react-email/render';
-import WelcomeEmail from '@/emails/welcome-email';
-import VerifyEmail from '@/emails/verify-email';
+import { env } from "@/config/env";
+import { sendEmail } from "@/services/email";
+import { render, toPlainText } from "@react-email/render";
+import WelcomeEmail from "@/emails/welcome-email";
+import VerifyEmail from "@/emails/verify-email";
 import {
   ChangeEmailVerification,
   ChangeEmailVerificationProps,
-} from '@/emails/change-email-verification';
-import { User } from '@/types/user';
-import ResetPasswordEmail from '@/emails/reset-password';
+} from "@/emails/change-email-verification";
+import { User } from "@/types/user";
+import ResetPasswordEmail from "@/emails/reset-password";
 export const sendWelcomeEmail = async (userEmail: string, userName: string) => {
   const html = await render(
     <WelcomeEmail
@@ -18,9 +18,9 @@ export const sendWelcomeEmail = async (userEmail: string, userName: string) => {
   );
   const text = toPlainText(html);
   const result = await sendEmail({
-    from: { email: env.EMAIL_SENDER, name: 'pen • dev' },
+    from: { email: env.EMAIL_SENDER, name: "pen • dev" },
     to: [{ email: userEmail, name: userName }],
-    subject: 'Welcome!',
+    subject: "Welcome!",
     html,
     text,
   });
@@ -50,15 +50,15 @@ export const sendVerifyEmail = async ({
   const text = toPlainText(html);
 
   await sendEmail({
-    from: { email: env.EMAIL_SENDER, name: 'pen • dev' },
+    from: { email: env.EMAIL_SENDER, name: "pen • dev" },
     to: [{ email: userEmail, name: userName }],
-    subject: 'Verify Your Email Address',
+    subject: "Verify Your Email Address",
     html,
     text,
   });
 };
 
-type CommonEmailProps = Omit<ChangeEmailVerificationProps, 'userName'> & {
+type CommonEmailProps = Omit<ChangeEmailVerificationProps, "userName"> & {
   user: User;
 };
 export const sendChangeEmailVerification = async ({
@@ -79,9 +79,9 @@ export const sendChangeEmailVerification = async ({
   const text = toPlainText(html);
 
   await sendEmail({
-    from: { email: env.EMAIL_SENDER, name: 'pen • dev' },
+    from: { email: env.EMAIL_SENDER, name: "pen • dev" },
     to: [{ email: user.email, name: user.name }],
-    subject: 'Verify Your New Email Address',
+    subject: "Verify Your New Email Address",
     html,
     text,
   });
@@ -108,9 +108,9 @@ export const sendResetEmailPassword = async ({
   const text = toPlainText(html);
 
   await sendEmail({
-    from: { email: env.EMAIL_SENDER, name: 'pen • dev' },
+    from: { email: env.EMAIL_SENDER, name: "pen • dev" },
     to: [{ email: user.email, name: user.name }],
-    subject: 'Verify Your New Email Address',
+    subject: "Verify Your New Email Address",
     html,
     text,
   });

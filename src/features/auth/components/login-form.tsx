@@ -1,31 +1,31 @@
-'use client';
+"use client";
 
-import { useForm } from 'react-hook-form';
+import { useForm } from "react-hook-form";
 
-import { LoginInput, loginResolver } from '@/lib/validations/auth-validator';
-import { LoadingSwap } from '@/components/ui/loading-swap';
-import { authClient } from '@/lib/auth/auth-client';
-import { useRouter } from 'next/navigation';
-import { toast } from 'sonner';
-import { Separator } from '@/components/ui/separator';
-import SocialAuthButtons from './social-auth-buttons';
-import AuthHeaderControls from './auth-header-controls';
-import { AuthRedirectMessage } from './auth-redirect-message';
-import Link from 'next/link';
-import { DynamicForm, FormFieldConfig } from '@/components/ui/dynamic-form';
+import { LoginInput, loginResolver } from "@/lib/validations/auth-validator";
+import { LoadingSwap } from "@/components/ui/loading-swap";
+import { authClient } from "@/lib/auth/auth-client";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+import { Separator } from "@/components/ui/separator";
+import SocialAuthButtons from "./social-auth-buttons";
+import AuthHeaderControls from "./auth-header-controls";
+import { AuthRedirectMessage } from "./auth-redirect-message";
+import Link from "next/link";
+import { DynamicForm, FormFieldConfig } from "@/components/ui/dynamic-form";
 
 const loginFields: FormFieldConfig<LoginInput>[] = [
   {
-    name: 'email',
-    label: 'Email',
-    type: 'email',
-    placeholder: 'you@example.com',
+    name: "email",
+    label: "Email",
+    type: "email",
+    placeholder: "you@example.com",
   },
   {
-    name: 'password',
-    label: 'Password',
-    type: 'password',
-    placeholder: '••••••••',
+    name: "password",
+    label: "Password",
+    type: "password",
+    placeholder: "••••••••",
   },
 ];
 
@@ -33,8 +33,8 @@ const LoginForm = () => {
   const form = useForm<LoginInput>({
     resolver: loginResolver,
     defaultValues: {
-      email: '',
-      password: '',
+      email: "",
+      password: "",
     },
   });
 
@@ -70,11 +70,11 @@ const LoginForm = () => {
       },
       {
         onSuccess: () => {
-          router.push('/dashboard');
+          router.push("/dashboard");
         },
-        onError: error => {
+        onError: (error) => {
           toast.error(
-            error.error.message || 'Failed to login. Please try again!'
+            error.error.message || "Failed to login. Please try again!"
           );
         },
       }

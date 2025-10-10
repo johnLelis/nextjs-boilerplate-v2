@@ -1,31 +1,31 @@
-'use client';
-import { authClient } from '@/lib/auth/auth-client';
-import { LogOut } from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-import { toast } from 'sonner';
+"use client";
+import { authClient } from "@/lib/auth/auth-client";
+import { LogOut } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { toast } from "sonner";
 
 const Logout = () => {
   const router = useRouter();
   const [isDisabled, setIsDisabled] = useState(false);
   const handleOnClick = () => {
     setIsDisabled(true);
-    const toastId = toast.warning('Are you sure you want to logout?', {
-      description: 'You’ll be signed out and redirected to the landing page.',
+    const toastId = toast.warning("Are you sure you want to logout?", {
+      description: "You’ll be signed out and redirected to the landing page.",
       action: {
-        label: 'Confirm Logout',
+        label: "Confirm Logout",
         onClick: async () => {
           await authClient.signOut({
             fetchOptions: {
               onSuccess: () => {
-                router.push('/');
+                router.push("/");
               },
             },
           });
         },
       },
       cancel: {
-        label: 'Cancel',
+        label: "Cancel",
         onClick: () => {
           toast.dismiss(toastId);
           setIsDisabled(false);
@@ -36,7 +36,12 @@ const Logout = () => {
       },
     });
   };
-
+  [].forEach((item) => {
+    console.log(item);
+  });
+  const test = "test";
+  const name = `John${test}asdsa`;
+  console.log(name);
   return (
     <div className="flex items-center gap-2">
       <button

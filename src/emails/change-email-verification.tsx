@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   Body,
   Container,
@@ -9,7 +9,7 @@ import {
   Section,
   Tailwind,
   Text,
-} from '@react-email/components';
+} from "@react-email/components";
 
 export type ChangeEmailVerificationProps = {
   userName?: string;
@@ -24,12 +24,12 @@ export const ChangeEmailVerification = ({
   userName,
   newEmail,
   verificationUrl,
-  expirationTime = '24 hours',
-  brandName = 'pen • dev',
-  brandColor = '#0070f3',
+  expirationTime = "24 hours",
+  brandName = "pen • dev",
+  brandColor = "#0070f3",
 }: ChangeEmailVerificationProps) => {
-  const greeting = userName ? `Hi ${userName}` : 'Hi there';
-  const previewText = 'Confirm your new email address to complete the change';
+  const greeting = userName ? `Hi ${userName}` : "Hi there";
+  const previewText = "Confirm your new email address to complete the change";
 
   return (
     <Html>
@@ -57,7 +57,7 @@ export const ChangeEmailVerification = ({
               </Text>
               <Text className="mb-4">{greeting},</Text>
               <Text className="mb-4">
-                You recently requested to change your email address to{' '}
+                You recently requested to change your email address to{" "}
                 <strong>{newEmail}</strong>. To complete this change, please
                 verify your new email address by clicking the button below:
               </Text>
@@ -71,7 +71,7 @@ export const ChangeEmailVerification = ({
               </Section>
               <Section className="bg-gray-100 rounded p-4 my-6">
                 <Text className="text-sm text-gray-700">
-                  <strong>This link will expire in {expirationTime}.</strong>{' '}
+                  <strong>This link will expire in {expirationTime}.</strong>{" "}
                   After verification, this will become your new login email
                   address.
                 </Text>
@@ -85,7 +85,7 @@ export const ChangeEmailVerification = ({
               <hr className="my-6 border-gray-200" />
               <Section className="bg-red-50 rounded p-4">
                 <Text className="text-sm text-gray-700">
-                  <strong>{`Didn't`} request this change?</strong> If you{' '}
+                  <strong>{`Didn't`} request this change?</strong> If you{" "}
                   {`didn't`} request to change your email address, please ignore
                   this email and your account will remain unchanged. We
                   recommend changing your password immediately if you believe
@@ -113,12 +113,12 @@ export const ChangeEmailVerification = ({
 
 // Preview props for local dev
 ChangeEmailVerification.PreviewProps = {
-  userName: 'John Doe',
-  newEmail: 'new.email@example.com',
-  verificationUrl: 'https://example.com/verify-change?token=123',
-  expirationTime: '24 hours',
-  brandName: 'pen • dev',
-  brandColor: '#0070f3',
+  userName: "John Doe",
+  newEmail: "new.email@example.com",
+  verificationUrl: "https://example.com/verify-change?token=123",
+  expirationTime: "24 hours",
+  brandName: "pen • dev",
+  brandColor: "#0070f3",
 } as ChangeEmailVerificationProps;
 
 export default ChangeEmailVerification;

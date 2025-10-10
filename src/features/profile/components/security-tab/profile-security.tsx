@@ -1,18 +1,18 @@
-import { DynamicForm } from '@/components/ui/dynamic-form';
-import { authClient } from '@/lib/auth/auth-client';
+import { DynamicForm } from "@/components/ui/dynamic-form";
+import { authClient } from "@/lib/auth/auth-client";
 import {
   ChangePasswordInput,
   changePasswordResolver,
-} from '@/lib/validations/auth-validator';
-import { useForm } from 'react-hook-form';
-import { toast } from 'sonner';
+} from "@/lib/validations/auth-validator";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 const ProfileSecurity = () => {
   const form = useForm({
     resolver: changePasswordResolver,
     defaultValues: {
-      newPassword: '',
-      confirmPassword: '',
+      newPassword: "",
+      confirmPassword: "",
     },
   });
 
@@ -22,7 +22,7 @@ const ProfileSecurity = () => {
       newPassword: data.newPassword,
       revokeOtherSessions: true,
     });
-    toast.success('Password changed successfully');
+    toast.success("Password changed successfully");
     form.reset();
   };
   return (
@@ -31,14 +31,14 @@ const ProfileSecurity = () => {
         form={form}
         fields={[
           {
-            name: 'newPassword',
-            label: 'New Password',
-            type: 'password',
+            name: "newPassword",
+            label: "New Password",
+            type: "password",
           },
           {
-            name: 'confirmPassword',
-            label: 'Confirm New Password',
-            type: 'password',
+            name: "confirmPassword",
+            label: "Confirm New Password",
+            type: "password",
           },
         ]}
         onSubmit={onSubmit}

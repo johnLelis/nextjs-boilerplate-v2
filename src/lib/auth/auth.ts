@@ -1,16 +1,16 @@
-import { betterAuth } from 'better-auth';
-import { drizzleAdapter } from 'better-auth/adapters/drizzle';
-import { db } from '@/drizzle/db';
-import { nextCookies } from 'better-auth/next-js';
-import { env } from '@/config/env';
-import { createAuthMiddleware } from 'better-auth/api';
+import { betterAuth } from "better-auth";
+import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { db } from "@/drizzle/db";
+import { nextCookies } from "better-auth/next-js";
+import { env } from "@/config/env";
+import { createAuthMiddleware } from "better-auth/api";
 import {
   sendChangeEmailVerification,
   sendResetEmailPassword,
   sendVerifyEmail,
   sendWelcomeEmail,
-} from '@/actions/email';
-import { emailOTPClient } from 'better-auth/client/plugins';
+} from "@/actions/email";
+import { emailOTPClient } from "better-auth/client/plugins";
 
 export const auth = betterAuth({
   user: {
@@ -22,7 +22,7 @@ export const auth = betterAuth({
           user,
           newEmail,
           verificationUrl: url,
-          expirationTime: '1 hour',
+          expirationTime: "1 hour",
         });
       },
     },
@@ -45,7 +45,7 @@ export const auth = betterAuth({
       await sendResetEmailPassword({
         user,
         resetUrl: new URL(`${url}?token=${token}`),
-        expirationTime: '5 minutes',
+        expirationTime: "5 minutes",
       });
     },
   },
@@ -56,7 +56,7 @@ export const auth = betterAuth({
       await sendVerifyEmail({
         userName: user.name,
         verificationUrl: url,
-        expirationTime: '1 hour',
+        expirationTime: "1 hour",
         userEmail: user.email,
       });
     },
@@ -85,12 +85,12 @@ export const auth = betterAuth({
     },
   },
   database: drizzleAdapter(db, {
-    provider: 'pg',
+    provider: "pg",
   }),
   hooks: {
-    after: createAuthMiddleware(async ctx => {
+    after: createAuthMiddleware(async (ctx) => {
       const newSession = ctx.context.newSession;
-      if (ctx.path.startsWith('/verify-email') && newSession) {
+      if (ctx.path.startsWith("/verify-email") && newSession) {
         const userEmail = newSession.user.email;
         const userName = newSession.user.name;
         await sendWelcomeEmail(userEmail, userName);

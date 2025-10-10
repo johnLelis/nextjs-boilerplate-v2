@@ -1,4 +1,4 @@
-import { ClientSecretCredential } from '@azure/identity';
+import { ClientSecretCredential } from "@azure/identity";
 type TokenServiceConfig = {
   tenantId: string;
   clientId: string;
@@ -10,7 +10,7 @@ export const getAccessToken = async (
   scopes: string[]
 ): Promise<string> => {
   try {
-    console.log('Fetching access token...');
+    console.log("Fetching access token...");
 
     const credential = new ClientSecretCredential(
       config.tenantId,
@@ -21,13 +21,13 @@ export const getAccessToken = async (
     const tokenResponse = await credential.getToken(scopes);
 
     if (!tokenResponse?.token) {
-      throw new Error('Failed to retrieve access token');
+      throw new Error("Failed to retrieve access token");
     }
 
-    console.log('Access token retrieved successfully');
+    console.log("Access token retrieved successfully");
     return tokenResponse.token;
   } catch (error) {
-    console.error('Error getting access token:', error);
+    console.error("Error getting access token:", error);
     throw error;
   }
 };

@@ -1,5 +1,5 @@
-import { authClient } from '@/lib/auth/auth-client';
-import { useMemo } from 'react';
+import { authClient } from "@/lib/auth/auth-client";
+import { useMemo } from "react";
 
 export const useUser = () => {
   const { data: session, isPending, error, ...rest } = authClient.useSession();

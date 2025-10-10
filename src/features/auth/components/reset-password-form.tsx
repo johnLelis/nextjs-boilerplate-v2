@@ -1,28 +1,28 @@
-'use client';
-import { useForm } from 'react-hook-form';
+"use client";
+import { useForm } from "react-hook-form";
 import {
   ResetPasswordInput,
   resetPasswordResolver,
-} from '@/lib/validations/auth-validator';
-import { LoadingSwap } from '@/components/ui/loading-swap';
-import { authClient } from '@/lib/auth/auth-client';
-import AuthHeaderControls from '@/features/auth/components/auth-header-controls';
-import { toast } from 'sonner';
-import { useRouter } from 'next/navigation';
-import { DynamicForm, FormFieldConfig } from '@/components/ui/dynamic-form';
+} from "@/lib/validations/auth-validator";
+import { LoadingSwap } from "@/components/ui/loading-swap";
+import { authClient } from "@/lib/auth/auth-client";
+import AuthHeaderControls from "@/features/auth/components/auth-header-controls";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { DynamicForm, FormFieldConfig } from "@/components/ui/dynamic-form";
 
 const resetPasswordFields: FormFieldConfig<ResetPasswordInput>[] = [
   {
-    name: 'password',
-    label: 'Password',
-    type: 'password',
-    placeholder: '••••••••',
+    name: "password",
+    label: "Password",
+    type: "password",
+    placeholder: "••••••••",
   },
   {
-    name: 'confirmPassword',
-    label: 'Confirm Password',
-    type: 'password',
-    placeholder: '••••••••',
+    name: "confirmPassword",
+    label: "Confirm Password",
+    type: "password",
+    placeholder: "••••••••",
   },
 ];
 
@@ -31,24 +31,24 @@ const ResetPasswordForm = () => {
   const form = useForm<ResetPasswordInput>({
     resolver: resetPasswordResolver,
     defaultValues: {
-      password: '',
-      confirmPassword: '',
+      password: "",
+      confirmPassword: "",
     },
   });
 
   const { isSubmitting } = form.formState;
 
   const handleOnSubmit = async (data: ResetPasswordInput) => {
-    const token = new URLSearchParams(window.location.search).get('token');
+    const token = new URLSearchParams(window.location.search).get("token");
     if (!token) {
-      toast.error('Invalid token. Please try again!');
+      toast.error("Invalid token. Please try again!");
     } else {
       await authClient.resetPassword({
         newPassword: data.password,
         token,
       });
-      toast.success('Your password has been reset successfully!');
-      router.push('/login');
+      toast.success("Your password has been reset successfully!");
+      router.push("/login");
     }
   };
 

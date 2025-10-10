@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { User, Shield, Monitor, Link2, Trash2 } from 'lucide-react';
-import React from 'react';
+import { User, Shield, Monitor, Link2, Trash2 } from "lucide-react";
+import React from "react";
 
 type Tab = {
   readonly id: string;
@@ -11,16 +11,16 @@ type Tab = {
 };
 
 const tabs: Readonly<Tab[]> = [
-  { id: 'profile', label: 'Profile', icon: User },
-  { id: 'security', label: 'Security', icon: Shield },
-  { id: 'sessions', label: 'Sessions', icon: Monitor },
-  { id: 'accounts', label: 'Accounts', icon: Link2 },
-  { id: 'delete', label: 'Delete Account', icon: Trash2, destructive: true },
+  { id: "profile", label: "Profile", icon: User },
+  { id: "security", label: "Security", icon: Shield },
+  { id: "sessions", label: "Sessions", icon: Monitor },
+  { id: "accounts", label: "Accounts", icon: Link2 },
+  { id: "delete", label: "Delete Account", icon: Trash2, destructive: true },
 ];
 
 interface TabNavigationProps {
-  activeTab: Tab['id'];
-  setActiveTab: (id: Tab['id']) => void;
+  activeTab: Tab["id"];
+  setActiveTab: (id: Tab["id"]) => void;
 }
 
 export const TabNavigation: React.FC<TabNavigationProps> = ({
@@ -29,7 +29,7 @@ export const TabNavigation: React.FC<TabNavigationProps> = ({
 }) => (
   <div className="border-b">
     <div className="flex overflow-x-auto">
-      {tabs.map(tab => {
+      {tabs.map((tab) => {
         const Icon = tab.icon;
         return (
           <button
@@ -38,10 +38,10 @@ export const TabNavigation: React.FC<TabNavigationProps> = ({
             onClick={() => setActiveTab(tab.id)}
             className={`flex items-center gap-2 px-6 py-4 text-sm font-medium border-b-2 whitespace-nowrap transition-colors ${
               activeTab === tab.id
-                ? 'border-primary text-primary'
+                ? "border-primary text-primary"
                 : tab.destructive
-                ? 'border-transparent text-destructive hover:text-destructive/80'
-                : 'border-transparent text-muted-foreground hover:text-foreground'
+                  ? "border-transparent text-destructive hover:text-destructive/80"
+                  : "border-transparent text-muted-foreground hover:text-foreground"
             }`}
           >
             <Icon className="w-4 h-4" />

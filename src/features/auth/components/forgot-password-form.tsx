@@ -1,21 +1,21 @@
-'use client';
-import { useForm } from 'react-hook-form';
+"use client";
+import { useForm } from "react-hook-form";
 import {
   ForgotPasswordInput,
   forgotPasswordResolver,
-} from '@/lib/validations/auth-validator';
-import { LoadingSwap } from '@/components/ui/loading-swap';
-import { authClient } from '@/lib/auth/auth-client';
-import AuthHeaderControls from '@/features/auth/components/auth-header-controls';
-import { toast } from 'sonner';
-import { useRouter } from 'next/navigation';
-import { DynamicForm, FormFieldConfig } from '@/components/ui/dynamic-form';
+} from "@/lib/validations/auth-validator";
+import { LoadingSwap } from "@/components/ui/loading-swap";
+import { authClient } from "@/lib/auth/auth-client";
+import AuthHeaderControls from "@/features/auth/components/auth-header-controls";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { DynamicForm, FormFieldConfig } from "@/components/ui/dynamic-form";
 const forgotPasswordFields: FormFieldConfig<ForgotPasswordInput>[] = [
   {
-    name: 'email',
-    label: 'Email',
-    type: 'email',
-    placeholder: 'you@example.com',
+    name: "email",
+    label: "Email",
+    type: "email",
+    placeholder: "you@example.com",
   },
 ];
 const ForgotPasswordForm = () => {
@@ -24,7 +24,7 @@ const ForgotPasswordForm = () => {
   const form = useForm<ForgotPasswordInput>({
     resolver: forgotPasswordResolver,
     defaultValues: {
-      email: '',
+      email: "",
     },
   });
 
@@ -34,10 +34,10 @@ const ForgotPasswordForm = () => {
     const email = data.email;
     await authClient.requestPasswordReset({
       email,
-      redirectTo: '/reset-password',
+      redirectTo: "/reset-password",
     });
     toast.success(`Password reset url has been sent to ${email}!`);
-    router.push('/');
+    router.push("/");
   };
 
   return (

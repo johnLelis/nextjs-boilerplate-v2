@@ -1,5 +1,5 @@
-import { Button } from '@/components/ui/button';
-import { UserGreetingProps } from '@/types/user';
+import { Button } from "@/components/ui/button";
+import { UserGreetingProps } from "@/types/user";
 
 const ProfileAvatar = ({ user }: UserGreetingProps) => {
   return (
@@ -28,11 +28,11 @@ const ProfileAvatar = ({ user }: UserGreetingProps) => {
 };
 
 const getInitials = (name?: string | null) => {
-  if (!name) return '?';
+  if (!name) return "?";
   return name
-    .split(' ')
-    .map(n => n[0])
-    .join('')
+    .split(" ")
+    .map((n) => n[0])
+    .join("")
     .toUpperCase()
     .slice(0, 2);
 };

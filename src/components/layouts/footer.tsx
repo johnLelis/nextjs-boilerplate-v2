@@ -1,4 +1,4 @@
-import dayjs from 'dayjs';
+import dayjs from "dayjs";
 
 interface FooterProps {
   className?: string;
@@ -8,7 +8,7 @@ const Footer = ({ className }: FooterProps) => {
   const year = dayjs().year();
 
   const defaultStyles =
-    'border-t border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm';
+    "border-t border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm";
 
   return (
     <footer className={className || defaultStyles}>

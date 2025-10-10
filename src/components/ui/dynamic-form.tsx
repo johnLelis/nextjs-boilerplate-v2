@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { UseFormReturn, FieldValues, Path } from 'react-hook-form';
+import { UseFormReturn, FieldValues, Path } from "react-hook-form";
 import {
   Form,
   FormField,
@@ -9,33 +9,33 @@ import {
   FormControl,
   FormMessage,
   FormDescription,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Button } from '@/components/ui/button';
-import { ReactNode, ComponentProps } from 'react';
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+import { ReactNode, ComponentProps } from "react";
 
 export type FormFieldConfig<T extends FieldValues> = {
   name: Path<T>;
   label: string;
-  type?: 'text' | 'email' | 'password' | 'number' | 'textarea';
+  type?: "text" | "email" | "password" | "number" | "textarea";
   placeholder?: string;
   description?: string;
   rows?: number;
-  inputProps?: Omit<ComponentProps<typeof Input>, 'type' | 'placeholder'>;
-  textareaProps?: Omit<ComponentProps<typeof Textarea>, 'placeholder' | 'rows'>;
+  inputProps?: Omit<ComponentProps<typeof Input>, "type" | "placeholder">;
+  textareaProps?: Omit<ComponentProps<typeof Textarea>, "placeholder" | "rows">;
 };
 
 export type FormButton = {
   label: string;
-  type?: 'submit' | 'button' | 'reset';
+  type?: "submit" | "button" | "reset";
   variant?:
-    | 'default'
-    | 'destructive'
-    | 'outline'
-    | 'secondary'
-    | 'ghost'
-    | 'link';
+    | "default"
+    | "destructive"
+    | "outline"
+    | "secondary"
+    | "ghost"
+    | "link";
   onClick?: () => void;
   disabled?: boolean;
   className?: string;
@@ -58,8 +58,8 @@ export const DynamicForm = <T extends FieldValues>({
   form,
   fields,
   onSubmit,
-  submitLabel = 'Submit',
-  className = 'space-y-4',
+  submitLabel = "Submit",
+  className = "space-y-4",
   footer,
   loadingComponent,
   buttons,
@@ -70,8 +70,8 @@ export const DynamicForm = <T extends FieldValues>({
   const formButtons: FormButton[] = buttons || [
     {
       label: submitLabel,
-      type: 'submit',
-      variant: 'default',
+      type: "submit",
+      variant: "default",
       disabled: isSubmitting,
       loadingComponent,
     },
@@ -79,13 +79,13 @@ export const DynamicForm = <T extends FieldValues>({
 
   const getButtonClassName = (button: FormButton) => {
     if (button.className) return button.className;
-    return formButtons.length === 1 ? 'w-full' : '';
+    return formButtons.length === 1 ? "w-full" : "";
   };
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className={className}>
-        {fields.map(fieldConfig => (
+        {fields.map((fieldConfig) => (
           <FormField
             key={fieldConfig.name}
             control={form.control}
@@ -94,7 +94,7 @@ export const DynamicForm = <T extends FieldValues>({
               <FormItem>
                 <FormLabel>{fieldConfig.label}</FormLabel>
                 <FormControl>
-                  {fieldConfig.type === 'textarea' ? (
+                  {fieldConfig.type === "textarea" ? (
                     <Textarea
                       placeholder={fieldConfig.placeholder}
                       rows={fieldConfig.rows || 4}
@@ -103,7 +103,7 @@ export const DynamicForm = <T extends FieldValues>({
                     />
                   ) : (
                     <Input
-                      type={fieldConfig.type || 'text'}
+                      type={fieldConfig.type || "text"}
                       placeholder={fieldConfig.placeholder}
                       {...field}
                       {...fieldConfig.inputProps}
@@ -119,19 +119,19 @@ export const DynamicForm = <T extends FieldValues>({
           />
         ))}
 
-        <div className={buttonsClassName || 'flex justify-end gap-3'}>
+        <div className={buttonsClassName || "flex justify-end gap-3"}>
           {formButtons.map((button, index) => (
             <Button
               key={`button-${index}`}
-              type={button.type || 'button'}
-              variant={button.variant || 'default'}
+              type={button.type || "button"}
+              variant={button.variant || "default"}
               disabled={
-                button.disabled || (button.type === 'submit' && isSubmitting)
+                button.disabled || (button.type === "submit" && isSubmitting)
               }
               onClick={button.onClick}
               className={getButtonClassName(button)}
             >
-              {button.type === 'submit' &&
+              {button.type === "submit" &&
               isSubmitting &&
               button.loadingComponent
                 ? button.loadingComponent

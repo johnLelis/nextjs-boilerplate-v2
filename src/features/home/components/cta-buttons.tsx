@@ -1,6 +1,6 @@
-import { Button } from '@/components/ui/button';
-import Image from 'next/image';
-import Link from 'next/link';
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import Link from "next/link";
 const CtaButtons = () => {
   return (
     <div className="flex flex-col place-items-center sm:flex-row gap-4 w-full sm:w-auto">
@@ -33,7 +33,7 @@ const CtaButtons = () => {
           rel="noopener noreferrer"
         >
           <Image
-            src={'/images/github.svg'}
+            src={"/images/github.svg"}
             alt="github"
             width={24}
             height={24}

@@ -1,13 +1,13 @@
-import { z } from 'zod';
+import { z } from "zod";
 
 const envSchema = z.object({
   NODE_ENV: z
-    .enum(['development', 'test', 'production'])
-    .default('development'),
+    .enum(["development", "test", "production"])
+    .default("development"),
   //Database
   DATABASE_URL: z.url(),
   DB_HOST: z.string().min(1),
-  DB_PORT: z.string().default('5432'),
+  DB_PORT: z.string().default("5432"),
   DB_PASSWORD: z.string().min(1),
   DB_USER: z.string().min(1),
   DB_NAME: z.string().min(1),
@@ -19,10 +19,10 @@ const envSchema = z.object({
   //Arcjet
   ARCJET_KEY: z.string().min(30).optional(),
   ARCJET_ENV: z
-    .enum(['development', 'production'])
-    .default('development')
+    .enum(["development", "production"])
+    .default("development")
     .optional(),
-  ENABLE_ARCJET: z.string().default('false').optional(),
+  ENABLE_ARCJET: z.string().default("false").optional(),
 
   //Social Providers
   GITHUB_CLIENT_ID: z.string().optional(),
@@ -37,17 +37,17 @@ const envSchema = z.object({
 
   //Email Provider
   EMAIL_SENDER: z.string(),
-  EMAIL_PROVIDER: z.string().optional().default('azure'),
+  EMAIL_PROVIDER: z.string().optional().default("azure"),
 
   // Optional vars with defaults
-  PORT: z.string().default('3000'),
+  PORT: z.string().default("3000"),
 });
 
 const parsed = envSchema.safeParse(process.env);
 if (!parsed.success) {
   const flattened = parsed.error.message;
-  console.error('❌ Invalid environment variables:', flattened);
-  throw new Error('Invalid environment variables');
+  console.error("❌ Invalid environment variables:", flattened);
+  throw new Error("Invalid environment variables");
 }
 
 const parsedData = {

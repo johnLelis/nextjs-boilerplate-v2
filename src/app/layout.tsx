@@ -1,17 +1,17 @@
-import type { Metadata } from 'next';
-import '../styles/globals.css';
-import { ThemeProvider } from 'next-themes';
-import { Inter } from 'next/font/google';
-import { Toaster } from 'sonner';
+import type { Metadata } from "next";
+import "../styles/globals.css";
+import { ThemeProvider } from "next-themes";
+import { Inter } from "next/font/google";
+import { Toaster } from "sonner";
 const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: 'Next App Boilerplate',
-  description: 'Created by: PenLelis',
+  title: "Next App Boilerplate",
+  description: "Created by: PenLelis",
 };
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {

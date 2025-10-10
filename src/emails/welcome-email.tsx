@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   Body,
   Container,
@@ -9,7 +9,7 @@ import {
   Section,
   Tailwind,
   Text,
-} from '@react-email/components';
+} from "@react-email/components";
 
 type WelcomeEmailProps = {
   userName: string;
@@ -22,9 +22,9 @@ type WelcomeEmailProps = {
 export const WelcomeEmail = ({
   userName,
   dashboardUrl,
-  supportUrl = '#',
-  brandName = 'pen • dev',
-  brandColor = '#0070f3',
+  supportUrl = "#",
+  brandName = "pen • dev",
+  brandColor = "#0070f3",
 }: WelcomeEmailProps) => {
   const previewText = `Welcome aboard! ${`We're`} excited to have you with us.`;
 
@@ -84,10 +84,10 @@ export const WelcomeEmail = ({
               <Section className="bg-gray-100 rounded p-4 my-6">
                 <Text className="text-sm text-gray-700">
                   <strong>Need help getting started?</strong> Our support team
-                  is here to help!{' '}
+                  is here to help!{" "}
                   <Link href={supportUrl} className="text-blue-700 underline">
                     Contact us
-                  </Link>{' '}
+                  </Link>{" "}
                   anytime.
                 </Text>
               </Section>
@@ -116,11 +116,11 @@ export const WelcomeEmail = ({
 
 // Preview props for local dev
 WelcomeEmail.PreviewProps = {
-  userName: 'John Doe',
-  dashboardUrl: 'https://example.com/dashboard',
-  supportUrl: 'https://example.com/support',
-  brandName: 'pen • dev',
-  brandColor: '#0070f3',
+  userName: "John Doe",
+  dashboardUrl: "https://example.com/dashboard",
+  supportUrl: "https://example.com/support",
+  brandName: "pen • dev",
+  brandColor: "#0070f3",
 } as WelcomeEmailProps;
 
 export default WelcomeEmail;

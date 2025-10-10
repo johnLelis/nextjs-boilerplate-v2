@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import { useUser } from '@/hooks/useUser';
-import UserAvatar from './user-avatar';
-import Link from 'next/link';
+import { useUser } from "@/hooks/useUser";
+import UserAvatar from "./user-avatar";
+import Link from "next/link";
 
 const UserGreeting = () => {
   const { user } = useUser();
   if (!user) return null;
 
   return (
-    <Link href={'/profile'}>
+    <Link href={"/profile"}>
       <div className="flex gap-1 place-items-center">
         <UserAvatar user={user} />
         <p className="text-sm">
