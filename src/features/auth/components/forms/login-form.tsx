@@ -12,9 +12,9 @@ import { Separator } from "@/components/ui/separator";
 import { authClient } from "@/lib/auth/auth-client";
 import { LoginInput, loginResolver } from "@/lib/validations/auth-validator";
 
-import AuthHeaderControls from "./auth-header-controls";
-import { AuthRedirectMessage } from "./auth-redirect-message";
-import SocialAuthButtons from "./social-auth-buttons";
+import AuthHeaderControls from "../ui/auth-header-controls";
+import { AuthRedirectMessage } from "../ui/auth-redirect-message";
+import SocialAuthButtons from "../ui/social-auth-buttons";
 
 const loginFields: FormFieldConfig<LoginInput>[] = [
   {

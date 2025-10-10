@@ -1,4 +1,4 @@
-import RegisterForm from "@/features/auth/components/register-form";
+import RegisterForm from "@/features/auth/components/forms/register-form";
 import { checkAuthRedirect } from "@/lib/middlewares/check-auth-redirect";
 
 const RegisterPage = async () => {

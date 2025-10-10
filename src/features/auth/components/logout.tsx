@@ -39,12 +39,7 @@ const Logout = () => {
       },
     });
   };
-  [].forEach((item) => {
-    console.log(item);
-  });
-  const test = "test";
-  const name = `John${test}asdsa`;
-  console.log(name);
+
   return (
     <div className="flex items-center gap-2">
       <button

@@ -7,7 +7,7 @@ import { toast } from "sonner";
 
 import { DynamicForm, FormFieldConfig } from "@/components/ui/dynamic-form";
 import { LoadingSwap } from "@/components/ui/loading-swap";
-import AuthHeaderControls from "@/features/auth/components/auth-header-controls";
+import AuthHeaderControls from "@/features/auth/components/ui/auth-header-controls";
 import { authClient } from "@/lib/auth/auth-client";
 import {
   ForgotPasswordInput,
