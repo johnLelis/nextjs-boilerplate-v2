@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 
 import { auth } from "@/lib/auth/auth";
 
-export const checkAuthRedirect = async (redirectTo: Route) => {
+export const checkAuthRedirect = async (redirectTo: Route = "/dashboard") => {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
