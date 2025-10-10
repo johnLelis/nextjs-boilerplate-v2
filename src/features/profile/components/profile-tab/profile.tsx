@@ -82,8 +82,9 @@ const Profile = () => {
           : changes.name
             ? "Profile name updated successfully."
             : "We've sent a verification link to your new email. Please check your inbox to confirm the change.";
+      const nameToRender = data.name ? data.name : user?.name || "";
       form.reset({
-        name: user?.name || "",
+        name: nameToRender,
         email: user?.email || "",
       });
       toast.success(message);
@@ -93,6 +94,11 @@ const Profile = () => {
           ? error.message
           : "An unexpected error occurred while updating your profile."
       );
+
+      form.reset({
+        name: user?.name,
+        email: user?.email || "",
+      });
     }
   };
 
