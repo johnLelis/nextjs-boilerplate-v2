@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 
-import { useUser } from "@/hooks/useUser";
+import { useUser } from "@/hooks/use-user";
 
 import UserAvatar from "./user-avatar";
 

@@ -7,7 +7,7 @@ import { toast } from "sonner";
 
 import { DynamicForm, FormFieldConfig } from "@/components/ui/dynamic-form";
 import { LoadingSwap } from "@/components/ui/loading-swap";
-import { useUser } from "@/hooks/useUser";
+import { useUser } from "@/hooks/use-user";
 import { authClient } from "@/lib/auth/auth-client";
 import {
   UpdateProfileInput,
