@@ -1,11 +1,12 @@
 "use client";
 
+import type { Route } from "next";
 import Link from "next/link";
 
 type AuthRedirectMessageProps = {
   message: string;
   linkText: string;
-  href: string;
+  href: Route;
 };
 
 export const AuthRedirectMessage = ({
