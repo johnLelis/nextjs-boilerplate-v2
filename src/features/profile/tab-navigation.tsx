@@ -1,7 +1,8 @@
 "use client";
 
-import { User, Shield, Monitor, Link2, Trash2 } from "lucide-react";
 import React from "react";
+
+import { Link2, Monitor, Shield, Trash2, User } from "lucide-react";
 
 type Tab = {
   readonly id: string;

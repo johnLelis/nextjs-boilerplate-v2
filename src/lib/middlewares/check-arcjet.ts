@@ -1,15 +1,16 @@
+import { findIp } from "@arcjet/ip";
 import arcjet, {
   BotOptions,
-  detectBot,
   EmailOptions,
+  SlidingWindowRateLimitOptions,
+  detectBot,
   protectSignup,
   shield,
   slidingWindow,
-  SlidingWindowRateLimitOptions,
 } from "@arcjet/next";
-import { auth } from "@/lib/auth/auth";
-import { findIp } from "@arcjet/ip";
+
 import { env } from "@/config/env";
+import { auth } from "@/lib/auth/auth";
 
 const botSettings = { mode: "LIVE", allow: [] } satisfies BotOptions;
 const restrictiveRateLimitSettings = {

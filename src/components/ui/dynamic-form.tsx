@@ -1,19 +1,21 @@
 "use client";
 
-import { UseFormReturn, FieldValues, Path } from "react-hook-form";
+import { ComponentProps, ReactNode } from "react";
+
+import { FieldValues, Path, UseFormReturn } from "react-hook-form";
+
+import { Button } from "@/components/ui/button";
 import {
   Form,
+  FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
-  FormControl,
   FormMessage,
-  FormDescription,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
-import { ReactNode, ComponentProps } from "react";
 
 export type FormFieldConfig<T extends FieldValues> = {
   name: Path<T>;

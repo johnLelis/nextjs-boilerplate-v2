@@ -1,14 +1,16 @@
-import { env } from "@/config/env";
-import { sendEmail } from "@/services/email";
 import { render, toPlainText } from "@react-email/render";
-import WelcomeEmail from "@/emails/welcome-email";
-import VerifyEmail from "@/emails/verify-email";
+
+import { env } from "@/config/env";
 import {
   ChangeEmailVerification,
   ChangeEmailVerificationProps,
 } from "@/emails/change-email-verification";
-import { User } from "@/types/user";
 import ResetPasswordEmail from "@/emails/reset-password";
+import VerifyEmail from "@/emails/verify-email";
+import WelcomeEmail from "@/emails/welcome-email";
+import { sendEmail } from "@/services/email";
+import { User } from "@/types/user";
+
 export const sendWelcomeEmail = async (userEmail: string, userName: string) => {
   const html = await render(
     <WelcomeEmail

@@ -1,5 +1,5 @@
-import { EmailMessage, EmailResponse, AzureEmailConfig } from "@/types/email";
 import { getAccessToken } from "@/services/email/providers/azure/azure-token-service";
+import { AzureEmailConfig, EmailMessage, EmailResponse } from "@/types/email";
 
 export const sendEmailViaAzure = async (
   message: EmailMessage,

@@ -1,18 +1,22 @@
 "use client";
+
+import { useRouter } from "next/navigation";
+
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+
+import { DynamicForm, FormFieldConfig } from "@/components/ui/dynamic-form";
+import { LoadingSwap } from "@/components/ui/loading-swap";
+import { Separator } from "@/components/ui/separator";
+import { authClient } from "@/lib/auth/auth-client";
 import {
   RegisterInput,
   registerResolver,
 } from "@/lib/validations/auth-validator";
-import { LoadingSwap } from "@/components/ui/loading-swap";
-import { authClient } from "@/lib/auth/auth-client";
-import { toast } from "sonner";
-import { useRouter } from "next/navigation";
-import { Separator } from "@/components/ui/separator";
-import SocialAuthButtons from "./social-auth-buttons";
+
 import AuthHeaderControls from "./auth-header-controls";
 import { AuthRedirectMessage } from "./auth-redirect-message";
-import { DynamicForm, FormFieldConfig } from "@/components/ui/dynamic-form";
+import SocialAuthButtons from "./social-auth-buttons";
 
 const registerFields: FormFieldConfig<RegisterInput>[] = [
   {

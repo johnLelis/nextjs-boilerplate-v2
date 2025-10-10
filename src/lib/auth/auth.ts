@@ -1,16 +1,17 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import { db } from "@/drizzle/db";
-import { nextCookies } from "better-auth/next-js";
-import { env } from "@/config/env";
 import { createAuthMiddleware } from "better-auth/api";
+import { emailOTPClient } from "better-auth/client/plugins";
+import { nextCookies } from "better-auth/next-js";
+
 import {
   sendChangeEmailVerification,
   sendResetEmailPassword,
   sendVerifyEmail,
   sendWelcomeEmail,
 } from "@/actions/email";
-import { emailOTPClient } from "better-auth/client/plugins";
+import { env } from "@/config/env";
+import { db } from "@/drizzle/db";
 
 export const auth = betterAuth({
   user: {

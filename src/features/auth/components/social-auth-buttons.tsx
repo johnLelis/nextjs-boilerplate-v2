@@ -1,12 +1,15 @@
 "use client";
+
+import { useState } from "react";
+
 import { Button } from "@/components/ui/button";
 import { LoadingSwap } from "@/components/ui/loading-swap";
-import { authClient } from "@/lib/auth/auth-client";
 import {
   SUPPORTED_OAUTH_PROVIDERS,
   SUPPORTED_OAUTH_PROVIDERS_DETAILS,
 } from "@/features/auth/config/o-auth-providers";
-import { useState } from "react";
+import { authClient } from "@/lib/auth/auth-client";
+
 const SocialAuthButtons = () => {
   const [submittingProvider, setSubmittingProvider] = useState<string | null>(
     null

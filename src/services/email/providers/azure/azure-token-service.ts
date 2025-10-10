@@ -1,4 +1,5 @@
 import { ClientSecretCredential } from "@azure/identity";
+
 type TokenServiceConfig = {
   tenantId: string;
   clientId: string;

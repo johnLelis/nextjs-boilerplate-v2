@@ -1,16 +1,17 @@
 import * as React from "react";
+
 import {
   Body,
+  Column,
   Container,
   Head,
   Html,
   Link,
   Preview,
+  Row,
   Section,
   Tailwind,
   Text,
-  Row,
-  Column,
 } from "@react-email/components";
 
 type UpdatePasswordOtpTemplateProps = {

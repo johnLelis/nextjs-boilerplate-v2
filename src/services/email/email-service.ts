@@ -1,6 +1,7 @@
-import { EmailMessage, EmailResponse } from "@/types/email";
-import { sendEmailViaAzure } from "./providers/azure/azure-provider";
 import { env } from "@/config/env";
+import { EmailMessage, EmailResponse } from "@/types/email";
+
+import { sendEmailViaAzure } from "./providers/azure/azure-provider";
 
 type EmailProvider = "azure" | "postmark" | "sendgrid";
 

@@ -1,4 +1,5 @@
 import * as React from "react";
+
 import {
   Body,
   Container,
@@ -85,8 +86,8 @@ export const ChangeEmailVerification = ({
               <hr className="my-6 border-gray-200" />
               <Section className="bg-red-50 rounded p-4">
                 <Text className="text-sm text-gray-700">
-                  <strong>{`Didn't`} request this change?</strong> If you{" "}
-                  {`didn't`} request to change your email address, please ignore
+                  <strong>{"Didn't"} request this change?</strong> If you{" "}
+                  {"didn't"} request to change your email address, please ignore
                   this email and your account will remain unchanged. We
                   recommend changing your password immediately if you believe
                   your account may be compromised.

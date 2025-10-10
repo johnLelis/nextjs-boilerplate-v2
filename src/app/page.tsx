@@ -1,8 +1,8 @@
 import Footer from "@/components/layouts/footer";
 import ModeToggle from "@/components/ui/mode-toggle";
-import Hero from "@/features/home/components/hero";
 import CtaButtons from "@/features/home/components/cta-buttons";
 import FeaturesGrid from "@/features/home/components/features-grid";
+import Hero from "@/features/home/components/hero";
 
 const HomePage = () => {
   return (

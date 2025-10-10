@@ -1,6 +1,8 @@
-import { NextRequest, NextResponse } from "next/server";
 import { headers } from "next/headers";
+import { NextRequest, NextResponse } from "next/server";
+
 import { auth } from "@/lib/auth/auth";
+
 import { checkArcjet } from "./check-arcjet";
 
 export const authMiddleware = async (request: NextRequest) => {

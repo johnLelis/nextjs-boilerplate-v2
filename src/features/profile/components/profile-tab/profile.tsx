@@ -1,17 +1,20 @@
 "use client";
 
 import { useEffect } from "react";
+
 import { useForm } from "react-hook-form";
-import { DynamicForm, FormFieldConfig } from "@/components/ui/dynamic-form";
-import {
-  updateProfileResolver,
-  UpdateProfileInput,
-} from "@/lib/validations/auth-validator";
-import { useUser } from "@/hooks/useUser";
-import { LoadingSwap } from "@/components/ui/loading-swap";
-import ProfileAvatar from "./profile-avatar";
-import { authClient } from "@/lib/auth/auth-client";
 import { toast } from "sonner";
+
+import { DynamicForm, FormFieldConfig } from "@/components/ui/dynamic-form";
+import { LoadingSwap } from "@/components/ui/loading-swap";
+import { useUser } from "@/hooks/useUser";
+import { authClient } from "@/lib/auth/auth-client";
+import {
+  UpdateProfileInput,
+  updateProfileResolver,
+} from "@/lib/validations/auth-validator";
+
+import ProfileAvatar from "./profile-avatar";
 
 const Profile = () => {
   const { user } = useUser();

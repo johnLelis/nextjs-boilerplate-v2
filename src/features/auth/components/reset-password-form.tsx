@@ -1,15 +1,18 @@
 "use client";
+
+import { useRouter } from "next/navigation";
+
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+
+import { DynamicForm, FormFieldConfig } from "@/components/ui/dynamic-form";
+import { LoadingSwap } from "@/components/ui/loading-swap";
+import AuthHeaderControls from "@/features/auth/components/auth-header-controls";
+import { authClient } from "@/lib/auth/auth-client";
 import {
   ResetPasswordInput,
   resetPasswordResolver,
 } from "@/lib/validations/auth-validator";
-import { LoadingSwap } from "@/components/ui/loading-swap";
-import { authClient } from "@/lib/auth/auth-client";
-import AuthHeaderControls from "@/features/auth/components/auth-header-controls";
-import { toast } from "sonner";
-import { useRouter } from "next/navigation";
-import { DynamicForm, FormFieldConfig } from "@/components/ui/dynamic-form";
 
 const resetPasswordFields: FormFieldConfig<ResetPasswordInput>[] = [
   {

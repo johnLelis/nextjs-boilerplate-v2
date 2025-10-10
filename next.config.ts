@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
+
 import path from "path";
+
 import { env } from "@/config/env";
+
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,

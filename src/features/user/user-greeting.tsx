@@ -1,8 +1,10 @@
 "use client";
 
-import { useUser } from "@/hooks/useUser";
-import UserAvatar from "./user-avatar";
 import Link from "next/link";
+
+import { useUser } from "@/hooks/useUser";
+
+import UserAvatar from "./user-avatar";
 
 const UserGreeting = () => {
   const { user } = useUser();

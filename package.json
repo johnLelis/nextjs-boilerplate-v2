@@ -18,6 +18,7 @@
     "auth:generate": "npx @better-auth/cli@latest generate --config ./src/lib/auth/auth.ts --output ./src/drizzle/schemas/auth/new-auth-schema.ts --yes",
     "email": "email dev --dir src/emails --port 4000",
     "lint": "eslint",
+    "lint:fix": "eslint . --fix",
     "format": "prettier --write ."
   },
   "dependencies": {
@@ -55,6 +56,7 @@
     "@eslint/eslintrc": "^3",
     "@react-email/preview-server": "^4.3.0",
     "@tailwindcss/postcss": "^4",
+    "@trivago/prettier-plugin-sort-imports": "^5.2.2",
     "@types/node": "^20",
     "@types/pg": "^8.15.5",
     "@types/react": "^19",

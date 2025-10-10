@@ -1,5 +1,7 @@
 "use client";
+
 import Link from "next/link";
+
 import ModeToggle from "../ui/mode-toggle";
 
 type NavbarProps = {

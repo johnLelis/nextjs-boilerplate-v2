@@ -1,6 +1,8 @@
-import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
+
+import { Button } from "@/components/ui/button";
+
 const CtaButtons = () => {
   return (
     <div className="flex flex-col place-items-center sm:flex-row gap-4 w-full sm:w-auto">

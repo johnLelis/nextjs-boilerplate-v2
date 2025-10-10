@@ -1,4 +1,5 @@
 import * as React from "react";
+
 import {
   Body,
   Container,
@@ -26,7 +27,7 @@ export const WelcomeEmail = ({
   brandName = "pen • dev",
   brandColor = "#0070f3",
 }: WelcomeEmailProps) => {
-  const previewText = `Welcome aboard! ${`We're`} excited to have you with us.`;
+  const previewText = `Welcome aboard! ${"We're"} excited to have you with us.`;
 
   return (
     <Html>
@@ -54,8 +55,8 @@ export const WelcomeEmail = ({
               </Text>
               <Text className="mb-4">Hi {userName},</Text>
               <Text className="mb-4">
-                {`We're`} thrilled to have you on board! Your account has been
-                successfully created and {`you're`} all set to get started.
+                {"We're"} thrilled to have you on board! Your account has been
+                successfully created and {"you're"} all set to get started.
               </Text>
               {dashboardUrl && (
                 <Section className="text-center my-6">
@@ -69,7 +70,7 @@ export const WelcomeEmail = ({
               )}
               <hr className="my-6 border-gray-200" />
               <Text className="text-xl font-semibold text-gray-900 mb-4">
-                {`What's`} Next?
+                {"What's"} Next?
               </Text>
               <Text className="mb-4">
                 Here are some things you can do to make the most of your
@@ -77,7 +78,7 @@ export const WelcomeEmail = ({
               </Text>
               <ul className="text-base text-gray-600 ml-5 mb-6 list-disc leading-7">
                 <li>Complete your profile to personalize your experience</li>
-                <li>Explore our features and discover {`what's`} possible</li>
+                <li>Explore our features and discover {"what's"} possible</li>
                 <li>Check out our help center for guides and tutorials</li>
                 <li>Connect with our community and share your feedback</li>
               </ul>
@@ -93,8 +94,8 @@ export const WelcomeEmail = ({
               </Section>
               <hr className="my-6 border-gray-200" />
               <Text className="mb-4">
-                {`We're`} committed to providing you with the best experience
-                possible. If you have any questions or feedback, {`don't`}
+                {"We're"} committed to providing you with the best experience
+                possible. If you have any questions or feedback, {"don't"}
                 hesitate to reach out.
               </Text>
               <Text className="mt-6">Thanks for choosing {brandName}!</Text>

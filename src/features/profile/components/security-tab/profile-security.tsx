@@ -1,11 +1,12 @@
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+
 import { DynamicForm } from "@/components/ui/dynamic-form";
 import { authClient } from "@/lib/auth/auth-client";
 import {
   ChangePasswordInput,
   changePasswordResolver,
 } from "@/lib/validations/auth-validator";
-import { useForm } from "react-hook-form";
-import { toast } from "sonner";
 
 const ProfileSecurity = () => {
   const form = useForm({

@@ -1,15 +1,18 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+
+import { toast } from "sonner";
+
 import { Button } from "@/components/ui/button";
+import { DynamicDialog } from "@/components/ui/dynamic-dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { toast } from "sonner";
 import { authClient } from "@/lib/auth/auth-client";
-import { DynamicDialog } from "@/components/ui/dynamic-dialog";
+
 import DeleteHeader from "./delete-header";
 import DeleteProfileWarning from "./delete-profile-warning";
-import { useRouter } from "next/navigation";
 
 const DeleteProfile = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,7 +21,7 @@ const DeleteProfile = () => {
   const handleDelete = async () => {
     try {
       await authClient.deleteUser();
-      toast.success(`Account deleted successfully.`);
+      toast.success("Account deleted successfully.");
       setIsOpen(false);
       setConfirmText("");
       router.push("/");
@@ -66,7 +69,7 @@ const DeleteProfile = () => {
               id="confirm"
               value={confirmText}
               onChange={(e) => setConfirmText(e.target.value)}
-              placeholder={`Type "delete" here`}
+              placeholder={"Type 'delete' here"}
               className="mt-2"
             />
           </div>

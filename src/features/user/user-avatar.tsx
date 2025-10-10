@@ -1,5 +1,6 @@
-import { User } from "@/types/user";
 import Image from "next/image";
+
+import { User } from "@/types/user";
 
 const UserAvatar = ({ user }: { user: User }) => {
   if (user.image) {

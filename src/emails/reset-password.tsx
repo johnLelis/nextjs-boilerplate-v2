@@ -1,4 +1,5 @@
 import * as React from "react";
+
 import {
   Body,
   Container,
@@ -84,7 +85,7 @@ export const ResetPasswordEmail = ({
               <hr className="my-6 border-gray-200" />
               <Section className="bg-red-50 rounded p-4">
                 <Text className="text-sm text-gray-700">
-                  <strong>{`Didn't`} request this?</strong> If you {`didn't`}{" "}
+                  <strong>{"Didn't"} request this?</strong> If you {"didn't"}{" "}
                   ask to reset your password, you can safely ignore this email.
                   Your password will remain unchanged.
                 </Text>

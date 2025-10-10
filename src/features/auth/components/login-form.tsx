@@ -1,18 +1,20 @@
 "use client";
 
-import { useForm } from "react-hook-form";
-
-import { LoginInput, loginResolver } from "@/lib/validations/auth-validator";
-import { LoadingSwap } from "@/components/ui/loading-swap";
-import { authClient } from "@/lib/auth/auth-client";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
+
+import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+
+import { DynamicForm, FormFieldConfig } from "@/components/ui/dynamic-form";
+import { LoadingSwap } from "@/components/ui/loading-swap";
 import { Separator } from "@/components/ui/separator";
-import SocialAuthButtons from "./social-auth-buttons";
+import { authClient } from "@/lib/auth/auth-client";
+import { LoginInput, loginResolver } from "@/lib/validations/auth-validator";
+
 import AuthHeaderControls from "./auth-header-controls";
 import { AuthRedirectMessage } from "./auth-redirect-message";
-import Link from "next/link";
-import { DynamicForm, FormFieldConfig } from "@/components/ui/dynamic-form";
+import SocialAuthButtons from "./social-auth-buttons";
 
 const loginFields: FormFieldConfig<LoginInput>[] = [
   {
@@ -109,7 +111,7 @@ const LoginForm = () => {
       <Separator />
       <SocialAuthButtons />
       <AuthRedirectMessage
-        message={`Don't have an account?`}
+        message={"Don't have an account?"}
         href="/register"
         linkText="Register!"
       />

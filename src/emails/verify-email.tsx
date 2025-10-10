@@ -1,4 +1,5 @@
 import * as React from "react";
+
 import {
   Body,
   Container,
@@ -70,7 +71,7 @@ export const VerifyEmail = ({
               <Section className="bg-gray-100 rounded p-4 my-6">
                 <Text className="text-sm text-gray-700">
                   <strong>This link will expire in {expirationTime}.</strong>{" "}
-                  After that, {`you'll`} need to request a new verification
+                  After that, {"you'll"} need to request a new verification
                   email.
                 </Text>
               </Section>
@@ -86,13 +87,13 @@ export const VerifyEmail = ({
               <hr className="my-6 border-gray-200" />
               <Section className="bg-red-50 rounded p-4">
                 <Text className="text-sm text-gray-700">
-                  <strong>{`Didn't`} create an account?</strong> If you{" "}
-                  {`didn't`} sign up for {brandName}, you can safely ignore this
+                  <strong>{"Didn't"} create an account?</strong> If you{" "}
+                  {"didn't"} sign up for {brandName}, you can safely ignore this
                   email.
                 </Text>
               </Section>
               <Text className="text-sm text-gray-500 mt-6">
-                {`We're`} excited to have you on board! If you have any
+                {"We're"} excited to have you on board! If you have any
                 questions, feel free to reach out to our support team.
               </Text>
             </Section>

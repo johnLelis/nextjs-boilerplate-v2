@@ -1,7 +1,8 @@
 import Footer from "@/components/layouts/footer";
 import Navbar from "@/components/layouts/navbar";
-import UserGreeting from "@/features/user/user-greeting";
 import Logout from "@/features/auth/components/logout";
+import UserGreeting from "@/features/user/user-greeting";
+
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="flex min-h-screen flex-col">
