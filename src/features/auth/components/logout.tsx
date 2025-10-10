@@ -51,7 +51,7 @@ const Logout = () => {
         type="button"
         onClick={handleOnClick}
         disabled={isDisabled}
-        className="disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none"
+        className="disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50"
         aria-label="Logout"
       >
         <LogOut />

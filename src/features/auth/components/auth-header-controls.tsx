@@ -11,7 +11,7 @@ const AuthHeaderControls = () => {
       <Link href={"/"}>
         <HomeIcon
           size={35}
-          className="shadow-sm border-1 rounded-sm p-2 bg-gray-50 hover:bg-accent dark:bg-accent dark:hover:bg-border"
+          className="hover:bg-accent dark:bg-accent dark:hover:bg-border rounded-sm border-1 bg-gray-50 p-2 shadow-sm"
         />
       </Link>
     </div>

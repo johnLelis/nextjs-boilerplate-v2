@@ -42,7 +42,7 @@ const SocialAuthButtons = () => {
           >
             <LoadingSwap
               isLoading={isLoading}
-              className="flex gap-1 place-items-center"
+              className="flex place-items-center gap-1"
             >
               <Icon />
               {name}

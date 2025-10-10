@@ -27,7 +27,7 @@ const ProfileSecurity = () => {
     form.reset();
   };
   return (
-    <div className="p-6 flex justify-center">
+    <div className="flex justify-center p-6">
       <DynamicForm
         form={form}
         fields={[
@@ -44,7 +44,7 @@ const ProfileSecurity = () => {
         ]}
         onSubmit={onSubmit}
         submitLabel="Change Password"
-        className="w-md flex flex-col space-y-4"
+        className="flex w-md flex-col space-y-4"
         buttonsClassName="w-fit self-end"
       />
     </div>

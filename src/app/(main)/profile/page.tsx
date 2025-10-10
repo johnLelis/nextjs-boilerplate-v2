@@ -22,7 +22,7 @@ const ProfilePage = () => {
 
   return (
     <div className="min-h-screen p-6">
-      <div className="max-w-3xl mx-auto">
+      <div className="mx-auto max-w-3xl">
         <ProfileHeader />
         <div className="bg-card rounded-lg border shadow-sm">
           <TabNavigation activeTab={activeTab} setActiveTab={setActiveTab} />

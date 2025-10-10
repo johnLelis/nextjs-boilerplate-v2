@@ -37,15 +37,15 @@ export const TabNavigation: React.FC<TabNavigationProps> = ({
             key={tab.id}
             type="button"
             onClick={() => setActiveTab(tab.id)}
-            className={`flex items-center gap-2 px-6 py-4 text-sm font-medium border-b-2 whitespace-nowrap transition-colors ${
+            className={`flex items-center gap-2 border-b-2 px-6 py-4 text-sm font-medium whitespace-nowrap transition-colors ${
               activeTab === tab.id
                 ? "border-primary text-primary"
                 : tab.destructive
-                  ? "border-transparent text-destructive hover:text-destructive/80"
-                  : "border-transparent text-muted-foreground hover:text-foreground"
+                  ? "text-destructive hover:text-destructive/80 border-transparent"
+                  : "text-muted-foreground hover:text-foreground border-transparent"
             }`}
           >
-            <Icon className="w-4 h-4" />
+            <Icon className="h-4 w-4" />
             {tab.label}
           </button>
         );

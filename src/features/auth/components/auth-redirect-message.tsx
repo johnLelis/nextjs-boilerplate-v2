@@ -14,7 +14,7 @@ export const AuthRedirectMessage = ({
   href,
 }: AuthRedirectMessageProps) => {
   return (
-    <div className="flex gap-2 font-light text-sm">
+    <div className="flex gap-2 text-sm font-light">
       <p>{message}</p>
       <Link href={href} className="text-blue-400 hover:underline">
         {linkText}

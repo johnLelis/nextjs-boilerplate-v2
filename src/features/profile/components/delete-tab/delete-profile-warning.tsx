@@ -2,15 +2,15 @@ import { AlertTriangle } from "lucide-react";
 
 const DeleteProfileWarning = () => {
   return (
-    <div className="bg-destructive/10 border border-destructive/20 rounded-lg p-4 mb-6">
+    <div className="bg-destructive/10 border-destructive/20 mb-6 rounded-lg border p-4">
       <div className="flex gap-3">
-        <AlertTriangle className="h-5 w-5 text-destructive flex-shrink-0 mt-0.5" />
+        <AlertTriangle className="text-destructive mt-0.5 h-5 w-5 flex-shrink-0" />
         <div>
-          <h3 className="font-semibold text-destructive mb-1">Warning</h3>
-          <p className="text-sm text-muted-foreground">
+          <h3 className="text-destructive mb-1 font-semibold">Warning</h3>
+          <p className="text-muted-foreground text-sm">
             Deleting your account will permanently remove:
           </p>
-          <ul className="text-sm text-muted-foreground mt-2 space-y-1 list-disc list-inside">
+          <ul className="text-muted-foreground mt-2 list-inside list-disc space-y-1 text-sm">
             <li>Your profile and personal information</li>
             <li>All your data and settings</li>
             <li>Access to all associated services</li>

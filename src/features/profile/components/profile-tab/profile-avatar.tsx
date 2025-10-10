@@ -4,7 +4,7 @@ import { UserGreetingProps } from "@/types/user";
 const ProfileAvatar = ({ user }: UserGreetingProps) => {
   return (
     <div className="flex items-center gap-6">
-      <div className="w-24 h-24 rounded-full bg-gradient-to-br from-primary to-primary/50 flex items-center justify-center text-2xl font-bold">
+      <div className="from-primary to-primary/50 flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br text-2xl font-bold">
         {getInitials(user?.name)}
       </div>
       <div>
@@ -19,7 +19,7 @@ const ProfileAvatar = ({ user }: UserGreetingProps) => {
         <Button type="button" variant="secondary" size="sm" className="ml-2">
           Remove
         </Button>
-        <p className="text-xs text-muted-foreground mt-2">
+        <p className="text-muted-foreground mt-2 text-xs">
           JPG, GIF or PNG. Max size of 2MB.
         </p>
       </div>

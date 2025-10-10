@@ -5,11 +5,11 @@ import { Button } from "@/components/ui/button";
 
 const CtaButtons = () => {
   return (
-    <div className="flex flex-col place-items-center sm:flex-row gap-4 w-full sm:w-auto">
+    <div className="flex w-full flex-col place-items-center gap-4 sm:w-auto sm:flex-row">
       <Button
         asChild
         size="lg"
-        className="text-white text-base px-8 py-6 shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700"
+        className="bg-gradient-to-r from-blue-600 to-indigo-600 px-8 py-6 text-base text-white shadow-lg transition-all duration-300 hover:from-blue-700 hover:to-indigo-700 hover:shadow-xl"
       >
         <Link href="/login">Get Started</Link>
       </Button>
@@ -18,7 +18,7 @@ const CtaButtons = () => {
         asChild
         variant="outline"
         size="lg"
-        className="text-base px-8 py-6 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border-2 hover:bg-white dark:hover:bg-slate-800 transition-all duration-300 shadow-md hover:shadow-lg"
+        className="border-2 bg-white/50 px-8 py-6 text-base shadow-md backdrop-blur-sm transition-all duration-300 hover:bg-white hover:shadow-lg dark:bg-slate-800/50 dark:hover:bg-slate-800"
       >
         <Link href="/register">Create Account</Link>
       </Button>
@@ -27,7 +27,7 @@ const CtaButtons = () => {
         asChild
         variant="secondary"
         size="lg"
-        className="text-base px-8 py-6 flex items-center gap-2 shadow-md hover:shadow-lg transition-all duration-300"
+        className="flex items-center gap-2 px-8 py-6 text-base shadow-md transition-all duration-300 hover:shadow-lg"
       >
         <Link
           href="https://github.com/johnLelis/nextjs-boilerplate-v2"

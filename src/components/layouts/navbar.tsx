@@ -11,14 +11,14 @@ type NavbarProps = {
 
 const Navbar = ({ greeting, logout }: NavbarProps) => {
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 w-full border-b backdrop-blur">
       <div className="flex h-16 items-center justify-between px-8">
-        <div className="flex items-center gap-8 justify-between">
+        <div className="flex items-center justify-between gap-8">
           <Link href="/" className="text-xl font-bold">
             NextJs
           </Link>
 
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden items-center gap-8 md:flex">
             <Link href="/dashboard" className="text-sm font-medium">
               Dashboard
             </Link>

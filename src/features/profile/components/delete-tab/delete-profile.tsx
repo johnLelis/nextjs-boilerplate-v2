@@ -62,7 +62,7 @@ const DeleteProfile = () => {
         >
           <div>
             <Label htmlFor="confirm" className="text-sm font-medium">
-              Type <span className="font-bold text-destructive">delete</span> to
+              Type <span className="text-destructive font-bold">delete</span> to
               confirm
             </Label>
             <Input

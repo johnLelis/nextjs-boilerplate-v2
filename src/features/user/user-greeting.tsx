@@ -12,7 +12,7 @@ const UserGreeting = () => {
 
   return (
     <Link href={"/profile"}>
-      <div className="flex gap-1 place-items-center">
+      <div className="flex place-items-center gap-1">
         <UserAvatar user={user} />
         <p className="text-sm">
           <span className="font-semibold text-blue-500">{user.name}</span>

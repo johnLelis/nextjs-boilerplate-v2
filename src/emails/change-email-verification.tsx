@@ -53,7 +53,7 @@ export const ChangeEmailVerification = ({
 
             {/* Body */}
             <Section className="px-10 py-10">
-              <Text className="text-2xl font-bold mb-4">
+              <Text className="mb-4 text-2xl font-bold">
                 Verify Your New Email Address
               </Text>
               <Text className="mb-4">{greeting},</Text>
@@ -62,15 +62,15 @@ export const ChangeEmailVerification = ({
                 <strong>{newEmail}</strong>. To complete this change, please
                 verify your new email address by clicking the button below:
               </Text>
-              <Section className="text-center my-6">
+              <Section className="my-6 text-center">
                 <Link
                   href={verificationUrl}
-                  className="inline-block rounded bg-blue-600 px-6 py-3 text-white font-semibold no-underline"
+                  className="inline-block rounded bg-blue-600 px-6 py-3 font-semibold text-white no-underline"
                 >
                   Verify New Email
                 </Link>
               </Section>
-              <Section className="bg-gray-100 rounded p-4 my-6">
+              <Section className="my-6 rounded bg-gray-100 p-4">
                 <Text className="text-sm text-gray-700">
                   <strong>This link will expire in {expirationTime}.</strong>{" "}
                   After verification, this will become your new login email
@@ -80,11 +80,11 @@ export const ChangeEmailVerification = ({
               <Text className="mb-2">
                 Or copy and paste this link into your browser:
               </Text>
-              <Link href={verificationUrl} className="text-blue-600 break-all">
+              <Link href={verificationUrl} className="break-all text-blue-600">
                 {verificationUrl}
               </Link>
               <hr className="my-6 border-gray-200" />
-              <Section className="bg-red-50 rounded p-4">
+              <Section className="rounded bg-red-50 p-4">
                 <Text className="text-sm text-gray-700">
                   <strong>{"Didn't"} request this change?</strong> If you{" "}
                   {"didn't"} request to change your email address, please ignore
@@ -93,7 +93,7 @@ export const ChangeEmailVerification = ({
                   your account may be compromised.
                 </Text>
               </Section>
-              <Text className="text-sm text-gray-500 mt-6">
+              <Text className="mt-6 text-sm text-gray-500">
                 <strong>Important:</strong> Your current email address will
                 remain active until you verify this new address.
               </Text>

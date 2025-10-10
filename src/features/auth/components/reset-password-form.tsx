@@ -56,9 +56,9 @@ const ResetPasswordForm = () => {
   };
 
   return (
-    <div className="w-sm max-w-md rounded-lg border bg-card p-8 shadow-lg flex flex-col gap-4">
+    <div className="bg-card flex w-sm max-w-md flex-col gap-4 rounded-lg border p-8 shadow-lg">
       <AuthHeaderControls />
-      <h1 className="mb-2 text-center text-2xl font-semibold text-card-foreground">
+      <h1 className="text-card-foreground mb-2 text-center text-2xl font-semibold">
         Reset Password
       </h1>
       <DynamicForm

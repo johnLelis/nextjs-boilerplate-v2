@@ -52,7 +52,7 @@ export const UpdatePasswordOtpEmail = ({
 
             {/* Body */}
             <Section className="px-10 py-10">
-              <Text className="text-2xl font-bold mb-4">
+              <Text className="mb-4 text-2xl font-bold">
                 Verify Your Password Change Request
               </Text>
               <Text className="mb-4">Hi {userName},</Text>
@@ -61,12 +61,12 @@ export const UpdatePasswordOtpEmail = ({
                 action, please use the verification code below.
               </Text>
 
-              <Section className="text-center my-[20px]">
+              <Section className="my-[20px] text-center">
                 <Row align="center">
                   {digits.map((d, i) => (
                     <Column key={`${d}-${i}`} align="center">
-                      <div className="inline-block min-w-[44px] px-[14px] py-[10px] rounded-lg bg-gray-100 border border-gray-200">
-                        <Text className="m-0 p-0 text-[24px] font-bold text-gray-900 leading-[28px]">
+                      <div className="inline-block min-w-[44px] rounded-lg border border-gray-200 bg-gray-100 px-[14px] py-[10px]">
+                        <Text className="m-0 p-0 text-[24px] leading-[28px] font-bold text-gray-900">
                           {d}
                         </Text>
                       </div>
@@ -82,7 +82,7 @@ export const UpdatePasswordOtpEmail = ({
                 immediately.
               </Text>
 
-              <Section className="bg-red-50 rounded p-4 my-6">
+              <Section className="my-6 rounded bg-red-50 p-4">
                 <Text className="text-sm text-gray-700">
                   Do not share this code with anyone. Our team will never ask
                   for your verification code.

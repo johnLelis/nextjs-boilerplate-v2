@@ -50,7 +50,7 @@ export const WelcomeEmail = ({
 
             {/* Body */}
             <Section className="px-10 py-10">
-              <Text className="text-2xl font-bold mb-4">
+              <Text className="mb-4 text-2xl font-bold">
                 Welcome to {brandName}! 🎉
               </Text>
               <Text className="mb-4">Hi {userName},</Text>
@@ -59,30 +59,30 @@ export const WelcomeEmail = ({
                 successfully created and {"you're"} all set to get started.
               </Text>
               {dashboardUrl && (
-                <Section className="text-center my-6">
+                <Section className="my-6 text-center">
                   <Link
                     href={dashboardUrl}
-                    className="inline-block rounded bg-blue-600 px-6 py-3 text-white font-semibold no-underline"
+                    className="inline-block rounded bg-blue-600 px-6 py-3 font-semibold text-white no-underline"
                   >
                     Get Started
                   </Link>
                 </Section>
               )}
               <hr className="my-6 border-gray-200" />
-              <Text className="text-xl font-semibold text-gray-900 mb-4">
+              <Text className="mb-4 text-xl font-semibold text-gray-900">
                 {"What's"} Next?
               </Text>
               <Text className="mb-4">
                 Here are some things you can do to make the most of your
                 account:
               </Text>
-              <ul className="text-base text-gray-600 ml-5 mb-6 list-disc leading-7">
+              <ul className="mb-6 ml-5 list-disc text-base leading-7 text-gray-600">
                 <li>Complete your profile to personalize your experience</li>
                 <li>Explore our features and discover {"what's"} possible</li>
                 <li>Check out our help center for guides and tutorials</li>
                 <li>Connect with our community and share your feedback</li>
               </ul>
-              <Section className="bg-gray-100 rounded p-4 my-6">
+              <Section className="my-6 rounded bg-gray-100 p-4">
                 <Text className="text-sm text-gray-700">
                   <strong>Need help getting started?</strong> Our support team
                   is here to help!{" "}

@@ -51,7 +51,7 @@ export const ResetPasswordEmail = ({
 
             {/* Body */}
             <Section className="px-10 py-10">
-              <Text className="text-2xl font-bold mb-4">
+              <Text className="mb-4 text-2xl font-bold">
                 Reset Your Password
               </Text>
               <Text className="mb-4">{greeting},</Text>
@@ -59,15 +59,15 @@ export const ResetPasswordEmail = ({
                 We received a request to reset the password for your account.
                 Click the button below to create a new password:
               </Text>
-              <Section className="text-center my-6">
+              <Section className="my-6 text-center">
                 <Link
                   href={resetUrl.toString()}
-                  className="inline-block rounded bg-blue-600 px-6 py-3 text-white font-semibold no-underline"
+                  className="inline-block rounded bg-blue-600 px-6 py-3 font-semibold text-white no-underline"
                 >
                   Reset Password
                 </Link>
               </Section>
-              <Section className="bg-gray-100 rounded p-4 my-6">
+              <Section className="my-6 rounded bg-gray-100 p-4">
                 <Text className="text-sm text-gray-700">
                   <strong>This link will expire in {expirationTime}.</strong> If
                   you need more time, you can request a new password reset.
@@ -78,22 +78,22 @@ export const ResetPasswordEmail = ({
               </Text>
               <Link
                 href={resetUrl.toString()}
-                className="text-blue-600 break-all"
+                className="break-all text-blue-600"
               >
                 {resetUrl.toString()}
               </Link>
               <hr className="my-6 border-gray-200" />
-              <Section className="bg-red-50 rounded p-4">
+              <Section className="rounded bg-red-50 p-4">
                 <Text className="text-sm text-gray-700">
                   <strong>{"Didn't"} request this?</strong> If you {"didn't"}{" "}
                   ask to reset your password, you can safely ignore this email.
                   Your password will remain unchanged.
                 </Text>
               </Section>
-              <Text className="text-sm text-gray-500 mt-6">
+              <Text className="mt-6 text-sm text-gray-500">
                 For security reasons, we recommend that you:
               </Text>
-              <ul className="text-sm text-gray-500 ml-5 mb-4 list-disc">
+              <ul className="mb-4 ml-5 list-disc text-sm text-gray-500">
                 <li>Use a strong, unique password</li>
                 <li>Enable two-factor authentication if available</li>
                 <li>Never share your password with anyone</li>
