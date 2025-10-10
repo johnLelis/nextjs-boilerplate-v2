@@ -4,14 +4,15 @@ import { createAuthMiddleware } from "better-auth/api";
 import { emailOTPClient } from "better-auth/client/plugins";
 import { nextCookies } from "better-auth/next-js";
 
+import { env } from "@/config/env";
+import { db } from "@/drizzle/db";
+
 import {
   sendChangeEmailVerification,
   sendResetEmailPassword,
   sendVerifyEmail,
   sendWelcomeEmail,
-} from "@/actions/email";
-import { env } from "@/config/env";
-import { db } from "@/drizzle/db";
+} from "./emails";
 
 export const auth = betterAuth({
   user: {
