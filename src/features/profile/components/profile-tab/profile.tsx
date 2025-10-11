@@ -43,13 +43,13 @@ const Profile = () => {
       name: "name",
       label: "Full Name",
       type: "text",
-      placeholder: "John Doe",
+      placeholder: "",
     },
     {
       name: "email",
       label: "Email",
       type: "email",
-      placeholder: "you@example.com",
+      placeholder: "",
       description: "We'll send a verification email to your new email address.",
     },
   ];

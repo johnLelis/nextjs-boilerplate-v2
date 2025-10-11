@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
-// 🔑 Schemas
+// Schemas
 const loginSchema = z.object({
   email: z.email("Please enter a valid email."),
   password: z.string().min(8, "Password must be at least 8 characters"),
@@ -54,20 +54,20 @@ const updateProfileSchema = z.object({
 const changePasswordSchema = z
   .object({
     currentPassword: z.string().min(8),
-    newPassword: z
-      .string()
-      .min(8)
-      .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
-      .regex(/[a-z]/, "Password must contain at least one lowercase letter")
-      .regex(/[0-9]/, "Password must contain at least one number"),
+    newPassword: z.string().min(8),
+    //Uncomment for production use
+    // .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
+    // .regex(/[a-z]/, "Password must contain at least one lowercase letter")
+    // .regex(/[0-9]/, "Password must contain at least one number"),
     confirmPassword: z.string(),
+    revokeOtherSessions: z.boolean().optional(),
   })
   .refine((data) => data.newPassword === data.confirmPassword, {
     message: "Passwords don't match",
     path: ["confirmPassword"],
   });
 
-// 🔑 Types
+// Types
 type LoginInput = z.infer<typeof loginSchema>;
 type RegisterInput = z.infer<typeof registerSchema>;
 type ForgotPasswordInput = z.infer<typeof forgotPasswordSchema>;
@@ -75,7 +75,7 @@ type ResetPasswordInput = z.infer<typeof resetPasswordSchema>;
 type UpdateProfileInput = z.infer<typeof updateProfileSchema>;
 type ChangePasswordInput = z.infer<typeof changePasswordSchema>;
 
-// 🔑 Resolvers (ready to plug into useForm)
+// Resolvers (ready to plug into useForm)
 const loginResolver = zodResolver(loginSchema);
 const registerResolver = zodResolver(registerSchema);
 const forgotPasswordResolver = zodResolver(forgotPasswordSchema);
@@ -84,16 +84,16 @@ const updateProfileResolver = zodResolver(updateProfileSchema);
 const changePasswordResolver = zodResolver(changePasswordSchema);
 
 export {
-  type LoginInput,
-  type RegisterInput,
-  type ForgotPasswordInput,
-  type ResetPasswordInput,
-  type UpdateProfileInput,
-  type ChangePasswordInput,
+  changePasswordResolver,
+  forgotPasswordResolver,
   loginResolver,
   registerResolver,
-  forgotPasswordResolver,
   resetPasswordResolver,
   updateProfileResolver,
-  changePasswordResolver,
+  type ChangePasswordInput,
+  type ForgotPasswordInput,
+  type LoginInput,
+  type RegisterInput,
+  type ResetPasswordInput,
+  type UpdateProfileInput,
 };

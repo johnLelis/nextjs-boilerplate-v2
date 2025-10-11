@@ -5,6 +5,7 @@ import { ComponentProps, ReactNode } from "react";
 import { FieldValues, Path, UseFormReturn } from "react-hook-form";
 
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Form,
   FormControl,
@@ -20,12 +21,16 @@ import { Textarea } from "@/components/ui/textarea";
 export type FormFieldConfig<T extends FieldValues> = {
   name: Path<T>;
   label: string;
-  type?: "text" | "email" | "password" | "number" | "textarea";
+  type?: "text" | "email" | "password" | "number" | "textarea" | "checkbox";
   placeholder?: string;
   description?: string;
   rows?: number;
   inputProps?: Omit<ComponentProps<typeof Input>, "type" | "placeholder">;
   textareaProps?: Omit<ComponentProps<typeof Textarea>, "placeholder" | "rows">;
+  checkboxProps?: Omit<
+    ComponentProps<typeof Checkbox>,
+    "checked" | "onCheckedChange"
+  >;
 };
 
 export type FormButton = {
@@ -94,26 +99,52 @@ export const DynamicForm = <T extends FieldValues>({
             name={fieldConfig.name}
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{fieldConfig.label}</FormLabel>
-                <FormControl>
-                  {fieldConfig.type === "textarea" ? (
-                    <Textarea
-                      placeholder={fieldConfig.placeholder}
-                      rows={fieldConfig.rows || 4}
-                      {...field}
-                      {...fieldConfig.textareaProps}
-                    />
-                  ) : (
-                    <Input
-                      type={fieldConfig.type || "text"}
-                      placeholder={fieldConfig.placeholder}
-                      {...field}
-                      {...fieldConfig.inputProps}
-                    />
-                  )}
-                </FormControl>
-                {fieldConfig.description && (
-                  <FormDescription>{fieldConfig.description}</FormDescription>
+                {fieldConfig.type === "checkbox" ? (
+                  <div className="flex items-center space-x-2">
+                    <FormControl>
+                      <Checkbox
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                        {...fieldConfig.checkboxProps}
+                      />
+                    </FormControl>
+                    <div className="space-y-1 leading-none">
+                      <FormLabel className="cursor-pointer">
+                        {fieldConfig.label}
+                      </FormLabel>
+                      {fieldConfig.description && (
+                        <FormDescription>
+                          {fieldConfig.description}
+                        </FormDescription>
+                      )}
+                    </div>
+                  </div>
+                ) : (
+                  <>
+                    <FormLabel>{fieldConfig.label}</FormLabel>
+                    <FormControl>
+                      {fieldConfig.type === "textarea" ? (
+                        <Textarea
+                          placeholder={fieldConfig.placeholder}
+                          rows={fieldConfig.rows || 4}
+                          {...field}
+                          {...fieldConfig.textareaProps}
+                        />
+                      ) : (
+                        <Input
+                          type={fieldConfig.type || "text"}
+                          placeholder={fieldConfig.placeholder}
+                          {...field}
+                          {...fieldConfig.inputProps}
+                        />
+                      )}
+                    </FormControl>
+                    {fieldConfig.description && (
+                      <FormDescription>
+                        {fieldConfig.description}
+                      </FormDescription>
+                    )}
+                  </>
                 )}
                 <FormMessage />
               </FormItem>
