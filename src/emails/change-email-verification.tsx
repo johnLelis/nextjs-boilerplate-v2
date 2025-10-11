@@ -1,5 +1,3 @@
-import * as React from "react";
-
 import {
   Body,
   Container,
@@ -12,14 +10,7 @@ import {
   Text,
 } from "@react-email/components";
 
-export type ChangeEmailVerificationProps = {
-  userName?: string;
-  newEmail: string;
-  verificationUrl: string;
-  expirationTime?: string;
-  brandName?: string;
-  brandColor?: string;
-};
+import { ChangeEmailVerificationProps } from "@/types/email";
 
 export const ChangeEmailVerification = ({
   userName,

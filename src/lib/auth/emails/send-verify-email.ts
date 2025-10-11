@@ -1,12 +1,7 @@
 import VerifyEmail from "@/emails/verify-email";
 import { renderAndSendEmail } from "@/lib/utils/render-and-send-email";
+import { VerifyEmailProps } from "@/types/email";
 
-type VerifyEmailProps = {
-  userName: string;
-  verificationUrl: URL | string;
-  expirationTime: string;
-  userEmail: string;
-};
 export const sendVerifyEmail = async ({
   userName,
   verificationUrl,

@@ -1,15 +1,7 @@
-import ChangeEmailVerification, {
-  ChangeEmailVerificationProps,
-} from "@/emails/change-email-verification";
+import ChangeEmailVerification from "@/emails/change-email-verification";
 import { renderAndSendEmail } from "@/lib/utils/render-and-send-email";
-import { User } from "@/types/user";
+import { ChangeEmailVerificationRequest } from "@/types/email";
 
-type ChangeEmailVerificationRequest = Omit<
-  ChangeEmailVerificationProps,
-  "userName"
-> & {
-  user: User;
-};
 export const sendChangeEmailVerification = async ({
   user,
   newEmail,

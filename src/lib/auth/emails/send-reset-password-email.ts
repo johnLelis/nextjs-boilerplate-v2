@@ -1,12 +1,7 @@
 import ResetPasswordEmail from "@/emails/reset-password";
 import { renderAndSendEmail } from "@/lib/utils/render-and-send-email";
-import { User } from "@/types/user";
+import { ResetEmailProps } from "@/types/email";
 
-type ResetEmailProps = {
-  user: User;
-  resetUrl: URL;
-  expirationTime: string;
-};
 export const sendResetEmailPassword = async ({
   user,
   resetUrl,
