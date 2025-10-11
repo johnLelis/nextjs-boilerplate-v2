@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-import { User } from "better-auth";
+import { User } from "better-auth/types";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
