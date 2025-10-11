@@ -2,7 +2,6 @@ import { FlatCompat } from "@eslint/eslintrc";
 import prettier from "eslint-config-prettier";
 import boundaries from "eslint-plugin-boundaries";
 import checkFile from "eslint-plugin-check-file";
-import reactHooks from "eslint-plugin-react-hooks";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 
@@ -15,14 +14,6 @@ const compat = new FlatCompat({
 
 const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
-  {
-    plugins: {
-      "react-hooks": reactHooks,
-    },
-    rules: {
-      ...reactHooks.configs.recommended.rules,
-    },
-  },
   {
     ignores: [
       "node_modules/**",
