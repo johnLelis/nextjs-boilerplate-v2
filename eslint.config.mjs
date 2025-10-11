@@ -15,7 +15,14 @@ const compat = new FlatCompat({
 
 const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
-  reactHooks.configs.flat["recommended-latest"],
+  {
+    plugins: {
+      "react-hooks": reactHooks,
+    },
+    rules: {
+      ...reactHooks.configs.recommended.rules,
+    },
+  },
   {
     ignores: [
       "node_modules/**",
