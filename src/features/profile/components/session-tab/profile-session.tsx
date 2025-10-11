@@ -16,15 +16,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { useUser } from "@/hooks/use-user";
 import { authClient } from "@/lib/auth/auth-client";
 
 const ProfileSessionManager = () => {
-  const { session } = useUser();
+  const { data } = authClient.useSession();
   const [sessions, setSessions] = useState<Session[]>([]);
   const [loading, setLoading] = useState(true);
   const [deletingToken, setDeletingToken] = useState<string | null>(null);
-
+  const session: Session | null = data && data.session;
   useEffect(() => {
     loadSessions();
   }, []);
@@ -118,7 +117,7 @@ const ProfileSessionManager = () => {
     return { browser, os };
   };
 
-  const currentSession = session?.session;
+  const currentSession = session;
   const otherSessions = sessions.filter((s) => s.id !== currentSession?.id);
 
   if (loading) {

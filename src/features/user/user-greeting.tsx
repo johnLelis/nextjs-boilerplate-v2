@@ -2,12 +2,15 @@
 
 import Link from "next/link";
 
-import { useUser } from "@/hooks/use-user";
+import { User } from "better-auth/types";
+
+import { authClient } from "@/lib/auth/auth-client";
 
 import UserAvatar from "./user-avatar";
 
 const UserGreeting = () => {
-  const { user } = useUser();
+  const { data } = authClient.useSession();
+  const user: User | null = data && data.user;
   if (!user) return null;
 
   return (

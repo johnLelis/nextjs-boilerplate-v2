@@ -2,12 +2,12 @@
 
 import { useEffect } from "react";
 
+import { User } from "better-auth";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 import { DynamicForm, FormFieldConfig } from "@/components/ui/dynamic-form";
 import { LoadingSwap } from "@/components/ui/loading-swap";
-import { useUser } from "@/hooks/use-user";
 import { authClient } from "@/lib/auth/auth-client";
 import {
   UpdateProfileInput,
@@ -17,7 +17,7 @@ import {
 import ProfileAvatar from "./profile-avatar";
 
 const Profile = () => {
-  const { user } = useUser();
+  const { data } = authClient.useSession();
 
   const form = useForm<UpdateProfileInput>({
     resolver: updateProfileResolver,
@@ -28,6 +28,7 @@ const Profile = () => {
   });
 
   const { isDirty, isSubmitting } = form.formState;
+  const user: User | null = data && data.user;
 
   useEffect(() => {
     if (user) {
