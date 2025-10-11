@@ -31,8 +31,6 @@ export const sendEmail = async (
   message: EmailMessage,
   config?: EmailConfig
 ): Promise<EmailResponse> => {
-  console.log("EmailService: Sending email...");
-
   const emailConfig = config || getEmailConfigFromEnv();
 
   switch (emailConfig.provider) {

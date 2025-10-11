@@ -2,6 +2,7 @@ import { FlatCompat } from "@eslint/eslintrc";
 import prettier from "eslint-config-prettier";
 import boundaries from "eslint-plugin-boundaries";
 import checkFile from "eslint-plugin-check-file";
+import reactHooks from "eslint-plugin-react-hooks";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 
@@ -14,7 +15,7 @@ const compat = new FlatCompat({
 
 const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
-
+  reactHooks.configs.flat["recommended-latest"],
   {
     ignores: [
       "node_modules/**",
@@ -24,12 +25,10 @@ const eslintConfig = [
       "next-env.d.ts",
     ],
   },
-
   // Boundaries plugin config
   {
     plugins: {
       boundaries,
-      prettier,
     },
     settings: {
       "boundaries/include": ["src/**/*"],
@@ -74,7 +73,23 @@ const eslintConfig = [
       "prefer-arrow-callback": ["error"],
       "prefer-template": ["error"],
       "boundaries/no-unknown": ["error"],
+      "no-unused-vars": [
+        "error",
+        {
+          args: "all",
+          argsIgnorePattern: "^_",
+          caughtErrors: "all",
+          caughtErrorsIgnorePattern: "^_",
+          destructuredArrayIgnorePattern: "^_",
+          varsIgnorePattern: "^_",
+          ignoreRestSiblings: true,
+        },
+      ],
       quotes: ["error", "double"],
+      "no-console": ["warn", { allow: ["warn", "error"] }],
+      "no-debugger": "error",
+      "no-var": "error",
+      "prefer-const": "error",
       "boundaries/no-unknown-files": ["error"],
       "boundaries/element-types": [
         "error",
@@ -142,6 +157,7 @@ const eslintConfig = [
       ],
     },
   },
+  prettier,
 ];
 
 export default eslintConfig;

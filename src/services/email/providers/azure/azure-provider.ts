@@ -6,8 +6,6 @@ export const sendEmailViaAzure = async (
   config: AzureEmailConfig
 ): Promise<EmailResponse> => {
   try {
-    console.log("Sending email via MS Graph...");
-
     const accessToken = await getAccessToken(
       {
         tenantId: config.tenantId,
@@ -65,8 +63,6 @@ export const sendEmailViaAzure = async (
       const error = await response.json();
       throw new Error(error.error?.message || "Failed to send email");
     }
-
-    console.log("Email sent successfully via MS Graph");
 
     return {
       success: true,

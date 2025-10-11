@@ -1,13 +1,13 @@
 "use client";
 
-import React from "react";
+import type { Dispatch, ElementType, FC, SetStateAction } from "react";
 
 import { Link2, Monitor, Shield, Trash2, User } from "lucide-react";
 
 type Tab = {
   readonly id: string;
   readonly label: string;
-  readonly icon: React.ElementType;
+  readonly icon: ElementType;
   readonly destructive?: boolean;
 };
 
@@ -21,10 +21,10 @@ const tabs: Readonly<Tab[]> = [
 
 interface TabNavigationProps {
   activeTab: Tab["id"];
-  setActiveTab: (id: Tab["id"]) => void;
+  setActiveTab: Dispatch<SetStateAction<Tab["id"]>>;
 }
 
-export const TabNavigation: React.FC<TabNavigationProps> = ({
+export const TabNavigation: FC<TabNavigationProps> = ({
   activeTab,
   setActiveTab,
 }) => (

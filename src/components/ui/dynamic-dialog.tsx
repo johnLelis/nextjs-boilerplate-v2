@@ -35,7 +35,7 @@ type DynamicDialogProps = {
   children: ReactNode;
   buttons?: DialogButton[];
   open?: boolean;
-  onOpenChange?: (open: boolean) => void;
+  onOpenChange?: (_open: boolean) => void;
   showCloseButton?: boolean;
 };
 

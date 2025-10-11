@@ -52,7 +52,7 @@ export type FormButton = {
 type DynamicFormProps<T extends FieldValues> = {
   form: UseFormReturn<T>;
   fields: FormFieldConfig<T>[];
-  onSubmit: (data: T) => Promise<void> | void;
+  onSubmit: (_data: T) => void | Promise<void>;
   submitLabel?: string;
   className?: string;
   footer?: ReactNode;
