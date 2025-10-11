@@ -44,7 +44,7 @@ const ProfileSecurity = () => {
         fields={[
           {
             name: "currentPassword",
-            label: "Confirm New Password",
+            label: "Current Password",
             type: "password",
           },
           {
