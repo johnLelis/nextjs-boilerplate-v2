@@ -19,10 +19,10 @@ const Navbar = ({ greeting, logout }: NavbarProps) => {
           </Link>
 
           <nav className="hidden items-center gap-8 md:flex">
-            <Link href="/dashboard" className="text-sm font-medium">
+            <Link href="/dashboard" className="link-hover text-sm font-medium">
               Dashboard
             </Link>
-            <Link href="/about" className="text-sm font-medium">
+            <Link href="/about" className="link-hover text-sm font-medium">
               About
             </Link>
           </nav>

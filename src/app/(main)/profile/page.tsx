@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 import DeleteProfile from "@/features/profile/components/delete-tab/delete-profile";
-import ProfileAccounts from "@/features/profile/components/linked-accounts-tab/profile-accounts";
+import ProfileAccounts from "@/features/profile/components/linked-accounts-tab/profile-linked-accounts";
 import Profile from "@/features/profile/components/profile-tab/profile";
 import ProfileHeader from "@/features/profile/components/profile-tab/profile-header";
 import ProfileSecurity from "@/features/profile/components/security-tab/profile-security";
