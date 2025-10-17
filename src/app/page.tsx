@@ -6,7 +6,7 @@ import Hero from "@/features/home/components/hero";
 
 const HomePage = () => {
   return (
-    <div className="relative flex min-h-screen flex-col bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-800">
+    <>
       <div className="mx-auto mt-10 w-full max-w-6xl">
         <ModeToggle />
       </div>
@@ -20,7 +20,7 @@ const HomePage = () => {
       <footer className="mx-auto w-full max-w-6xl">
         <Footer />
       </footer>
-    </div>
+    </>
   );
 };
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 import { User } from "better-auth/types";
 import { useForm } from "react-hook-form";
@@ -16,6 +16,12 @@ import {
 
 import ProfileAvatar from "./profile-avatar";
 
+type MessageTypeProps = "nameAndEmailChanges" | "nameOnly" | "default";
+type MessageTypeMap = Readonly<Record<MessageTypeProps, string>>;
+type ChangesProps = {
+  name?: boolean;
+  email?: boolean;
+};
 const Profile = () => {
   const { data } = authClient.useSession();
 
@@ -29,7 +35,6 @@ const Profile = () => {
 
   const { isDirty, isSubmitting } = form.formState;
   const user: User | null = data && data.user;
-
   useEffect(() => {
     if (user) {
       form.reset({
@@ -38,6 +43,12 @@ const Profile = () => {
       });
     }
   }, [user, form]);
+  const formRef = useRef<HTMLFormElement>(null);
+  useEffect(() => {
+    if (formRef && formRef.current) {
+      formRef.current.focus();
+    }
+  }, []);
 
   const profileFields: FormFieldConfig<UpdateProfileInput>[] = [
     {
@@ -61,7 +72,7 @@ const Profile = () => {
       const changes = {
         name: data.name && data.name !== user?.name,
         email: data.email && data.email !== user?.email,
-      };
+      } as ChangesProps;
 
       if (changes.name) {
         updates.push(authClient.updateUser({ name: data.name! }));
@@ -77,12 +88,16 @@ const Profile = () => {
       }
 
       await Promise.all(updates);
-      const message =
-        changes.name && changes.email
-          ? "Profile name updated and a verification link has been sent to your new email."
-          : changes.name
-            ? "Profile name updated successfully."
-            : "We've sent a verification link to your new email. Please check your inbox to confirm the change.";
+      const messageMap = {
+        nameAndEmailChanges:
+          "Profile name updated and a verification link has been sent to your new email.",
+        nameOnly: "Profile name updated successfully.",
+        default:
+          "We've sent a verification link to your new email. Please check your inbox to confirm the change.",
+      } satisfies MessageTypeMap;
+
+      const messageType = getMessageType(changes);
+      const message = messageMap[messageType];
       const nameToRender = data.name ? data.name : user?.name || "";
       form.reset({
         name: nameToRender,
@@ -108,6 +123,7 @@ const Profile = () => {
       <div className="space-y-6">
         <ProfileAvatar user={user} />
         <DynamicForm
+          formRef={formRef}
           form={form}
           fields={profileFields}
           onSubmit={onSubmit}
@@ -147,6 +163,12 @@ const Profile = () => {
       </div>
     </div>
   );
+};
+
+const getMessageType = (changes: ChangesProps): MessageTypeProps => {
+  if (changes.name && changes.email) return "nameAndEmailChanges";
+  if (changes.name) return "nameOnly";
+  return "default";
 };
 
 export default Profile;

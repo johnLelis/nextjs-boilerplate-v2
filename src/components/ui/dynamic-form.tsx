@@ -1,6 +1,6 @@
 "use client";
 
-import { ComponentProps, ReactNode } from "react";
+import { ComponentProps, ReactNode, RefObject } from "react";
 
 import { FieldValues, Path, UseFormReturn } from "react-hook-form";
 
@@ -59,6 +59,7 @@ type DynamicFormProps<T extends FieldValues> = {
   loadingComponent?: ReactNode;
   buttons?: FormButton[];
   buttonsClassName?: string;
+  formRef?: RefObject<HTMLFormElement | null>;
 };
 
 export const DynamicForm = <T extends FieldValues>({
@@ -71,6 +72,7 @@ export const DynamicForm = <T extends FieldValues>({
   loadingComponent,
   buttons,
   buttonsClassName,
+  formRef,
 }: DynamicFormProps<T>) => {
   const { isSubmitting } = form.formState;
 
@@ -91,7 +93,11 @@ export const DynamicForm = <T extends FieldValues>({
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className={className}>
+      <form
+        ref={formRef}
+        onSubmit={form.handleSubmit(onSubmit)}
+        className={className}
+      >
         {fields.map((fieldConfig) => (
           <FormField
             key={fieldConfig.name}

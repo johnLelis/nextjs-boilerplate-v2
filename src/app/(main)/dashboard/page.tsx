@@ -1,5 +1,5 @@
 const Dashboard = () => {
-  return <div>Dashboard</div>;
+  return <div className="text-fluid-3xl flex-center font-bold">Dashboard</div>;
 };
 
 export default Dashboard;
