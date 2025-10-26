@@ -28,7 +28,13 @@ const eslintConfig = [
     plugins: {
       boundaries,
     },
+
     settings: {
+      "boundaries/ignore": [
+        "**/*.test.{js,jsx,ts,tsx}",
+        "**/*.spec.{js,jsx,ts,tsx}",
+        "**/__tests__/**",
+      ],
       "boundaries/include": ["src/**/*"],
       "boundaries/elements": [
         {
@@ -83,6 +89,7 @@ const eslintConfig = [
           ignoreRestSiblings: true,
         },
       ],
+
       quotes: ["error", "double"],
       "no-console": ["warn", { allow: ["warn", "error"] }],
       "no-debugger": "error",
