@@ -38,6 +38,11 @@ export const auth = betterAuth({
       enabled: true,
     },
   },
+  account: {
+    accountLinking: {
+      enabled: true,
+    },
+  },
   emailAndPassword: {
     resetPasswordTokenExpiresIn: 300,
     enabled: true,
