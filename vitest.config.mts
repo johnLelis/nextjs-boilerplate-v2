@@ -11,6 +11,14 @@ export default defineConfig({
     css: true, // allow CSS imports in tests
     coverage: {
       reporter: ["text", "json", "html"],
+      include: ["src/**/*.{ts,tsx}"],
+      exclude: [
+        "src/**/*.d.ts",
+        "src/**/__tests__/**",
+        "src/**/*.test.{ts,tsx}",
+        "src/**/*.spec.{ts,tsx}",
+        "src/**/mocks/**",
+      ],
     },
   },
 });
