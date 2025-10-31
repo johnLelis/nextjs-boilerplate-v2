@@ -1,5 +1,3 @@
-import * as React from "react";
-
 import {
   Body,
   Column,
@@ -14,29 +12,37 @@ import {
   Text,
 } from "@react-email/components";
 
-type UpdatePasswordOtpTemplateProps = {
+type OtpEmailTemplateProps = {
   userName?: string;
   otpCode: string;
+  purpose?: string; // e.g. "password reset", "login verification", "email confirmation"
   supportEmail?: string;
   brandName?: string;
   brandColor?: string;
+  expireMinutes?: number;
 };
 
-export const UpdatePasswordOtpEmail = ({
+export const OtpEmailTemplate = ({
   userName = "User",
   otpCode,
+  purpose = "account verification",
   supportEmail = "support@example.com",
   brandName = "pen • dev",
   brandColor = "#0070f3",
-}: UpdatePasswordOtpTemplateProps) => {
-  const previewText = `Use this code to confirm your password change: ${otpCode}`;
+  expireMinutes = 10,
+}: OtpEmailTemplateProps) => {
+  const formattedPurpose =
+    purpose.charAt(0).toUpperCase() + purpose.slice(1).toLowerCase();
+  const previewText = `Use this code to complete your ${purpose}: ${otpCode}`;
   const digits = otpCode.split("");
+
   return (
     <Html>
       <Head />
       <Tailwind>
         <Body className="bg-gray-50 font-sans">
           <Preview>{previewText}</Preview>
+
           <Container className="mx-auto my-10 max-w-[600px] rounded-lg bg-white shadow-sm">
             {/* Header */}
             <Section
@@ -53,44 +59,47 @@ export const UpdatePasswordOtpEmail = ({
             {/* Body */}
             <Section className="px-10 py-10">
               <Text className="mb-4 text-2xl font-bold">
-                Verify Your Password Change Request
+                {formattedPurpose} Code
               </Text>
               <Text className="mb-4">Hi {userName},</Text>
               <Text className="mb-4">
-                We received a request to change your password. To confirm this
-                action, please use the verification code below.
+                Here’s your one-time code to complete your{" "}
+                <strong>{purpose}</strong> process. Enter it in the app or
+                website to continue.
               </Text>
 
-              <Section className="my-[20px] text-center">
-                <Row align="center">
+              <Section className="my-8 text-center">
+                <Row align="center" className="justify-center">
                   {digits.map((d, i) => (
-                    <Column key={`${d}-${i}`} align="center">
-                      <div className="inline-block min-w-[44px] rounded-lg border border-gray-200 bg-gray-100 px-[14px] py-[10px]">
-                        <Text className="m-0 p-0 text-[24px] leading-[28px] font-bold text-gray-900">
-                          {d}
-                        </Text>
+                    <Column key={i} align="center">
+                      <div
+                        className="mx-[6px] inline-flex h-[56px] w-[48px] items-center justify-center rounded-lg border border-gray-200 bg-gray-50 text-[28px] font-semibold text-gray-900 shadow-[0_2px_4px_rgba(0,0,0,0.06)]"
+                        style={{
+                          borderImage: `linear-gradient(45deg, ${brandColor}, ${brandColor}99) 1`,
+                        }}
+                      >
+                        {d}
                       </div>
                     </Column>
                   ))}
                 </Row>
               </Section>
 
-              <Text className="mb-4">
-                For your security, this code will expire in{" "}
-                <strong>10 minutes</strong>. If you did not request this change,
-                please ignore this email or contact our support team
-                immediately.
+              <Text className="mb-4 text-gray-700">
+                This code will expire in{" "}
+                <strong>{expireMinutes} minutes</strong>. If you didn’t request
+                this, you can safely ignore this email.
               </Text>
 
-              <Section className="my-6 rounded bg-red-50 p-4">
+              <Section className="my-6 rounded-md border border-yellow-200 bg-yellow-50 p-4">
                 <Text className="text-sm text-gray-700">
-                  Do not share this code with anyone. Our team will never ask
-                  for your verification code.
+                  ⚠️ For your security, never share this code with anyone —
+                  including our support team.
                 </Text>
               </Section>
 
-              <Text className="mb-4">
-                If you continue to experience issues, you can reach us at{" "}
+              <Text className="mt-6 text-gray-700">
+                Need help? Contact us at{" "}
                 <Link
                   href={`mailto:${supportEmail}`}
                   className="text-blue-600 underline"
@@ -115,12 +124,13 @@ export const UpdatePasswordOtpEmail = ({
 };
 
 // Preview props for local dev
-UpdatePasswordOtpEmail.PreviewProps = {
+OtpEmailTemplate.PreviewProps = {
   userName: "John Doe",
-  otpCode: "123456",
-  supportEmail: "support@example.com",
+  otpCode: "482193",
+  purpose: "email verification",
+  supportEmail: "support@pendev.com",
   brandName: "pen • dev",
   brandColor: "#0070f3",
-} as UpdatePasswordOtpTemplateProps;
+} as OtpEmailTemplateProps;
 
-export default UpdatePasswordOtpEmail;
+export default OtpEmailTemplate;
