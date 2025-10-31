@@ -42,16 +42,16 @@ const ResetPasswordForm = () => {
   const { isSubmitting } = form.formState;
 
   const handleOnSubmit = async (data: ResetPasswordInput) => {
-    const token = new URLSearchParams(window.location.search).get("token");
-    if (!token) {
-      toast.error("Invalid token. Please try again!");
-    } else {
+    const token = new URLSearchParams(globalThis.location.search).get("token");
+    if (token) {
       await authClient.resetPassword({
         newPassword: data.password,
         token,
       });
       toast.success("Your password has been reset successfully!");
       router.push("/login");
+    } else {
+      toast.error("Invalid token. Please try again!");
     }
   };
 

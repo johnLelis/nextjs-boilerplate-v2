@@ -5,5 +5,5 @@ export type User = {
 };
 
 export type UserGreetingProps = {
-  user: User | null;
+  user: User | undefined;
 };

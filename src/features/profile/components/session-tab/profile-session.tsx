@@ -16,7 +16,7 @@ const ProfileSessionManager = () => {
   const [sessions, setSessions] = useState<Session[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const session: Session | null = data && data.session;
+  const session: Session | null | undefined = data?.session;
   useEffect(() => {
     loadSessions();
   }, []);

@@ -62,7 +62,7 @@ const ProfileLinkedAccounts = ({
   const handleOnUnlink = async ({ accountId, providerId }: Unlink) => {
     setIsDisabled(true);
     if (linkedAccounts.length === 0) {
-      return Promise.resolve({ error: { message: "Account not found" } });
+      return { error: { message: "Account not found" } };
     }
 
     const toastId = toast.warning(
@@ -70,8 +70,8 @@ const ProfileLinkedAccounts = ({
       {
         action: {
           label: "Unlink ",
-          onClick: async () => {
-            await authClient.unlinkAccount(
+          onClick: () => {
+            authClient.unlinkAccount(
               {
                 accountId,
                 providerId,
@@ -158,7 +158,7 @@ const ProfileLinkedAccounts = ({
                       {linkedAccount.scopes.length > 0 && (
                         <span className="ml-2">
                           • {linkedAccount.scopes.length} scope
-                          {linkedAccount.scopes.length !== 1 ? "s" : ""}
+                          {linkedAccount.scopes.length === 1 ? "" : "s"}
                         </span>
                       )}
                     </span>

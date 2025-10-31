@@ -34,7 +34,7 @@ const Profile = () => {
   });
 
   const { isDirty, isSubmitting } = form.formState;
-  const user: User | null = data && data.user;
+  const user: User | undefined = data?.user;
   useEffect(() => {
     if (user) {
       form.reset({
@@ -45,7 +45,7 @@ const Profile = () => {
   }, [user, form]);
   const formRef = useRef<HTMLFormElement>(null);
   useEffect(() => {
-    if (formRef && formRef.current) {
+    if (formRef?.current) {
       formRef.current.focus();
     }
   }, []);

@@ -27,29 +27,38 @@ interface TabNavigationProps {
 export const TabNavigation: FC<TabNavigationProps> = ({
   activeTab,
   setActiveTab,
-}) => (
-  <div className="border-b">
-    <div className="flex overflow-x-auto">
-      {tabs.map((tab) => {
-        const Icon = tab.icon;
-        return (
-          <button
-            key={tab.id}
-            type="button"
-            onClick={() => setActiveTab(tab.id)}
-            className={`flex items-center gap-2 border-b-2 px-6 py-4 text-sm font-medium whitespace-nowrap transition-colors ${
-              activeTab === tab.id
-                ? "border-primary text-primary"
-                : tab.destructive
-                  ? "text-destructive hover:text-destructive/80 border-transparent"
-                  : "text-muted-foreground hover:text-foreground border-transparent"
-            }`}
-          >
-            <Icon className="h-4 w-4" />
-            {tab.label}
-          </button>
-        );
-      })}
+}) => {
+  const getTabClassNames = (tab: Tab, isActive: boolean): string => {
+    if (isActive) {
+      return "border-primary text-primary";
+    }
+    if (tab.destructive) {
+      return "text-destructive hover:text-destructive/80 border-transparent";
+    }
+    return "text-muted-foreground hover:text-foreground border-transparent";
+  };
+
+  return (
+    <div className="border-b">
+      <div className="flex overflow-x-auto">
+        {tabs.map((tab) => {
+          const Icon = tab.icon;
+          const isActive = activeTab === tab.id;
+          const tabClass = getTabClassNames(tab, isActive);
+
+          return (
+            <button
+              key={tab.id}
+              type="button"
+              onClick={() => setActiveTab(tab.id)}
+              className={`flex items-center gap-2 border-b-2 px-6 py-4 text-sm font-medium whitespace-nowrap transition-colors ${tabClass}`}
+            >
+              <Icon className="h-4 w-4" />
+              {tab.label}
+            </button>
+          );
+        })}
+      </div>
     </div>
-  </div>
-);
+  );
+};

@@ -17,8 +17,8 @@ const Logout = () => {
       description: "You’ll be signed out and redirected to the landing page.",
       action: {
         label: "Confirm Logout",
-        onClick: async () => {
-          await authClient.signOut({
+        onClick: () => {
+          authClient.signOut({
             fetchOptions: {
               onSuccess: () => {
                 router.push("/");

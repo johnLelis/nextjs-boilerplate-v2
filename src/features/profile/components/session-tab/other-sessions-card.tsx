@@ -26,41 +26,50 @@ const OtherSessionsCard = ({
   setSessions,
 }: OtherSessionProp) => {
   const [deletingToken, setDeletingToken] = useState<string | null>(null);
+
+  const handleConfirmRevoke = (
+    sessionToken: string,
+    toastId: string | number
+  ) => {
+    authClient.revokeSession(
+      { token: sessionToken },
+      {
+        onSuccess: () => handleRevokeSuccess(sessionToken),
+        onError: () => handleRevokeFailure(toastId),
+      }
+    );
+  };
+
+  const handleRevokeSuccess = (sessionToken: string) => {
+    setSessions((prev) => prev.filter((s) => s.token !== sessionToken));
+    toast.success("Session revoked successfully");
+  };
+
+  const handleRevokeFailure = (toastId: string | number) => {
+    toast.error("Failed to revoke session");
+    toast.dismiss(toastId);
+  };
+
+  const handleCancelRevoke = (toastId: string | number) => {
+    toast.dismiss(toastId);
+  };
+
   const handleRevokeSession = async (sessionToken: string) => {
     setDeletingToken(sessionToken);
+
     try {
       const toastId = toast.warning(
         "Are you sure you want to revoke this session?",
         {
           action: {
             label: "Revoke Session",
-            onClick: async () => {
-              await authClient.revokeSession(
-                { token: sessionToken },
-                {
-                  onSuccess: () => {
-                    setSessions((prev) =>
-                      prev.filter((s) => s.token !== sessionToken)
-                    );
-                    toast.success("Session revoked successfully");
-                  },
-                  onError: () => {
-                    toast.error("Failed to revoke session");
-                    toast.dismiss(toastId);
-                  },
-                }
-              );
-            },
+            onClick: () => handleConfirmRevoke(sessionToken, toastId),
           },
           cancel: {
             label: "Cancel",
-            onClick: () => {
-              toast.dismiss(toastId);
-            },
+            onClick: () => handleCancelRevoke(toastId),
           },
-          onAutoClose() {
-            setDeletingToken(null);
-          },
+          onAutoClose: () => setDeletingToken(null),
         }
       );
     } catch (error) {

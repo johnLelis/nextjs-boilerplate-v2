@@ -33,16 +33,14 @@ export const sendEmail = async (
 ): Promise<EmailResponse> => {
   const emailConfig = config || getEmailConfigFromEnv();
 
-  switch (emailConfig.provider) {
-    case "azure":
-      if (!emailConfig.azure) {
-        throw new Error("Azure configuration is required");
-      }
-      return sendEmailViaAzure(message, emailConfig.azure);
-
-    default:
-      throw new Error(`Unknown email provider: ${emailConfig.provider}`);
+  if (emailConfig.provider === "azure") {
+    if (!emailConfig.azure) {
+      throw new Error("Azure configuration is required");
+    }
+    return sendEmailViaAzure(message, emailConfig.azure);
   }
+
+  throw new Error(`Unknown email provider: ${emailConfig.provider}`);
 };
 
 export const getEmailConfigFromEnv = (): EmailConfig => {
@@ -52,42 +50,35 @@ export const getEmailConfigFromEnv = (): EmailConfig => {
     throw new Error("EMAIL_PROVIDER environment variable is required");
   }
 
-  const config: EmailConfig = {
-    provider,
-  };
+  if (provider === "azure") {
+    const {
+      AZURE_TENANT_ID,
+      AZURE_CLIENT_ID,
+      AZURE_CLIENT_SECRET,
+      EMAIL_SENDER,
+    } = env;
 
-  // Load config based on provider
-  switch (provider) {
-    case "azure":
-      const {
-        AZURE_TENANT_ID,
-        AZURE_CLIENT_ID,
-        AZURE_CLIENT_SECRET,
-        EMAIL_SENDER,
-      } = env;
+    if (
+      !AZURE_TENANT_ID ||
+      !AZURE_CLIENT_ID ||
+      !AZURE_CLIENT_SECRET ||
+      !EMAIL_SENDER
+    ) {
+      throw new Error(
+        "Missing required Azure email configuration. Please set AZURE_TENANT_ID, AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, and EMAIL_SENDER environment variables."
+      );
+    }
 
-      if (
-        !AZURE_TENANT_ID ||
-        !AZURE_CLIENT_ID ||
-        !AZURE_CLIENT_SECRET ||
-        !EMAIL_SENDER
-      ) {
-        throw new Error(
-          "Missing required Azure email configuration. Please set AZURE_TENANT_ID, AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, and EMAIL_SENDER environment variables."
-        );
-      }
-
-      config.azure = {
+    return {
+      provider,
+      azure: {
         tenantId: AZURE_TENANT_ID,
         clientId: AZURE_CLIENT_ID,
         clientSecret: AZURE_CLIENT_SECRET,
         userEmail: EMAIL_SENDER,
-      };
-      break;
-
-    default:
-      throw new Error(`Unknown email provider: ${provider}`);
+      },
+    };
   }
 
-  return config;
+  throw new Error(`Unknown email provider: ${provider}`);
 };

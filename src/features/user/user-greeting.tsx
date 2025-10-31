@@ -10,7 +10,7 @@ import UserAvatar from "./user-avatar";
 
 const UserGreeting = () => {
   const { data } = authClient.useSession();
-  const user: User | null = data && data.user;
+  const user: User | undefined = data?.user;
   if (!user) return null;
 
   return (
