@@ -2,12 +2,12 @@
 
 import { useState } from "react";
 
-import { Button } from "@/components/ui/button";
-import { LoadingSwap } from "@/components/ui/loading-swap";
 import {
   SUPPORTED_OAUTH_PROVIDERS,
   SUPPORTED_OAUTH_PROVIDERS_DETAILS,
-} from "@/features/auth/config/o-auth-providers";
+} from "@/components/config/o-auth-providers";
+import { Button } from "@/components/ui/button";
+import { LoadingSwap } from "@/components/ui/loading-swap";
 import { authClient } from "@/lib/auth/auth-client";
 
 const SocialAuthButtons = () => {

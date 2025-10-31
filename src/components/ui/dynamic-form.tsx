@@ -19,6 +19,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
 export type FormFieldConfig<T extends FieldValues> = {
+  autocomplete?: string;
   name: Path<T>;
   label: string;
   type?: "text" | "email" | "password" | "number" | "textarea" | "checkbox";
@@ -109,6 +110,7 @@ export const DynamicForm = <T extends FieldValues>({
                   <div className="flex items-center space-x-2">
                     <FormControl>
                       <Checkbox
+                        name={field.name}
                         checked={field.value}
                         onCheckedChange={field.onChange}
                         {...fieldConfig.checkboxProps}
@@ -138,6 +140,7 @@ export const DynamicForm = <T extends FieldValues>({
                         />
                       ) : (
                         <Input
+                          autoComplete={fieldConfig.autocomplete}
                           type={fieldConfig.type || "text"}
                           placeholder={fieldConfig.placeholder}
                           {...field}

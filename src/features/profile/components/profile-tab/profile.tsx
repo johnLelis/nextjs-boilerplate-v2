@@ -56,6 +56,7 @@ const Profile = () => {
       label: "Full Name",
       type: "text",
       placeholder: "",
+      autocomplete: "name",
     },
     {
       name: "email",
@@ -63,6 +64,7 @@ const Profile = () => {
       type: "email",
       placeholder: "",
       description: "We'll send a verification email to your new email address.",
+      autocomplete: "email",
     },
   ];
 
