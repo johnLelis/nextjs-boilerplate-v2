@@ -83,6 +83,12 @@ const ProfileLinkedAccounts = ({
                   );
                   router.refresh();
                 },
+                onError: () => {
+                  toast.error(
+                    `${providerId.charAt(0).toUpperCase()}${providerId.slice(1)} unlinking failed! Please try again.`
+                  );
+                  setIsDisabled(false);
+                },
               }
             );
           },
