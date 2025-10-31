@@ -178,10 +178,8 @@ const ProfileLinkedAccounts = ({
                         })
                       }
                     >
-                      <div className="flex items-center gap-[1ch] dark:text-white">
-                        <Trash2 className="h-4 w-4" />
-                        <p>Unlink</p>
-                      </div>
+                      <Trash2 className="h-4 w-4" />
+                      Unlink
                     </Button>
                   ) : (
                     <Button
@@ -189,10 +187,8 @@ const ProfileLinkedAccounts = ({
                       size="sm"
                       onClick={() => handleOnLink(provider)}
                     >
-                      <div className="flex items-center gap-[1ch] dark:text-white">
-                        <LinkIcon className="h-4 w-4" />
-                        <p>Link</p>
-                      </div>
+                      <LinkIcon className="h-4 w-4" />
+                      Link
                     </Button>
                   )}
                 </div>
