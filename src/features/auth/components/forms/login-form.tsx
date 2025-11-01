@@ -43,37 +43,20 @@ const LoginForm = () => {
 
   const { isSubmitting } = form.formState;
   const router = useRouter();
+
   const handleOnSubmit = async (data: LoginInput) => {
-    // This is where you handle the form submission logic.
-    // Options include:
-    // 1. Call your backend API (e.g. POST /api/login or /api/register)
-    //    const res = await fetch("/api/login", {
-    //      method: "POST",
-    //      headers: { "Content-Type": "application/json" },
-    //      body: JSON.stringify(values),
-    //    });
-    //    const data = await res.json();
-    //
-    // 2. Handle authentication with a library (e.g. NextAuth, Supabase, Clerk).
-    //
-    // 3. Show success/error feedback:
-    //    - Inline form error messages (form.setError)
-    //    - Toast notifications (useToast from shadcn/ui)
-    //
-    // 4. Redirect or update state after success (e.g. router.push("/dashboard")).
-    // await new Promise(resolve => {
-    //   setTimeout(() => {
-    //     resolve('Test');
-    //   }, 2000);
-    // });
     await authClient.signIn.email(
       {
         ...data,
         rememberMe: false,
       },
       {
-        onSuccess: () => {
-          router.push("/dashboard");
+        onSuccess: (context) => {
+          if (context.data.twoFactorRedirect) {
+            router.push("/2fa");
+          } else {
+            router.push("/dashboard");
+          }
         },
         onError: (error) => {
           toast.error(

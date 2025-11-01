@@ -16,6 +16,7 @@ import {
 } from "./emails";
 
 export const auth = betterAuth({
+  appName: "nextjs-boilerplate",
   user: {
     changeEmail: {
       expiresIn: 3600,

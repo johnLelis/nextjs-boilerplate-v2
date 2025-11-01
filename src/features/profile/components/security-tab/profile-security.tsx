@@ -9,6 +9,8 @@ import {
   changePasswordResolver,
 } from "@/lib/validations/auth-validator";
 
+import { TwoFactorAuth } from "./twofactor-auth";
+
 const ProfileSecurity = () => {
   const defaultValues = {
     newPassword: "",
@@ -37,40 +39,47 @@ const ProfileSecurity = () => {
       },
     });
   };
+
   return (
-    <div className="flex justify-center p-6">
-      <DynamicForm
-        form={form}
-        fields={[
-          {
-            name: "currentPassword",
-            label: "Current Password",
-            type: "password",
-          },
-          {
-            name: "newPassword",
-            label: "New Password",
-            type: "password",
-          },
-          {
-            name: "confirmPassword",
-            label: "Confirm New Password",
-            type: "password",
-          },
-          {
-            name: "revokeOtherSessions",
-            label: "Log out other sessions",
-            type: "checkbox",
-          },
-        ]}
-        onSubmit={onSubmit}
-        submitLabel="Change Password"
-        loadingComponent={
-          <LoadingSwap isLoading={isSubmitting}>Change Password</LoadingSwap>
-        }
-        className="flex w-md flex-col space-y-4"
-        buttonsClassName="w-fit self-end"
-      />
+    <div className="flex flex-col gap-8 p-6">
+      <div className="flex justify-center">
+        <DynamicForm
+          form={form}
+          fields={[
+            {
+              name: "currentPassword",
+              label: "Current Password",
+              type: "password",
+            },
+            {
+              name: "newPassword",
+              label: "New Password",
+              type: "password",
+            },
+            {
+              name: "confirmPassword",
+              label: "Confirm New Password",
+              type: "password",
+            },
+            {
+              name: "revokeOtherSessions",
+              label: "Log out other sessions",
+              type: "checkbox",
+            },
+          ]}
+          onSubmit={onSubmit}
+          submitLabel="Change Password"
+          loadingComponent={
+            <LoadingSwap isLoading={isSubmitting}>Change Password</LoadingSwap>
+          }
+          className="flex w-md flex-col space-y-4"
+          buttonsClassName="w-fit self-end"
+        />
+      </div>
+
+      <div className="flex justify-center">
+        <TwoFactorAuth />
+      </div>
     </div>
   );
 };
