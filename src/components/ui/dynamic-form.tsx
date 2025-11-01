@@ -19,7 +19,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
 export type FormFieldConfig<T extends FieldValues> = {
-  autocomplete?: string;
+  autoComplete?: string;
   name: Path<T>;
   label: string;
   type?: "text" | "email" | "password" | "number" | "textarea" | "checkbox";
@@ -140,7 +140,7 @@ export const DynamicForm = <T extends FieldValues>({
                         />
                       ) : (
                         <Input
-                          autoComplete={fieldConfig.autocomplete}
+                          autoComplete={fieldConfig.autoComplete}
                           type={fieldConfig.type || "text"}
                           placeholder={fieldConfig.placeholder}
                           {...field}
@@ -162,9 +162,9 @@ export const DynamicForm = <T extends FieldValues>({
         ))}
 
         <div className={buttonsClassName || "flex justify-end gap-3"}>
-          {formButtons.map((button, index) => (
+          {formButtons.map((button) => (
             <Button
-              key={`button-${index}`}
+              key={`button-${button.label}`}
               type={button.type || "button"}
               variant={button.variant || "default"}
               disabled={

@@ -24,12 +24,14 @@ const registerFields: FormFieldConfig<RegisterInput>[] = [
     label: "Name",
     type: "text",
     placeholder: "Your name",
+    autoComplete: "name",
   },
   {
     name: "email",
     label: "Email",
     type: "email",
     placeholder: "you@example.com",
+    autoComplete: "email",
   },
   {
     name: "password",

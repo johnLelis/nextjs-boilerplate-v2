@@ -22,6 +22,7 @@ const loginFields: FormFieldConfig<LoginInput>[] = [
     label: "Email",
     type: "email",
     placeholder: "you@example.com",
+    autoComplete: "email",
   },
   {
     name: "password",
