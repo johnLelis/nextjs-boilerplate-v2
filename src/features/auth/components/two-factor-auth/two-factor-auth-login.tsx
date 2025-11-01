@@ -28,7 +28,7 @@ const TwoFactorAuthLogin = () => {
   const [trustDevice, setTrustDevice] = useState(false);
 
   const isBackupCode = (code: string) => {
-    // Check if it matches backup code format: XXXX-XXXX (9 chars with dash)
+    // Check if it matches backup code format: XXXXX-XXXXX (11chars with dash)
     return /^[A-Za-z0-9]{5}-[A-Za-z0-9]{5}$/.test(code);
   };
 
