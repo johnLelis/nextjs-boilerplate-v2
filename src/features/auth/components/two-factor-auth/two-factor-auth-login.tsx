@@ -27,6 +27,11 @@ const TwoFactorAuthLogin = () => {
   const [is2FALoading, setIs2FALoading] = useState(false);
   const [trustDevice, setTrustDevice] = useState(false);
 
+  const isBackupCode = (code: string) => {
+    // Check if it matches backup code format: XXXX-XXXX (9 chars with dash)
+    return /^[A-Za-z0-9]{5}-[A-Za-z0-9]{5}$/.test(code);
+  };
+
   const handleVerify2FA = async () => {
     if (twoFactorCode.length !== 6) {
       toast.error("Please enter a valid 6-digit code");
@@ -40,12 +45,13 @@ const TwoFactorAuthLogin = () => {
         code: twoFactorCode,
         trustDevice,
       })
-      .then(() => {
-        toast.success("Login successful!");
-        router.push("/dashboard");
-      })
-      .catch((error) => {
-        toast.error(error.message || "Invalid verification code");
+      .then(({ error }) => {
+        if (error) {
+          toast.error(error.message || "Invalid verification code");
+        } else {
+          toast.success("Login successful!");
+          router.push("/dashboard");
+        }
       })
       .finally(() => {
         setIs2FALoading(false);
@@ -65,12 +71,13 @@ const TwoFactorAuthLogin = () => {
         code: twoFactorCode,
         trustDevice,
       })
-      .then(() => {
-        toast.success("Login successful!");
-        router.push("/dashboard");
-      })
-      .catch((error) => {
-        toast.error(error.message || "Invalid backup code");
+      .then(({ error }) => {
+        if (error) {
+          toast.error(error.message || "Invalid backup code");
+        } else {
+          toast.success("Login successful!");
+          router.push("/dashboard");
+        }
       })
       .finally(() => {
         setIs2FALoading(false);
@@ -98,15 +105,30 @@ const TwoFactorAuthLogin = () => {
             <Label htmlFor="2fa-code">Verification Code</Label>
             <Input
               id="2fa-code"
-              placeholder="000000"
+              placeholder="000000 or XXXXX-XXXXX"
               value={twoFactorCode}
-              onChange={(e) =>
-                setTwoFactorCode(e.target.value.replaceAll(/\D/g, ""))
-              }
-              maxLength={6}
+              onChange={(e) => {
+                const value = e.target.value.toUpperCase();
+
+                const isValid =
+                  /^\d*$/.test(value) ||
+                  /^[A-Z0-9]{0,5}-?[A-Z0-9]{0,5}$/.test(value);
+
+                if (isValid) {
+                  setTwoFactorCode(value);
+                }
+              }}
+              maxLength={11}
               onKeyDown={(e) => {
-                if (e.key === "Enter" && twoFactorCode.length === 6) {
-                  handleVerify2FA();
+                if (e.key === "Enter") {
+                  if (
+                    twoFactorCode.length === 6 &&
+                    /^\d{6}$/.test(twoFactorCode)
+                  ) {
+                    handleVerify2FA();
+                  } else if (isBackupCode(twoFactorCode)) {
+                    handleUseBackupCode();
+                  }
                 }
               }}
               autoFocus
@@ -133,7 +155,11 @@ const TwoFactorAuthLogin = () => {
         <DialogFooter className="flex-col gap-2 sm:flex-col">
           <Button
             onClick={handleVerify2FA}
-            disabled={is2FALoading || twoFactorCode.length !== 6}
+            disabled={
+              is2FALoading ||
+              twoFactorCode.length !== 6 ||
+              !/^\d{6}$/.test(twoFactorCode)
+            }
             className="w-full"
           >
             <LoadingSwap isLoading={is2FALoading}>Verify</LoadingSwap>
@@ -141,7 +167,7 @@ const TwoFactorAuthLogin = () => {
           <Button
             variant="outline"
             onClick={handleUseBackupCode}
-            disabled={is2FALoading || !twoFactorCode}
+            disabled={is2FALoading || !isBackupCode(twoFactorCode)}
             className="w-full"
           >
             Use Backup Code

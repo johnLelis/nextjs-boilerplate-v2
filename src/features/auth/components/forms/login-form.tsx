@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -12,6 +13,7 @@ import { Separator } from "@/components/ui/separator";
 import { authClient } from "@/lib/auth/auth-client";
 import { LoginInput, loginResolver } from "@/lib/validations/auth-validator";
 
+import TwoFactorAuthLogin from "../two-factor-auth/two-factor-auth-login";
 import AuthHeaderControls from "../ui/auth-header-controls";
 import { AuthRedirectMessage } from "../ui/auth-redirect-message";
 import SocialAuthButtons from "../ui/social-auth-buttons";
@@ -33,6 +35,7 @@ const loginFields: FormFieldConfig<LoginInput>[] = [
 ];
 
 const LoginForm = () => {
+  const [showModal, setShowModal] = useState(false);
   const form = useForm<LoginInput>({
     resolver: loginResolver,
     defaultValues: {
@@ -53,7 +56,7 @@ const LoginForm = () => {
       {
         onSuccess: (context) => {
           if (context.data.twoFactorRedirect) {
-            router.push("/2fa");
+            setShowModal(true);
           } else {
             router.push("/dashboard");
           }
@@ -99,6 +102,8 @@ const LoginForm = () => {
         href="/register"
         linkText="Register!"
       />
+
+      {showModal && <TwoFactorAuthLogin />}
     </div>
   );
 };

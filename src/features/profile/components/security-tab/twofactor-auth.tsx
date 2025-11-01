@@ -43,9 +43,13 @@ export const TwoFactorAuth = () => {
       .enable({
         password,
       })
-      .then((response) => {
-        if (response.data) {
-          const uri = response.data.totpURI;
+      .then(({ data, error }) => {
+        if (error) {
+          toast.error(error.message || "Failed to enable 2FA");
+        }
+
+        if (data) {
+          const uri = data.totpURI;
           setQrCode(uri);
           // Extract secret from URI (format: otpauth://totp/...?secret=XXXXX&...)
           const secretRegex = /secret=([^&]+)/;
@@ -53,14 +57,13 @@ export const TwoFactorAuth = () => {
           if (secretMatch) {
             setSetupSecret(secretMatch[1]);
           }
-          setBackupCodes(response.data.backupCodes);
+          setBackupCodes(data.backupCodes);
         }
       })
-      .catch((error) => {
-        toast.error(error.message || "Failed to enable 2FA");
-      })
+
       .finally(() => {
         setIsLoading(false);
+        setPassword("");
         setShowPasswordModal(false);
       });
   };
@@ -71,15 +74,15 @@ export const TwoFactorAuth = () => {
       .verifyTotp({
         code: verificationCode,
       })
-      .then(() => {
-        toast.success("Two-factor authentication enabled successfully");
-
-        setQrCode(null);
-        setSetupSecret(null);
-        setVerificationCode("");
-      })
-      .catch((error) => {
-        toast.error(error.message || "Invalid verification code");
+      .then(({ error }) => {
+        if (error) {
+          toast.error(error.message || "Invalid verification code");
+        } else {
+          toast.success("Two-factor authentication enabled successfully");
+          setQrCode(null);
+          setSetupSecret(null);
+          setVerificationCode("");
+        }
       })
       .finally(() => {
         setIsLoading(false);
@@ -92,13 +95,14 @@ export const TwoFactorAuth = () => {
       .disable({
         password,
       })
-      .then(() => {
-        toast.success("Two-factor authentication disabled");
-        setShowDisableModal(false);
-        setBackupCodes(null);
-      })
-      .catch((error) => {
-        toast.error(error.message || "Failed to disable 2FA");
+      .then(({ error }) => {
+        if (error) {
+          toast.error(error.message || "Failed to disable 2FA");
+        } else {
+          toast.success("Two-factor authentication disabled");
+          setShowDisableModal(false);
+          setBackupCodes(null);
+        }
       })
       .finally(() => {
         setIsLoading(false);
@@ -184,14 +188,16 @@ export const TwoFactorAuth = () => {
                 <div className="bg-muted grid grid-cols-2 gap-2 rounded-md border p-4">
                   {backupCodes.map((code) => (
                     <code key={code} className="font-mono text-sm">
-                      {code}
+                      {code.toUpperCase()}
                     </code>
                   ))}
                 </div>
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={() => copyToClipboard(backupCodes.join("\n"))}
+                  onClick={() =>
+                    copyToClipboard(backupCodes.join("\n").toUpperCase())
+                  }
                 >
                   Copy All Codes
                 </Button>
