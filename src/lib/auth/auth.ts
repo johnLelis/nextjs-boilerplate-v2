@@ -3,6 +3,7 @@ import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { createAuthMiddleware } from "better-auth/api";
 import { emailOTPClient } from "better-auth/client/plugins";
 import { nextCookies } from "better-auth/next-js";
+import { passkey } from "better-auth/plugins/passkey";
 import { twoFactor } from "better-auth/plugins/two-factor";
 
 import { env } from "@/config/env";
@@ -83,7 +84,7 @@ export const auth = betterAuth({
     expiresIn: 15 * 60,
     preserveSessionInDatabase: false,
   },
-  plugins: [nextCookies(), emailOTPClient(), twoFactor()],
+  plugins: [nextCookies(), emailOTPClient(), twoFactor(), passkey()],
   socialProviders: {
     github: {
       clientId: env.GITHUB_CLIENT_ID as string,

@@ -13,6 +13,7 @@ import { Separator } from "@/components/ui/separator";
 import { authClient } from "@/lib/auth/auth-client";
 import { LoginInput, loginResolver } from "@/lib/validations/auth-validator";
 
+import PasskeyLoginButton from "../passkey/passkey-login-button";
 import TwoFactorAuthLogin from "../two-factor-auth/two-factor-auth-login";
 import AuthHeaderControls from "../ui/auth-header-controls";
 import { AuthRedirectMessage } from "../ui/auth-redirect-message";
@@ -97,6 +98,7 @@ const LoginForm = () => {
       />
       <Separator />
       <SocialAuthButtons />
+      <PasskeyLoginButton />
       <AuthRedirectMessage
         message={"Don't have an account?"}
         href="/register"

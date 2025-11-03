@@ -9,6 +9,7 @@ import {
   changePasswordResolver,
 } from "@/lib/validations/auth-validator";
 
+import { PasskeysManagement } from "./passkey-management";
 import { TwoFactorAuth } from "./twofactor-auth";
 
 const ProfileSecurity = () => {
@@ -79,6 +80,10 @@ const ProfileSecurity = () => {
 
       <div className="flex justify-center">
         <TwoFactorAuth />
+      </div>
+
+      <div className="flex justify-center">
+        <PasskeysManagement />
       </div>
     </div>
   );
