@@ -214,6 +214,8 @@ Refer to the script section in `package.json` for full details.
 
 ## References
 
+### Project files
+
 - Project manifest: `package.json`
 - Next config: `next.config.ts`
 - TypeScript config: `tsconfig.json`
@@ -230,6 +232,10 @@ Refer to the script section in `package.json` for full details.
 - App entry points: `src/app/layout.tsx`, `src/app/page.tsx`
 - Environment example: `env.example`
 - Vitest config: `vitest.config.mts`, `vitest.setup.ts`
+
+### External resources
+
+- [Bulletproof React - Project Structure](https://github.com/alan2207/bulletproof-react/blob/master/docs/project-structure.md) - A comprehensive guide to scalable React project architecture and organization patterns
 
 For additional context, consult the source tree and the files referenced above.
 
