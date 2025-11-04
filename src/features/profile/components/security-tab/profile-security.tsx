@@ -1,3 +1,5 @@
+"use client";
+
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -9,7 +11,7 @@ import {
   changePasswordResolver,
 } from "@/lib/validations/auth-validator";
 
-import { PasskeysManagement } from "./passkey-management";
+import { PasskeysManagement } from "./passkey/passkey-management";
 import { TwoFactorAuth } from "./twofactor-auth";
 
 const ProfileSecurity = () => {
