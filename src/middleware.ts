@@ -13,7 +13,7 @@ export const config = {
   runtime: "nodejs",
   // Apply middleware to specific routes
   matcher: [
-    "/(about|dashboard|profile)/:path*",
+    "/(about|dashboard|profile|admin)/:path*",
     // This regex says: match /api/ followed by anything that's NOT "auth"
     "/api/((?!auth).*)/:path*",
   ],

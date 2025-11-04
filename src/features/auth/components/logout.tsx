@@ -41,12 +41,12 @@ const Logout = () => {
   };
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex cursor-pointer items-center gap-2">
       <button
         type="button"
         onClick={handleOnClick}
         disabled={isDisabled}
-        className="disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50"
+        className="cursor-pointer disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50"
         aria-label="Logout"
       >
         <LogOut />
