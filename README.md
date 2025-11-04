@@ -114,20 +114,38 @@ Drizzle configuration is in `drizzle.config.ts`. The database client export is `
 
 ### Common tasks
 
-Generate schema:
+**Generate Better Auth schema:**
 
 ```sh
 npm run auth:generate
 ```
 
-Migrate / generate:
+This generates the Better Auth database schema to `src/drizzle/schemas/auth/new-auth-schema.ts`. After generation, manually copy the schema code to `src/drizzle/schemas/auth/auth-schema.ts` to integrate it with your database schema.
+
+**Push schema to database:**
 
 ```sh
-npm run db:migrate
-npm run db:generate
+npm run db:push
 ```
 
-Ensure `DATABASE_URL` is set before running migration tasks.
+Pushes your Drizzle schema directly to the database without generating migration files. Use this for rapid development.
+
+**Generate and run migrations:**
+
+```sh
+npm run db:generate
+npm run db:migrate
+```
+
+Generate migration files and apply them to the database. Use this approach for production environments.
+
+**Typical workflow for auth schema updates:**
+
+1. Run `npm run auth:generate` to generate new auth schema
+2. Copy the generated code from `new-auth-schema.ts` to `auth-schema.ts`
+3. Run `npm run db:push` to sync the schema with your database
+
+Ensure `DATABASE_URL` is set before running any database tasks.
 
 ## Testing and linting
 
