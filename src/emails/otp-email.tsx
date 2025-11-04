@@ -71,12 +71,9 @@ export const OtpEmailTemplate = ({
               <Section className="my-8 text-center">
                 <Row align="center" className="justify-center">
                   {digits.map((d, i) => (
-                    <Column key={i} align="center">
+                    <Column key={`${d}-${i}`} align="center">
                       <div
-                        className="mx-[6px] inline-flex h-[56px] w-[48px] items-center justify-center rounded-lg border border-gray-200 bg-gray-50 text-[28px] font-semibold text-gray-900 shadow-[0_2px_4px_rgba(0,0,0,0.06)]"
-                        style={{
-                          borderImage: `linear-gradient(45deg, ${brandColor}, ${brandColor}99) 1`,
-                        }}
+                        className={`mx-[6px] inline-flex h-[56px] w-[48px] items-center justify-center rounded-lg border-2 border-transparent bg-gray-50 bg-gradient-to-br text-[28px] font-semibold text-gray-900 shadow-[0_2px_4px_rgba(0,0,0,0.06)] from-[${brandColor}] to-[${brandColor}99] bg-clip-border`}
                       >
                         {d}
                       </div>
