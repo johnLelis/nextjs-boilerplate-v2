@@ -1,4 +1,5 @@
 import {
+  adminClient,
   inferAdditionalFields,
   passkeyClient,
   twoFactorClient,
@@ -12,5 +13,6 @@ export const authClient = createAuthClient({
     inferAdditionalFields<typeof auth>(),
     twoFactorClient(),
     passkeyClient(),
+    adminClient(),
   ],
 });
