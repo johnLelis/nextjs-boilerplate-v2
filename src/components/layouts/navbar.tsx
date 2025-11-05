@@ -2,8 +2,11 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 import { IconShield } from "@tabler/icons-react";
+
+import { authClient } from "@/lib/auth/auth-client";
 
 import { Button } from "../ui/button";
 import ModeToggle from "../ui/mode-toggle";
@@ -14,7 +17,19 @@ type NavbarProps = {
 };
 
 const Navbar = ({ greeting, logout }: NavbarProps) => {
+  const [hasAdminPermission, setHasAdminPermission] = useState(false);
   const router = useRouter();
+  useEffect(() => {
+    authClient.admin
+      .hasPermission({
+        permission: {
+          user: ["list"],
+        },
+      })
+      .then(({ data }) => {
+        setHasAdminPermission(data?.success ?? false);
+      });
+  }, []);
   return (
     <header className="bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 w-full border-b backdrop-blur">
       <div className="flex h-16 items-center justify-between px-8">
@@ -42,17 +57,19 @@ const Navbar = ({ greeting, logout }: NavbarProps) => {
             </div>
           )}
 
-          <Button
-            variant="ghost"
-            size="sm"
-            className="cursor-pointer gap-2"
-            onClick={() => {
-              router.push("/admin");
-            }}
-          >
-            <IconShield size={18} />
-            <span className="hidden sm:inline">Admin</span>
-          </Button>
+          {hasAdminPermission && (
+            <Button
+              variant="ghost"
+              size="sm"
+              className="cursor-pointer gap-2"
+              onClick={() => {
+                router.push("/admin");
+              }}
+            >
+              <IconShield size={18} />
+              <span className="hidden sm:inline">Admin</span>
+            </Button>
+          )}
 
           {logout}
         </div>
