@@ -11,6 +11,7 @@ A production-ready Next.js starter kit focused on authentication, email delivery
 - [Getting started](#getting-started)
 - [Environment variables](#environment-variables)
 - [Authentication and email](#authentication-and-email)
+- [Security with Arcjet (Optional)](#security-with-arcjet-optional)
 - [Database and migrations](#database-and-migrations)
 - [Testing and linting](#testing-and-linting)
 - [UI components and patterns](#ui-components-and-patterns)
@@ -51,7 +52,7 @@ This repository provides a modern Next.js (v15) application scaffold with:
 
 ## Repository layout (high level)
 
-```
+```bash
 src/
   app/ — Next.js app routes and layouts
   lib/ — core utilities and auth configuration
@@ -92,7 +93,7 @@ Copy and populate environment variables from `env.example`:
 npm run dev
 ```
 
-The default dev server runs on http://localhost:3000.
+The default dev server runs on <http://localhost:3000>.
 
 ## Environment variables
 
@@ -107,6 +108,83 @@ Client integration is exposed through `authClient`.
 Email sending uses the wrapper at `src/services/email/email-service.ts`. Provider implementations live under `src/services/email/providers`; an Azure provider is available at `src/services/email/providers/azure/azure-provider.ts`.
 
 Email templates are React components under `src/emails` (e.g. `src/emails/verify-email.tsx`, `src/emails/reset-password.tsx`, `src/emails/welcome-email.tsx`, `src/emails/otp-email.tsx`) and are rendered and sent via utilities in `src/lib/utils`.
+
+## Security with Arcjet (Optional)
+
+The boilerplate includes optional [Arcjet](https://arcjet.com) integration for advanced security features including bot detection, rate limiting, email validation, and protection against common attacks.
+
+### Features
+
+- **Shield**: Protects against common attacks (SQL injection, XSS, etc.)
+- **Bot Detection**: Blocks automated bots while allowing legitimate traffic
+- **Rate Limiting**: Configurable rate limits for different endpoints
+- **Email Protection**: Validates emails and blocks disposable/invalid addresses
+- **Signup Protection**: Combined protection specifically for registration endpoints
+
+### Configuration
+
+Arcjet middleware is implemented in `src/middleware/check-arcjet.ts`. To enable Arcjet:
+
+1. Sign up at [https://app.arcjet.com](https://app.arcjet.com) and get your site key
+2. Add the following to your environment variables:
+
+   ```properties
+   ENABLE_ARCJET=true
+   ARCJET_KEY=your_arcjet_site_key
+   ```
+
+3. The middleware will automatically protect your API routes when enabled
+
+### Usage
+
+The `checkArcjet` middleware runs automatically on incoming requests when `ENABLE_ARCJET=true`. It analyzes requests and returns a decision that can block malicious traffic.
+
+The middleware integrates with Better Auth sessions to identify users and applies different protection rules based on the endpoint:
+
+- **Signup endpoints** (`/auth/sign-up/email`): Stricter rate limits + email validation + bot detection
+- **Other endpoints**: Standard rate limits + bot detection + shield protection
+
+### Rate limit tiers
+
+The boilerplate includes two preconfigured rate limit tiers:
+
+- **Restrictive** (10 requests per 10 minutes): Used for sensitive endpoints like signup
+- **Lax** (60 requests per 1 minute): Used for general API endpoints
+
+### Customization
+
+Modify the settings in `src/middleware/check-arcjet.ts`:
+
+```typescript
+const restrictiveRateLimitSettings = {
+  mode: "LIVE",
+  max: 10,
+  interval: "10m",
+};
+
+const emailSettings = {
+  mode: "LIVE",
+  block: ["DISPOSABLE", "INVALID", "NO_MX_RECORDS"],
+};
+```
+
+Set `mode: "DRY_RUN"` to log decisions without blocking requests during development.
+
+### Disabling Arcjet
+
+To disable Arcjet protection, set:
+
+```properties
+ENABLE_ARCJET=false
+```
+
+Or remove the environment variable entirely. When disabled, requests will pass through without Arcjet checks.
+
+### Arcjet Reference
+
+- Arcjet middleware: `src/middleware/check-arcjet.ts`
+- Arcjet documentation: [https://docs.arcjet.com](https://docs.arcjet.com)
+- Bot list: [https://arcjet.com/bot-list](https://arcjet.com/bot-list)
 
 ## Database and migrations
 
@@ -224,6 +302,7 @@ Refer to the script section in `package.json` for full details.
 - Drizzle DB export: `src/drizzle/db.ts`
 - Better Auth core: `src/lib/auth/auth.ts`
 - Client auth wrapper: `src/lib/auth/auth-client.ts`
+- Arcjet middleware: `src/middleware/check-arcjet.ts` (optional)
 - Email service: `src/services/email/email-service.ts`
 - Azure email adapter: `src/services/email/providers/azure/azure-provider.ts`
 - Email templates: `src/emails/verify-email.tsx`, `src/emails/welcome-email.tsx`, `src/emails/reset-password.tsx`, `src/emails/otp-email.tsx`
